@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="W6tSHHKonS5D5zJBZVuUw0cq8L_u_q38qoqh0UBQL8k" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AI,Machine Learning,Deep Learning," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Artwalk's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="第四次工业革命︰ 人工智能入门 (AI)原文：The fourth industrial revolution: a primer on Artificial Intelligence (AI)  “过去的10年是移动端的10年。未来10年是 AI 的10年”（Sundar Pichai, CEO of Google, 2016-10）  TL; DR">
+<meta name="keywords" content="AI,Machine Learning,Deep Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A primer on Artificial Intelligence">
+<meta property="og:url" content="http://artwalk.github.io/2016/12/24/A-primer-on-Artificial-Intelligence/index.html">
+<meta property="og:site_name" content="Artwalk&#39;s Blog">
+<meta property="og:description" content="第四次工业革命︰ 人工智能入门 (AI)原文：The fourth industrial revolution: a primer on Artificial Intelligence (AI)  “过去的10年是移动端的10年。未来10年是 AI 的10年”（Sundar Pichai, CEO of Google, 2016-10）  TL; DR">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*ubsoUx6Hw9cKCCL-D4NjXA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*iRvZ4oDFBdJM7fE0Vi-F-g.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*39NQr3cn6iyVimk_nEvpZg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*k5HI9WRsCuQss9QNDq0kBA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*thwVgNJ2jfg2xjDyhAQC1g.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*I-_yVADdhxhcnBLebmTxRQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*-N5_FtLQFRCcpN2ykq0idQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*2tTNfCBXOmYnU4ZOmGa8gA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*8ZtNi8ho6sFXSryJZatnyg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*bMnbjzzYvyUIoeItFhwszw.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*AUylp0jdTTmJ6PWxWEnkIw.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*Xc3sRn7c3sovbRURo_8HFA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*guXXm4xdQpjmAFyOoXWLag.png">
+<meta property="og:updated_time" content="2016-12-26T16:24:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A primer on Artificial Intelligence">
+<meta name="twitter:description" content="第四次工业革命︰ 人工智能入门 (AI)原文：The fourth industrial revolution: a primer on Artificial Intelligence (AI)  “过去的10年是移动端的10年。未来10年是 AI 的10年”（Sundar Pichai, CEO of Google, 2016-10）  TL; DR">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1600/1*ubsoUx6Hw9cKCCL-D4NjXA.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://artwalk.github.io/2016/12/24/A-primer-on-Artificial-Intelligence/"/>
+
+
+
+
+
+  <title>A primer on Artificial Intelligence | Artwalk's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-45400676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Artwalk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">游走的艺术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+            Books
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'ua5s4giqP1Qhp6X6k3tY','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/12/24/A-primer-on-Artificial-Intelligence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">A primer on Artificial Intelligence</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-24T14:07:32+08:00">
+                2016-12-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/24/A-primer-on-Artificial-Intelligence/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/12/24/A-primer-on-Artificial-Intelligence/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第四次工业革命︰-人工智能入门-AI"><a href="#第四次工业革命︰-人工智能入门-AI" class="headerlink" title="第四次工业革命︰ 人工智能入门 (AI)"></a>第四次工业革命︰ 人工智能入门 (AI)</h1><p>原文：<a href="https://medium.com/mmc-writes/the-fourth-industrial-revolution-a-primer-on-artificial-intelligence-ai-ff5e7fffcae1#.xou8lwimu" target="_blank" rel="noopener">The fourth industrial revolution: a primer on Artificial Intelligence (AI)</a></p>
+<blockquote>
+<p>“过去的10年是移动端的10年。未来10年是 AI 的10年”（Sundar Pichai, CEO of Google, 2016-10）</p>
+</blockquote>
+<p>TL; DR</p>
+<a id="more"></a>
+<p>从亚马逊 谷歌 微软 脸书，世界上最具影响力的技术公司领导人凸显了他们的热情为人工智能 (AI)。但什么是 AI？为什么很重要？并且为什么是现在？随着 AI 越来越引起人们的兴趣，这个领域主要还是只有专家理解。我们原始目标是为了使这一重要领域可以让更广泛的受众了解。</p>
+<p>我们将首先解释 ‘AI’ 和关键术语包括机器学习的含义。我们还将说明 深度学习—AI 最有成效的领域之一是如何工作。我们会探讨 AI 解决了什么问题及为什么他们重要。我们到头条新闻背后看为什么上世纪 50 年代就发明了的 AI，如今已到来。</p>
+<p>作为风险资本家，我们寻找将为消费者和企业创造价值的新趋势。我们相信 AI 是比转移到移动或云计算更重要的演化。”很难说 AI 对社会的未来 20 年多大的冲击” 亚马逊 CEO 杰夫 · 贝佐斯写道。我们希望本指南穿过的炒作，并解释为什么 —无论你是顾客，行政，企业家或投资者 — 这种新兴趋势对我们所有人都重要。</p>
+<p>对更多的风险投资见解有兴趣吗？登录我们的博客。<br>一张地图包括在英国的 226 AI 初创企业，探讨这篇文章。你是 AI 企业家吗？这儿联系。</p>
+<h2 id="1-什么是-AI？"><a href="#1-什么是-AI？" class="headerlink" title="1. 什么是 AI？"></a>1. 什么是 AI？</h2><h3 id="人工智能︰-智能程序的科学"><a href="#人工智能︰-智能程序的科学" class="headerlink" title="人工智能︰ 智能程序的科学"></a>人工智能︰ 智能程序的科学</h3><p>铸造于 1956 年由达特茅斯大学助理教授约翰 · 麦卡锡，’ 人工智能 (AI) 是一个一般术语，指的是硬件或软件，展示智能的行为。用教授麦卡锡的话说，是”科学和工程的智能机，特别是智能计算机程序”。<br>基础的 ‘AI’ 已经存在了几十年，在特定环境中，通过提供基本的基于规则的程序显示 ‘智慧’ 。确实取得了进展，但是，受到限制 — — 因为通过人们手写算法来解决许多实际问题都过于复杂。</p>
+<p>复杂的事务，包括医疗诊断，预测时机器会失败，或衡量市场价值的某些资产，涉及到成千上万的数据集和变量之间的非线性关系。在这些情况下，很难使用的数据，我们有最好的效果 — — 以优化我们的预测。在其他情况下，包括识别图像中的对象和翻译语言，我们甚至不能制定规则来描述我们寻找的特征。我们如何能写一套规则，可以在所有情况下，描述一只狗的外观？</p>
+<p><em>我们是否能把 复杂预测的难度 — — 数据优化和功能规范 — — 即，从程序员转移到程序吗？这是现代人工智能技术所承诺的。</em></p>
+<h3 id="机器学习︰-减负功能优化"><a href="#机器学习︰-减负功能优化" class="headerlink" title="机器学习︰ 减负功能优化"></a>机器学习︰ 减负功能优化</h3><p><img src="https://cdn-images-1.medium.com/max/1600/1*ubsoUx6Hw9cKCCL-D4NjXA.png" alt=""></p>
+<p><strong>机器学习 （ML）</strong> 是 AI 的一个子集。所有的机器学习都是人工智能，但并不是所有 AI 都是机器学习 （图 1）。如今对 ‘AI’ 的兴趣反映为 机器学习的快速和显著的进步。</p>
+<p>机器学习可以让我们解决问题，通过将对人类而言过于复杂的一些负担转移到算法上。正如 AI 先锋阿瑟 · 塞缪尔写于 1959 年，机器学习是 ‘研究 赋予计算机在隐式编程条件下 学习的能力(field of study that gives computers the ability to learn without being explicitly programmed.)’。</p>
+<p>大多数机器学习的目标是开发一个预测引擎的特定用例。算法将接收有关域 （比如，一个人已经看过的电影） 的信息，并权衡，然后预测 （这人将来喜欢别的电影的概率）。通过给 ‘ 计算机学习能力 ‘ 的算法，即经过优化的任务 — — 衡器变量中可用的数据，作出对未来的准确预测。有时我们可以更进一步，根据首要任务的特定功能，给程序减负。</p>
+<p>机器学习算法通过训练学习。一种算法最初接收其产出已知的例子，注意其预测和正确的输出之间的区别，调整输入，以提高其预测的准确性，直到它们的权重被优化好。因此，机器学习算法的定义特征是<strong>通过经验所提高的预测质量</strong>。我们提供 （通常提升一个点） 越多的数据，便可越好地创建预测引擎 （图 2 和 3。注意所需的数据集的大小是高度依赖于上下文 — — 当然，我们不能用这个例子一概而论。)</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*iRvZ4oDFBdJM7fE0Vi-F-g.png" alt=""><br><img src="https://cdn-images-1.medium.com/max/1200/1*39NQr3cn6iyVimk_nEvpZg.png" alt=""></p>
+<p>有超过 15 机器的学习，每个使用不同的算法结构优化基于收到的数据的预测方法。一种方法 — — 深度学习 — — 在新的领域提供突破性的成果，我们在下面探讨。但还有很多其他的没得到足够的重视，他们由于其适用性广泛的使用情况也是很有价值的。除去深度学习之外最有效的机器学习算法包括︰</p>
+<ul>
+<li><strong>随机森林</strong>，创造了许许多多的决策树优化预测;</li>
+<li><strong>贝叶斯网络</strong> 使用概率的方法来分析变量和它们之间的关系</li>
+<li><strong>支持向量机</strong> 输入分类示例，创建模型来分配新投入的一个类别</li>
+</ul>
+<p>每种方法各有其优点和缺点，组合起来可能更常用（合奏）。选定要解决特定问题的算法将取决因素包括可用的数据集的性质。在实践中，开发人员倾向于实验来看看那个更好。</p>
+<p>机器学习的用例需要根据我们的需要和想象。有了正确的数据，我们可以生成数不尽的算法︰ 基于人们已经购买来推荐产品; 预测汽车装配生产线上的机器人何时失败; 预测一封电子邮件是否寄错了; 估算信用卡是被盗用的概率; 等等。</p>
+<h3 id="深度学习︰-卸载功能规范"><a href="#深度学习︰-卸载功能规范" class="headerlink" title="深度学习︰ 卸载功能规范"></a>深度学习︰ 卸载功能规范</h3><p>甚至是一般的机器学习理论 — — 随机森林，贝叶斯网络，支持向量机和更多 — — 很难编写执行某些任务，从理解讲话，认识到图象中的目标对象的程序。为什么呢？因为我们没法找到一个实用、 可靠的方式去优化功能。如果我们想要写一个标识的汽车图片的计算机程序，例如，我们不能指定一辆车的算法的特点来处理所有情况下都能正确识别。汽车的形状、 尺寸和颜色种类繁多。他们的位置、 方向和姿势又不一样。背景、 照明和无数其他因素影响对象的外观。有太多的变化，没法编写一套规则集合。即使我们可以，如果不是一个可扩展的解决方案。我们需要为每个想鉴别的类型对象写一套程序。</p>
+<p>进入<strong>深度学习 (DL)</strong>，彻底改变了的人工智能世界。深度学习是机器学习的一个子集 — — 超过 15 的办法之一。所有深度学习是机器学习，但并不是所有的机器学习是深度学习 （图 4，所示）。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*k5HI9WRsCuQss9QNDq0kBA.png" alt=""></p>
+<p>深度学习很有用，因为它避免了程序员承担<strong>特征值</strong> （定义特征可从数据分析获得） 或优化 （如何权衡要提供准确的预测的数据） 的任务 — — 算法全搞定了。</p>
+<p>这怎么做到的？在深入学习上的突破是<strong>脑模型，而非世界模型</strong>。我们自己的大脑学会做困难的事情 — — 包括理解语言和认识物体 — — 不是由处理详尽的规则，而是通过练习和反馈。作为一个孩子我们体验世界 （我们观察，例如，一辆汽车的图片），做出预测 （’ 车 ！’） 并接收反馈 （对了 ！）。我们是通过训练学习，并非详尽的规则。</p>
+<p>深度学习使用相同的方法。人工的、基于软件的计算器，近似的大脑中的神经元功能连接在一起。他们形成<strong>神经网络</strong>，接收输入信号 （继续我们的示例中，一辆汽车的图片）;分析它; 预测，被告知预测是否正确。如果输出是错的， 神经元之间的连接被算法调整，将改变未来的预测。最初的网络会有错了很多次。但作为我们喂了数以百万计的例子，神经元之间的连接将进行调整，所以神经网络可以在几乎所有场合作出正确决定。熟（几乎）能生巧。</p>
+<p>使用此过程中，提高效率，我们现在可以︰</p>
+<ul>
+<li>鉴别图片中的元素;</li>
+<li>实时翻译;</li>
+<li>语音控制设备 （通过苹果 Siri，谷歌 Now;亚马逊 Alexa 和微软 小娜）;</li>
+<li>预测遗传变异如何影响 DNA 转录;</li>
+<li>分析客户评论中的情绪</li>
+<li>检测医学图像中的肿瘤；等。</li>
+</ul>
+<p>深度学习并不适合所有问题。它通常需要大型数据集进行训练。它需要大量运算能力和一个神经网络。它有一个“可解释性”问题 — — 很难知道神经网络是如何发展其预测的。但通过把程序员从复杂的特征值中解放出来，深度学习已成功为一系列的重要问题交付了预测引擎。因此，它已经是 AI 开发者 的一个牛逼的工具包。</p>
+<h2 id="2-深度学习如何工作呢？"><a href="#2-深度学习如何工作呢？" class="headerlink" title="2.深度学习如何工作呢？"></a>2.深度学习如何工作呢？</h2><p>鉴于其重要性，它是有必要了解的如何深入学习的基础知识。深度学习涉及到使用人工的神经网络 — — 集合神经元 （基于软件的计算器） 连接在一起。</p>
+<p>人工神经元有一个或多个输入。它执行数学计算基于这些提供的产出。输出将取决于每个输入的<strong>‘权重’</strong>和 ‘输入输出函数’ 在神经元中的配置 （图 5，所示）。输入输出函数可以发生变化。神经元可能是︰</p>
+<ul>
+<li>线性单元 （输出是成正比的总加权的输入;</li>
+<li>阈值单位（输出设置为两个级别中的一个，具体取决于是否总投入是上面指定的值） </li>
+<li>S形单元 （输出不断变化，但作为输入的变化不是线性增长）</li>
+</ul>
+<p>神经网络被创建当神经元连接到另一个;一个神经元的输出成为另一个的输入 （图 6，所示）。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*thwVgNJ2jfg2xjDyhAQC1g.png" alt=""></p>
+<p>神经网络被组织成多层的神经元 （所以叫 ‘深度’ 学习）。’输入的层’ 接收信息，神经网络将处理 — — 例如，一组图片。’输出层’ 提供结果。输入和输出之间层是大多数活动发生的’隐藏的层’。通常情况下，每个神经元上一个级别的神经网络的输出作为下一层神经元的输入 （图 7，所示）。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*I-_yVADdhxhcnBLebmTxRQ.png" alt=""></p>
+<p>让我们考虑一种图像识别算法的例子 — — 识别人类面孔的图片。当数据被送入神经网络时，第一层识别局部对比度模式 — — 低水平的功能，例如边缘。作为图像遍历网络，逐步提取 ‘高层次’ 特征 — — 从边缘到鼻子，从鼻子到脸 (图 8，下面)</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*-N5_FtLQFRCcpN2ykq0idQ.png" alt=""></p>
+<p>在其输出层，基于它的训练神经网络将提供的图片是指定类型的概率 (人脸︰ 97%; 气球 2%; 叶 1%)。</p>
+<p>通常情况下，通过显露的大量贴有标签的例子训练神经网络。检测到错误的神经元之间的连接权值调整的算法，以改进结果。广泛地重复这一优化过程，系统部署后，用没标示的图像进行评估。</p>
+<p>以上就是一个简单的神经网络，但其结构可以改变和大多更复杂。变化包括于同一层上; 神经元之间的连接不同数目的神经元每层; 神经元连接到之前的网络输出层 （’递归’ 神经网络） 。</p>
+<p>设计和改进神经网络需要相当的技巧。步骤包括构建网络中的一个特定的应用程序提供一个合适的训练数据集、 调整按进度，网络的结构、 结合多种方法。</p>
+<h2 id="3-为什么-AI-重要？"><a href="#3-为什么-AI-重要？" class="headerlink" title="3.为什么 AI 重要？"></a>3.为什么 AI 重要？</h2><p>AI 重要是因为它处理非常非常困难的问题，解决这些问题的办法可以应用到人类其他领域分支 — — 从健康、 教育和商务到交通、 公用设施和娱乐。自 20 世纪 50 年代，AI 研究集中在五个领域︰</p>
+<ol>
+<li>推理︰ 解决问题，通过逻辑演绎的能力</li>
+<li>知识︰ 关于世界的知识表示能力 (理解世界上确定的实体、 事件和情况; 这些元素具有属性; 这些元素可被分门别类)</li>
+<li>规划︰ 能够设定和实现目标 （未来具体的状态，是可描述的，一系列的操作可影响到它的进展）</li>
+<li>通讯︰ 理解书面语和口语的能力。</li>
+<li>感知︰ 能够从视觉图像、 声音和其他传感器输入推断这个世界的事情。</li>
+</ol>
+<p>AI 是宝贵的因为在许多情况下，这些功能的进展提供了革命，而不是渐进的功能。示例的 AI 应用包括以下;还有更多。</p>
+<ol>
+<li>推理︰ 法律评估;金融资产管理;金融应用程序处理;游戏;自主武器系统。</li>
+<li>知识︰ 医疗诊断;药物的创作;媒体建议;采购预测;金融市场交易;预防欺诈。</li>
+<li>规划︰ 物流;调度;导航;物理和数字网络优化;预防性维护;需求预测;库存管理。</li>
+<li>通讯︰ 语音控制;智能助理、 助理和客户支持;实时翻译书面语和口语语言;实时的转录。</li>
+<li>感知︰ 自动驾驶汽车;医疗诊断;监视。</li>
+</ol>
+<p>在未来的几年中，机器学习能力将参与几乎所有部门的各种过程。考虑一个企业日常 — — 例如，在公司内的人力资源 (HR)  — — 描述了机器学习可以应用的范围︰</p>
+<ul>
+<li>招聘 增强靶向、 智能就业选配和部分自动的评估;</li>
+<li>劳动力管理 预测规划的人员的要求和可能缺勤;</li>
+<li>劳动力学习 更有效，更适合于员工的建议内容</li>
+<li>预测有价值的员工离开的风险，可以减少员工流失。</li>
+</ul>
+<p>随着时间的推移，我们期望机器学习成为<strong>正常现象</strong>。机器学习将成为开发人员的标准工具包，最初会改善现有流程，然后重塑他们。</p>
+<p>机器学习的<strong>二阶后果</strong>将超过其直接的影响。深度学习已经提高了计算机视觉，例如，自主汽车 （轿车和卡车） 是可行的突破点。但它们的影响将是什么？今天，90%的人和 80%的货运运输通过在英国的道路。自主车辆仅会影响︰</p>
+<ul>
+<li>安全 （90%的事故由司机注意力不集中引起的）</li>
+<li>就业 （220 万人在英国运输和物流行业工作，每年工资越 57B 英镑）</li>
+<li>保险 （自主研究预计英国汽车保险费随着时间的推移下降了 63%）</li>
+<li>部门经济学 （消费者很可能会使用对运输的需求服务到位汽车所有权）;</li>
+<li>车辆的吞吐量;城市规划;监管，等等。</li>
+</ul>
+<h2 id="4-为什么是-AI-今天时代来临？"><a href="#4-为什么是-AI-今天时代来临？" class="headerlink" title="4.为什么是 AI 今天时代来临？"></a>4.为什么是 AI 今天时代来临？</h2><p>人工智能的研究始于 20 世纪 50 年代;经过多次虚假的黎明，为什么是现在的转折点？由于近年来发明的新算法，更多的数据，更好的硬件，以及 云服务加速了开发者的安装，这些让 AI 更有效。</p>
+<h3 id="1-改进算法"><a href="#1-改进算法" class="headerlink" title="1.改进算法"></a>1.改进算法</h3><p>深的学习并不是新东西 — — 1965 年发表第一个有效的、 多层神经网络的规范 — — 在过去十年期演化过程中，深度学习算法已经改变了结果。</p>
+<p>我们已能够开始通过卷积神经网络 (CNN) 的开发，识别图像中的物体 （图 9，下）。从动物视觉皮层得到设计灵感，在神经网络中的每一层作为筛选器的一个特定的模式存在。到 2015 年，微软的基于 CNN 的计算机视觉系统比人类 （94.9%精度）更有效地识别图片中的对象 （95.1%精度）。”对我们的知识而言，”他们写道，”我们的结果是得到了第一个超越人类级别的性能。” CNN 有广泛的应用，包括视频和语音识别。</p>
+<p>同时，语音和手写识别的进展也随着递归神经网络 (RNNs)迅速改善 (图 10) 。RNNs 有使数据循环的反馈连接，与传统的神经网络只能’前馈’不同。强大的新型 RNN 是 ‘长短期记忆’ (LSTM) 模型。增加连接和记忆细胞，RNNs ‘记住’ 他们看见数千步骤前的数据，并以此来告知他们之后的解释 — — 下一词的释义将通过它之前的文字的语音识别衡量。从 2012 年起谷歌 LSTMs 用于增强安卓系统的语音识别。就在六个星期前，微软工程师报道他们的系统达到的 5.9%的误码字率 — — 历史上第一次大致等于人的能力。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*2tTNfCBXOmYnU4ZOmGa8gA.png" alt=""><br><img src="https://cdn-images-1.medium.com/max/1200/1*8ZtNi8ho6sFXSryJZatnyg.png" alt=""></p>
+<h3 id="2-专门的硬件"><a href="#2-专门的硬件" class="headerlink" title="2.专门的硬件"></a>2.专门的硬件</h3><p><strong>图形处理器 (GPUs)</strong> 是专业的电子线路，正在削减来训练神经网络用于深度学习所需的时间。</p>
+<p>最初 GPUs 在 1990 年代后期诞生，以加速 3D 游戏和 3D 开发应用程序。平移或缩放操作摄像机在 3D 环境中的重复利用称为矩阵计算的数学过程。微处理器与串行架构，包括今天的计算机的 CPUs 都不适合这项任务。 大规模并行架构的 GPUs（Nvidia M40 有 3,072 内核）可以有效进行矩阵计算。</p>
+<p>训练的神经网络广泛利用矩阵计算。这太明显了，因此，用于 3D 游戏的 GPUs 也适合用来加速深度学习。他们的性能相当客观;简单的 GPU 可以提高神经网络 5 倍时间，10 倍或更多在更难的问题。当结合合适的泛型深入学习框架的软件开发工具包，可以更好的提高训练速度 （图 11，所示）。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*bMnbjzzYvyUIoeItFhwszw.png" alt=""></p>
+<h3 id="3-广泛的数据"><a href="#3-广泛的数据" class="headerlink" title="3.广泛的数据"></a>3.广泛的数据</h3><p>神经网络用于深度学习通常需要海量数据训练 — — 从几个几千例子到数以百万计。幸运的是，创建和数据可用性已经急剧增长。今天，当我们进入 ‘第三次数据浪潮，<strong>人类每天产生 2.2 艾字节 （23 亿千兆字节） 的数据</strong>;世界上 90% 的数据产生在过去的 24 个月。</p>
+<p>‘第一波数据浪潮’，在上世纪 80 年代开始，涉及创建文档和事务性数据，是由互联网连接的桌面 PC 催生的。紧接着’第二波数据浪潮’ — — 爆炸的非结构化的媒体 （电子邮件、 照片、 音乐和视频）、 web 数据和元数据造成了无处不在并连接的智能手机。今天我们正在进入 ‘第三代’数据，其中机传感器部署在行业和家庭中，产生额外的 监测、分析、元、数据。</p>
+<p>既然今天生产的很多数据通过互联网传送使用，膨胀互联网流量作为人类的数据生产的巨大升幅的代理。虽然作为一个物种，我们在 1992 年每日传输 100 GB 的数据，到 2020 年我们将 每秒传输 61,000 GB  (如下图 12，— — 请注意对数刻度)。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*AUylp0jdTTmJ6PWxWEnkIw.png" alt=""></p>
+<p>超出一般数据的可用性的增加，专家数据资源促进了机器学习的进展。例如 ImageNet，是超过 1000 万的手贴上标签图像自由可用数据库。它的存在一直支持对象分类深度学习算法的快速发展。</p>
+<h3 id="4-云服务"><a href="#4-云服务" class="headerlink" title="4.云服务"></a>4.云服务</h3><p>开发者使用机器学习是由基于云计算的机器学习基础设施和行业领先的云提供商催化的。</p>
+<p>谷歌、 亚马逊、 微软和 IBM 提供<strong>基于云计算基础设施</strong> （环境模型构建和迭代、 可伸缩 ‘GPUs 作为一项服务’ 和相关托管的服务） 来减少成本和难度的发展机器学习能力。</p>
+<p>此外，他们提供新兴的<strong>基于云计算的机器学习服务</strong>（从图像识别语言翻译），开发人员可以在自己的应用程序中直接使用。谷歌机器学习提供方便服务︰ 视觉 （对象识别、 显式内容检测、 人脸检测和图像情感分析）;语音 （语音识别和语音文本）;文本分析 （实体识别、 情感分析、 语言检测和翻译）;和员工职位搜索 （机会浮现和资质匹配）。微软认知服务超过 21 项，包含领域有： 视觉、 语音、 语言、 知识和搜索。</p>
+<h3 id="5-利益和企业家精神"><a href="#5-利益和企业家精神" class="headerlink" title="5.利益和企业家精神"></a>5.利益和企业家精神</h3><p>在过去<strong>五年中，公众对 AI 的兴趣增加六倍</strong>，（图 13），与 AI 公司的风险投资公司投资的数目增加了更多 （图 14）。我们已经进入一个良性的循环，机器学习的进展吸引了投资、 创业精神和意识。然后，反过来，促进进一步的进展。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*Xc3sRn7c3sovbRURo_8HFA.png" alt=""><br><img src="https://cdn-images-1.medium.com/max/1200/1*guXXm4xdQpjmAFyOoXWLag.png" alt=""></p>
+<h2 id="5-接下来怎样？"><a href="#5-接下来怎样？" class="headerlink" title="5.接下来怎样？"></a>5.接下来怎样？</h2><p>机器学习的好处将是众多和显著。很多即将到来，从自主车辆到人机交互的新方法。有些将会不那么明显，但使日常业务流程和消费者服务更有效率。</p>
+<p>任何范式转变，有时过高的期望将超过短期的潜力。我们期望将来在关于 AI一些方面幻灭，应遵守其长期并持久的价值，就像机器学习曾经提高了，然后重新构建了现有系统。</p>
+<p>历史上，工业革命改变了生产和通信通过新的动力及传动来源。在 1780 年代第一次工业革命蒸汽动力用于机械化生产。在 1870 年代第二个使用电力驱动大批量生产。从 20 世纪 70 年代第三个用电子和软件来自动化生产和通信。今天，随着软件蚕食世界，我们的价值创造的主要来源是信息的处理。机器学习使我们做这些更加智能，产生效益即谦卑又具历史性。</p>
+<p>…</p>
+<p>我们会发布更多 AI 和风险资本的见解。为了避免遗漏，报名参加我们的博客文章。</p>
+<p>一张地图的 226 AI 初创公司在英国和塑造着市场的主要趋势，探索这篇文章。如果你是一个 AI 企业家，取得联系。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy Mage a coffee here 😉</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Artwalk WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Artwalk Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Artwalk Bitcoin"/>
+        <p>Bitcoin</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/23/Server-side-Swift/" rel="next" title="Server side Swift">
+                <i class="fa fa-chevron-left"></i> Server side Swift
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/27/Swift-Generics-in-protocol-and-enum/" rel="prev" title="Swift Generics in protocol and enum">
+                Swift Generics in protocol and enum <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Artwalk" />
+            
+              <p class="site-author-name" itemprop="name">Artwalk</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">145</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Artwalk" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/art_holy" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四次工业革命︰-人工智能入门-AI"><span class="nav-number">1.</span> <span class="nav-text">第四次工业革命︰ 人工智能入门 (AI)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是-AI？"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么是 AI？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#人工智能︰-智能程序的科学"><span class="nav-number">1.1.1.</span> <span class="nav-text">人工智能︰ 智能程序的科学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机器学习︰-减负功能优化"><span class="nav-number">1.1.2.</span> <span class="nav-text">机器学习︰ 减负功能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度学习︰-卸载功能规范"><span class="nav-number">1.1.3.</span> <span class="nav-text">深度学习︰ 卸载功能规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-深度学习如何工作呢？"><span class="nav-number">1.2.</span> <span class="nav-text">2.深度学习如何工作呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-为什么-AI-重要？"><span class="nav-number">1.3.</span> <span class="nav-text">3.为什么 AI 重要？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-为什么是-AI-今天时代来临？"><span class="nav-number">1.4.</span> <span class="nav-text">4.为什么是 AI 今天时代来临？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-改进算法"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.改进算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-专门的硬件"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.专门的硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-广泛的数据"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.广泛的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-云服务"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.云服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-利益和企业家精神"><span class="nav-number">1.4.5.</span> <span class="nav-text">5.利益和企业家精神</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-接下来怎样？"><span class="nav-number">1.5.</span> <span class="nav-text">5.接下来怎样？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2012 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Artwalk</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Artwalk.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://artwalk.github.io/2016/12/24/A-primer-on-Artificial-Intelligence/';
+          this.page.identifier = '2016/12/24/A-primer-on-Artificial-Intelligence/';
+          this.page.title = 'A primer on Artificial Intelligence';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Artwalk.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

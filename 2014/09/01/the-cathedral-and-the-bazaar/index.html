@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="W6tSHHKonS5D5zJBZVuUw0cq8L_u_q38qoqh0UBQL8k" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Programming," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Artwalk's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="如何成为一名黑客—— 大教堂与集市【美】雷蒙德（Eric S. Raymond） 读后感  一直以来，我就很奇怪大众眼中的程序员，一般是呆头呆脑，按逻辑办事，终日沉浸在自己世界，沉默寡言，高智商低情商，为哪种编程语言或框架比另一种要好争论不休哦，还有最重要的一条：木有妹纸   这也让我很困惑，甚至有段时间我发自内心的不认同这个标签    因为纵观国外的一些大牛，他们除了代码精湛之外，还写 Blog">
+<meta name="keywords" content="Programming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Cathedral and the Bazaar">
+<meta property="og:url" content="http://artwalk.github.io/2014/09/01/the-cathedral-and-the-bazaar/index.html">
+<meta property="og:site_name" content="Artwalk&#39;s Blog">
+<meta property="og:description" content="如何成为一名黑客—— 大教堂与集市【美】雷蒙德（Eric S. Raymond） 读后感  一直以来，我就很奇怪大众眼中的程序员，一般是呆头呆脑，按逻辑办事，终日沉浸在自己世界，沉默寡言，高智商低情商，为哪种编程语言或框架比另一种要好争论不休哦，还有最重要的一条：木有妹纸   这也让我很困惑，甚至有段时间我发自内心的不认同这个标签    因为纵观国外的一些大牛，他们除了代码精湛之外，还写 Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://img3.douban.com/mpic/s27277041.jpg">
+<meta property="og:updated_time" content="2016-05-14T05:48:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Cathedral and the Bazaar">
+<meta name="twitter:description" content="如何成为一名黑客—— 大教堂与集市【美】雷蒙德（Eric S. Raymond） 读后感  一直以来，我就很奇怪大众眼中的程序员，一般是呆头呆脑，按逻辑办事，终日沉浸在自己世界，沉默寡言，高智商低情商，为哪种编程语言或框架比另一种要好争论不休哦，还有最重要的一条：木有妹纸   这也让我很困惑，甚至有段时间我发自内心的不认同这个标签    因为纵观国外的一些大牛，他们除了代码精湛之外，还写 Blog">
+<meta name="twitter:image" content="http://img3.douban.com/mpic/s27277041.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://artwalk.github.io/2014/09/01/the-cathedral-and-the-bazaar/"/>
+
+
+
+
+
+  <title>The Cathedral and the Bazaar | Artwalk's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-45400676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Artwalk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">游走的艺术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+            Books
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'ua5s4giqP1Qhp6X6k3tY','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2014/09/01/the-cathedral-and-the-bazaar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">The Cathedral and the Bazaar</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-01T22:18:07+08:00">
+                2014-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2014/09/01/the-cathedral-and-the-bazaar/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2014/09/01/the-cathedral-and-the-bazaar/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="如何成为一名黑客"><a href="#如何成为一名黑客" class="headerlink" title="如何成为一名黑客"></a>如何成为一名黑客</h1><p>—— 大教堂与集市【美】雷蒙德（Eric S. Raymond） 读后感</p>
+<p><img src="http://img3.douban.com/mpic/s27277041.jpg" alt=""></p>
+<p>一直以来，我就很奇怪<br>大众眼中的程序员，一般是呆头呆脑，按逻辑办事，终日沉浸在自己世界，沉默寡言，高智商低情商，为哪种编程语言或框架比另一种要好争论不休<br>哦，还有最重要的一条：木有妹纸  </p>
+<p>这也让我很困惑，甚至有段时间我发自内心的不认同这个标签   </p>
+<p>因为纵观国外的一些大牛，他们除了代码精湛之外，还写 Blog、出书、营销、开公司、拉风投、潜水、登山、旅行…<br>而且并非浅尝辄止，只能用逆天来形容<br>这…还是程序员么  </p>
+<p>看了此书才明白，此人种名曰：黑客（Hacker）</p>
+<a id="more"></a>
+<p>上次看《黑客与画家》时，就很鸡冻<br>还记得刚学 C 语言时，就和我哥说，不想当一名黑客，也不想搞安全相关的东东<br>毕竟当时学校那破图书馆里都是《黑客攻防实践》《黑客反汇编》之类的东东  </p>
+<p>时隔多年，现在是知道了，原来我不想成为的是 骇客（cracker）  </p>
+<p>对于 骇客，Eric 文中给出了一些建议：</p>
+<blockquote>
+<p>如果你想成为一名黑客，请接着读下去。如果你想成为一名骇客，去读alt.2600新闻组（news:alt.2600），如果你发现自己并没有想象中那么聪明，做好准备去蹲上5到10次监狱吧。这就是我想对骇客说的。</p>
+</blockquote>
+<p>关于这个，我是存有疑问的，以后有时间看下 2000 年之前他们分别是什么版本</p>
+<blockquote>
+<p>Java也是一个不错的学习编程的语言。它比Python要难，但可以产生比Python更快的代码，我想它可以作为一个优秀的第二语言</p>
+</blockquote>
+<p>没看<code>Python</code> 的直接来看 <code>Ruby</code> 吧，这是一门让你爽的语言，还有，此书由于出版时间，iOS &amp; Android 尚未出现</p>
+<blockquote>
+<p>最好把这五种语言（Python、Java、C/C++、Perl和LISP）都学了。它们不只是最重要的黑客语言，还代表了截然不同的编程方法，每一种都会让你受益匪浅</p>
+</blockquote>
+<p>重复造轮子</p>
+<blockquote>
+<p>创造性头脑是无比珍贵的有限资源，它们不应浪费在重新发明轮子这种事上，尤其是还有这么多迷人的新问题在那里等着的时候</p>
+</blockquote>
+<p>GUI</p>
+<blockquote>
+<p>问题主要出在人机工程学设计和界面心理学上，黑客在这些方面从来就很弱。黑客在为其他黑客设计接口时做得很好，但他们往往不善于为另外95%人群的思维过程建模</p>
+</blockquote>
+<p>下面是书摘，附录很有意思</p>
+<hr>
+<h2 id="2-大教堂与集市"><a href="#2-大教堂与集市" class="headerlink" title="2. 大教堂与集市"></a>2. 大教堂与集市</h2><ol>
+<li>好的软件作品，往往源自于开发者的个人需要</li>
+<li>优秀的程序员知道写什么，卓越的程序员知道改写（和重用）什么</li>
+<li>“计划好扔掉一个吧，迟早你会这么做的。”（Fred Brooks，《人月神话》第11章）</li>
+<li>如果你有正确的态度，有趣的事情自然会找到你。</li>
+<li>当你对一个程序不再感兴趣时，你最后的责任就是把它交给一个可以胜任的接棒者</li>
+<li>把你的用户当成开发合作者对待，如果想让代码质量快速提升并有效排错，这是最省心的途径。</li>
+<li>早发布，常发布，倾听用户的反馈。</li>
+<li>如果有足够多的beta测试者和合作开发者，几乎所有问题都会很快显现，然后自然有人会把它解决。<ul>
+<li>Linus定律道出了大教堂模式和集市模式最关键的区别：在大教堂建筑者看来，bug是棘手的、难以发现的、隐藏在深处的，要经过几个人数月的全心投入和仔细检查，才能有点信心说已经剔除了所有错误。而发布间隔越长，倘若等待已久的发布版本并不完美，人们的失望就越发不可避免。</li>
+<li>对集市模式而言则完全不同，在上千名合作开发者热切钻研每个新发布版本的情况下，你可以假定bug是浅显易找的，或者至少可以很快变得浅显易找。所以你会频繁发布以获取更多的修正，其副作用是良性的：即便发布中有些小问题，你也不会损失太多。</li>
+</ul>
+</li>
+<li>聪明的数据结构配上愚笨的代码，远比反过来要好得多。</li>
+<li>如果你把beta测试者当做最珍贵的资源对待，他们就会成为你最珍贵的资源</li>
+<li>仅次于拥有好主意的是，识别来自用户的好主意，有时后者会更好</li>
+<li>通常，那些最有突破性和最有创新力的解决方案来自于你认识到你对问题的基本观念是错的。</li>
+<li>“设计上的完美不是没有东西可以再加，而是没有东西可以再减。”</li>
+<li>任何工具都应具备预期内的功能，但一个伟大的工具能给你带来预期外的功能。</li>
+<li>写网关类软件时，尽可能不要干扰数据流，而且绝不要扔掉信息，除非接收方强迫你这么做</li>
+<li>当你的语言还远不是图灵完备（Turing-complete）的时候，语法糖会让你受益良多。</li>
+<li>系统的安全性只取决于它所拥有的秘密。谨防虚假的秘密。</li>
+<li>想要解决一个有趣的问题，先去找一个让你感兴趣的问题。</li>
+<li>如果开发协调者有一个至少像Internet这样好的沟通媒介，并且知道如何不靠强制来领导，那么多人合作必然强于单兵作战<ul>
+<li>如果你在工作过程中感到恐惧和厌恶（即便你以自嘲的形式来表达——比如悬挂呆伯特玩偶），就应该意识到过程已经出了问题。快乐、幽默和玩兴是真正的资产</li>
+<li>玩”是创造性活动中最具经济效能的工作模式。</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-开垦心智层"><a href="#3-开垦心智层" class="headerlink" title="3. 开垦心智层"></a>3. 开垦心智层</h2><ul>
+<li>在礼物文化中，社会地位并不取决于你控制了什么，而是你给予了什么</li>
+</ul>
+<ol>
+<li>如果它不能像我所预期的那样工作，那就不是好的——不管它多么聪明和有原创性。</li>
+<li>在心智层的拓展性工作要比在某功能域内（对现有作品）的重复性工作好。</li>
+<li>能进入主要发行版的作品比不能进入的好。在所有主要发行版中都包含的作品最令人尊敬。</li>
+<li>“使用”是最真实的赞美，类别杀手比同类竞争者好。</li>
+<li>相比那些只挑有趣和简单工作的人，长期致力于艰苦和乏味工作（如调试、写文档）的人更令人钦佩。</li>
+<li>重要的功能扩展比低层次的修补好。</li>
+</ol>
+<h2 id="4-魔法锅"><a href="#4-魔法锅" class="headerlink" title="4. 魔法锅"></a>4. 魔法锅</h2><ol>
+<li>可靠性/稳定性/可扩展性非常重要。</li>
+<li>除了独立的同行评审，没有其他便捷易行的方法验证设计和实现的正确性。</li>
+<li>该软件对客户的业务非常关键。</li>
+<li>该软件创建或运转一个公共计算或通信基础架构。</li>
+<li>关键方法（或能实现同等功能的方法）属于公共知识</li>
+</ol>
+<h2 id="5-黑客的反击"><a href="#5-黑客的反击" class="headerlink" title="5. 黑客的反击"></a>5. 黑客的反击</h2><ul>
+<li>理论和语言的缺乏在两个方面对我们不利：一是我们不能系统性地思考如何改进我们的方法，二是我们难以向别人解释和推销我们的方法</li>
+</ul>
+<h2 id="附录A：如何成为一名黑客"><a href="#附录A：如何成为一名黑客" class="headerlink" title="附录A：如何成为一名黑客"></a>附录A：如何成为一名黑客</h2><h3 id="黑客搞建设，骇客搞破坏"><a href="#黑客搞建设，骇客搞破坏" class="headerlink" title="黑客搞建设，骇客搞破坏"></a>黑客搞建设，骇客搞破坏</h3><h3 id="黑客的态度"><a href="#黑客的态度" class="headerlink" title="黑客的态度"></a>黑客的态度</h3><ol>
+<li>这个世界充满了迷人的问题等待人们去解决。</li>
+<li>不要解决一个问题两次。</li>
+<li>无聊和乏味是有害的</li>
+<li>自由是好事</li>
+<li>态度不能代替能力。</li>
+</ol>
+<h3 id="黑客的基本技能"><a href="#黑客的基本技能" class="headerlink" title="黑客的基本技能"></a>黑客的基本技能</h3><ol>
+<li>学习编程<ul>
+<li>想要获得将知识转化为技能的思维模式，只能通过实践和跟随大师。做法就是读代码和写代码</li>
+</ul>
+</li>
+<li>找一个开源UNIX，学习使用和运行它。</li>
+<li>学习如何使用WWW和写HTML。</li>
+</ol>
+<h3 id="地位之于黑客文化"><a href="#地位之于黑客文化" class="headerlink" title="地位之于黑客文化"></a>地位之于黑客文化</h3><ol>
+<li>写开源软件。</li>
+<li>协助测试和调试开源软件</li>
+<li>发布有用的信息。</li>
+<li>帮助做一些基础工作。</li>
+<li>服务黑客文化自身。</li>
+</ol>
+<h3 id="格调问题"><a href="#格调问题" class="headerlink" title="格调问题"></a>格调问题</h3><ul>
+<li>学习很好地使用你的母语写作。尽管有一种陈旧的看法认为程序员写作不行，但很多黑客（包括我所知道的那些最优秀的黑客们）写得一手好文章，而且其数量多得让人吃惊。</li>
+<li>阅读科幻小说，参加科幻小说集会（这是认识黑客和潜在黑客的好方法）。</li>
+<li>研习禅修，并且/或者学习武术。（心智训练似乎在很多重要方面都是类似的。）</li>
+<li>培养起对音乐的鉴赏力。学会欣赏一些独特类型的音乐。学习很好地演奏乐器，或者学习如何唱歌。</li>
+<li><p>培养出你对双关语和俏皮话的欣赏能力。</p>
+<p>但这些事与左右脑技能的结合有关，这可能是问题的关键所在（黑客不仅需要有很强的逻辑推理能力，而且要能够很快从问题的具体逻辑中跳脱出来）</p>
+</li>
+</ul>
+<h3 id="不要"><a href="#不要" class="headerlink" title="不要"></a>不要</h3><ul>
+<li>不要使用愚蠢、浮夸的用户名或昵称。</li>
+<li>不要卷入Usenet（或其他任何地方）的网络骂战。</li>
+<li>不要自称为“电脑朋克”，也不要浪费时间交往那些自称电脑朋克的人。</li>
+<li>不要让你的贴子或email充满错误的拼写和糟糕的语法。</li>
+</ul>
+<p>最后：<br><strong>“只有其他黑客认为你是黑客时，你才是黑客”</strong><br>所表达出来的价值观，类似于中世纪欧洲骑士时代精英团体所宣称的理想（通常总是无法实现），这些社会精英有足够的财力超脱于所处的稀缺经济。像人们期望的那样，一个有抱负的骑士为正义而战，他追求荣誉而非获取钱财，他站在弱势和受压迫者一边，不断寻求机会挑战自己英勇才能的极限。也正因如此，他会认为自己（并被别人认为）是人中翘楚——前提是他的能力和品行已获得其他骑士的承认和正式认可。在亚瑟王传奇（Arthurian tales）和武功歌（chansons de geste）所颂扬的骑士精神中，我们看到了理想主义、对自我的不断挑战和对地位的追求，这与当今激励黑客的要素是类似的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy Mage a coffee here 😉</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Artwalk WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Artwalk Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Artwalk Bitcoin"/>
+        <p>Bitcoin</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Programming/" rel="tag"># Programming</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/28/ios-7-programming-cookbook/" rel="next" title="iOS 7 Programming Cookbook">
+                <i class="fa fa-chevron-left"></i> iOS 7 Programming Cookbook
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/09/03/what-technology-wants/" rel="prev" title="what technology wants">
+                what technology wants <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Artwalk" />
+            
+              <p class="site-author-name" itemprop="name">Artwalk</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">145</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Artwalk" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/art_holy" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何成为一名黑客"><span class="nav-number">1.</span> <span class="nav-text">如何成为一名黑客</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-大教堂与集市"><span class="nav-number">1.1.</span> <span class="nav-text">2. 大教堂与集市</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-开垦心智层"><span class="nav-number">1.2.</span> <span class="nav-text">3. 开垦心智层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-魔法锅"><span class="nav-number">1.3.</span> <span class="nav-text">4. 魔法锅</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-黑客的反击"><span class="nav-number">1.4.</span> <span class="nav-text">5. 黑客的反击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录A：如何成为一名黑客"><span class="nav-number">1.5.</span> <span class="nav-text">附录A：如何成为一名黑客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#黑客搞建设，骇客搞破坏"><span class="nav-number">1.5.1.</span> <span class="nav-text">黑客搞建设，骇客搞破坏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#黑客的态度"><span class="nav-number">1.5.2.</span> <span class="nav-text">黑客的态度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#黑客的基本技能"><span class="nav-number">1.5.3.</span> <span class="nav-text">黑客的基本技能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地位之于黑客文化"><span class="nav-number">1.5.4.</span> <span class="nav-text">地位之于黑客文化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格调问题"><span class="nav-number">1.5.5.</span> <span class="nav-text">格调问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要"><span class="nav-number">1.5.6.</span> <span class="nav-text">不要</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2012 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Artwalk</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Artwalk.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://artwalk.github.io/2014/09/01/the-cathedral-and-the-bazaar/';
+          this.page.identifier = '2014/09/01/the-cathedral-and-the-bazaar/';
+          this.page.title = 'The Cathedral and the Bazaar';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Artwalk.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

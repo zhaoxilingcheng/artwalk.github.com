@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="W6tSHHKonS5D5zJBZVuUw0cq8L_u_q38qoqh0UBQL8k" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Swift,iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Artwalk's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="服务器端 Swift︰ 经验教训原文链接：Building a Production Server Swift App: Lessons Learned 当你用 Swift 在 Xcode 上开发时，你有想过可以在 Linux，Web，甚至 微软 Exchange 服务器上用 Swift 吗？😱 也许没想过。 在 Jeff Bergier 工作中，他运行的一个应用程序需要使用所有的这些。并且，全">
+<meta name="keywords" content="Swift,iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Server side Swift">
+<meta property="og:url" content="http://artwalk.github.io/2016/12/23/Server-side-Swift/index.html">
+<meta property="og:site_name" content="Artwalk&#39;s Blog">
+<meta property="og:description" content="服务器端 Swift︰ 经验教训原文链接：Building a Production Server Swift App: Lessons Learned 当你用 Swift 在 Xcode 上开发时，你有想过可以在 Linux，Web，甚至 微软 Exchange 服务器上用 Swift 吗？😱 也许没想过。 在 Jeff Bergier 工作中，他运行的一个应用程序需要使用所有的这些。并且，全">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2016-12-23T12:36:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Server side Swift">
+<meta name="twitter:description" content="服务器端 Swift︰ 经验教训原文链接：Building a Production Server Swift App: Lessons Learned 当你用 Swift 在 Xcode 上开发时，你有想过可以在 Linux，Web，甚至 微软 Exchange 服务器上用 Swift 吗？😱 也许没想过。 在 Jeff Bergier 工作中，他运行的一个应用程序需要使用所有的这些。并且，全">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://artwalk.github.io/2016/12/23/Server-side-Swift/"/>
+
+
+
+
+
+  <title>Server side Swift | Artwalk's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-45400676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Artwalk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">游走的艺术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+            Books
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'ua5s4giqP1Qhp6X6k3tY','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/12/23/Server-side-Swift/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Server side Swift</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-23T20:36:00+08:00">
+                2016-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/23/Server-side-Swift/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/12/23/Server-side-Swift/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="服务器端-Swift︰-经验教训"><a href="#服务器端-Swift︰-经验教训" class="headerlink" title="服务器端 Swift︰ 经验教训"></a>服务器端 Swift︰ 经验教训</h1><p>原文链接：<a href="https://realm.io/news/slug-jeff-bergier-building-production-server-swift-app/?utm_source=wanqu.co&amp;utm_campaign=Wanqu+Daily&amp;utm_medium=website" target="_blank" rel="noopener">Building a Production Server Swift App: Lessons Learned</a></p>
+<p>当你用 Swift 在 Xcode 上开发时，你有想过可以在 Linux，Web，甚至 微软 Exchange 服务器上用 Swift 吗？😱 也许没想过。</p>
+<p>在 Jeff Bergier 工作中，他运行的一个应用程序需要使用所有的这些。并且，全部是 Swift ！当从安全的 Darwin 和 Foundation 转移到野蛮的 Linux 时，你可能会碰到不少减速带。在Swift用户组的这次演讲中，Jeff 分享了这些，以便你进入这个令人兴奋的新路时会容易点 ！</p>
+<a id="more"></a>
+<h2 id="介绍-0-36"><a href="#介绍-0-36" class="headerlink" title="介绍 (0:36)"></a>介绍 (0:36)</h2><p>我是用户体验设计师在 Riverbed 工作。我们是做企业的，与手机、iOS 或苹果无关的网络硬件。我在Swift之前学过Objective-C，自学了 iOS 差不多三年。</p>
+<h2 id="应用程序和它怎么开始的-1-20"><a href="#应用程序和它怎么开始的-1-20" class="headerlink" title="应用程序和它怎么开始的 (1:20)"></a>应用程序和它怎么开始的 (1:20)</h2><p>我生产服务器 Swift 应用程序是工作会议房间调度。它开始作为一个纯Storyboard原型。Storyboard是一种伟大的原型工具 — — 你可以扔在一起的所有table views，单击通过他们，无需任何代码，别人也很容易知道你在做什么。</p>
+<p>Storyboard 变成 Swift playground，因为在工作的每个人都希望它能够与 Outlook 进行交互。使用 Outlook，您需要使用Exchange API，这是 xml 格式的。在工作编程马拉松中，我用 Python 的 CherryPy 框架 开发了真正的版本。</p>
+<p>因为我不喜欢 Python，因为我想学 sever端的 Swift，我在业余时间重写了它。有几个 服务器端的 Swift 框架，特别是由 IBM 开发的那个。</p>
+<p>我并没用 IBM 框架，尽管他们有很棒 GUI 工具以转到 Linux 服务器。我  Perfect，因为它似乎最容易启动和运行。</p>
+<h2 id="为啥用-Server端-Swift？-7-01"><a href="#为啥用-Server端-Swift？-7-01" class="headerlink" title="为啥用 Server端 Swift？(7:01)"></a>为啥用 Server端 Swift？(7:01)</h2><p>我想学 JavaScript 和Server端的 Swift。Python 用来工作很好，但我认为 Xcode 超棒，因为自动完成和语法检查。在Server端 Swift，你不需要interface builder，因此，Xcode 几乎不崩溃。</p>
+<p>类型安全也超棒。它能控制意外参数进入 func。另外，Safari 的调试工具类似于 Xcode 的。</p>
+<h2 id="如何构建-7-01"><a href="#如何构建-7-01" class="headerlink" title="如何构建 (7:01)"></a>如何构建 (7:01)</h2><p>这是一个现代的 web 应用程序， 用 javascript 加载 HTML。JavaScript 将 post 请求发送到服务器。然后服务器发送回一个 JSON 字符串，然后 JavaScript 将 JSON 字符串转换成 HTML 元素，并显示它们。我用 Bootstrap 和 JavaScript，然后有用一些 cookie 存储会话信息。我也在 cookie 中存储一些 AES 证书，以便我可以在用户回访时解密他们的密码。</p>
+<p>就像 CherryPy 后端，像大多数 web 框架工作方式类似，在那里你有一个路由器的概念。我在 <code>/</code> 侦听所有或 POST 请求，然后它进入我的 Swift 代码。Perfect 没有会话管理器，所以我得到我自己设置 cookie 并根据请求将其还原。每个有 JSON payload 的请求，Swift 会解包，决定他们在哪个过程中，哪些数据与 exchange 服务器通信，然后返回新的 JSON 字符串。</p>
+<h2 id="忘了-XcodeProj-11-02"><a href="#忘了-XcodeProj-11-02" class="headerlink" title="忘了 .XcodeProj (11:02)"></a>忘了 .XcodeProj (11:02)</h2><p>框架不是 Xcode 项目，但可以刚刚好用 Xcode 编辑代码。我甚至没把它放到 repo 里，因为它是一次性的。我们改用 Swift 包管理器代替。</p>
+<p>出于某种原因，它将系统设置为 10.10，如果您使用任何更新的代码，你得告诉它要做 10.12。此外，因为您的 web 框架要需要跟它的静态文件，您必须添加一个复制文件阶段，否则 web 服务器找不到他们。</p>
+<h2 id="Foundation-几乎是现在的-17-13"><a href="#Foundation-几乎是现在的-17-13" class="headerlink" title="Foundation 几乎是现在的 (17:13)"></a>Foundation 几乎是现在的 (17:13)</h2><p>我会仍然默认情况下使用的基础类型，即使这样，Xcode 也没法告诉你它能否运行在 Linux 上。 我刚用时，Perfect 没有像 NSURLSession 这样的大类，但现在他们有了。</p>
+<p>这代码是我用来 舍入日期的; 你可以选择到就近的 15 分钟。它看起来像标准 iOS Foundation 代码。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Date</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">roundedTimeInterval</span><span class="params">(from date: Date)</span></span> -&gt; <span class="type">TimeInterval</span> &#123;</span><br><span class="line">   <span class="keyword">let</span> dc = <span class="type">Calendar</span>.current.dateComponents([.minute, .second], from: date)</span><br><span class="line">   <span class="keyword">let</span> originalMinute = <span class="type">Double</span>(dc.minute ?? <span class="number">0</span>)</span><br><span class="line">   <span class="keyword">let</span> originalSeconds = <span class="type">Double</span>(dc.second ?? <span class="number">0</span>)</span><br><span class="line">   <span class="keyword">let</span> roundTo = <span class="number">15.0</span></span><br><span class="line">   <span class="keyword">let</span> roundedMinute = round(originalMinute / roundTo) * roundTo</span><br><span class="line">   <span class="keyword">let</span> interval = ((roundedMinute - originalMinute) * <span class="number">60</span>) - originalSeconds</span><br><span class="line">   <span class="keyword">return</span> interval</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">roundMinutes</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="keyword">let</span> timeInterval = type(of: <span class="keyword">self</span>).roundedTimeInterval(from: <span class="keyword">self</span>)</span><br><span class="line"> <span class="keyword">self</span> += timeInterval</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你如何知道一个基础类型可以在 Linux 通过？你可以去苹果的 GitHub 上查一下。如果你找到类似的你见过的，这意味着它可能通过。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">DateComponents</span> : <span class="title">ReferenceConvertible</span>, <span class="title">Hashable</span>, <span class="title">Equatable</span>, <span class="title">_MutableBoxing</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">typealias</span> <span class="type">ReferenceType</span> = <span class="type">NSDateComponents</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">internal</span> <span class="keyword">var</span> _handle: _MutableHandle&lt;<span class="type">NSDateComponents</span>&gt;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//// Initialize a 'DateComponents', optionally specifying values for its fields.</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">init</span>(calendar: <span class="type">Calendar</span>? = <span class="literal">nil</span>,</span><br><span class="line">              timeZone: <span class="type">TimeZone</span>? = <span class="literal">nil</span>,</span><br><span class="line">              era: <span class="type">Int</span>? = <span class="literal">nil</span>,</span><br><span class="line">              ...</span><br><span class="line">              )</span><br><span class="line">    _handle = <span class="type">MutableHandle</span>(adoptingReference: <span class="type">NSDateComponents</span>())</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> _calendar = calendar &#123; <span class="keyword">self</span>.calendar = _calendar &#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> _timezone = timeZone &#123; <span class="keyword">self</span>.timeZone = _timeZone &#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> _era = era &#123; <span class="keyword">self</span>.era = era &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你看到这个，这是一个 NSURLAuthenticationChallenge 对象，但它没被实现。这是一个坏的迹象。这会在运行时崩溃。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">URLAuthenticationChallenge</span>: <span class="title">NSObject</span>, <span class="title">NSSecureCoding</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">var</span> supportsSecureCoding: <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder:<span class="type">NSCoder</span>) &#123;</span><br><span class="line">    <span class="type">NSUnimplemented</span>()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">open</span> <span class="function"><span class="keyword">func</span> <span class="title">encode</span><span class="params">(with aCoder: NSCoder)</span></span> &#123;</span><br><span class="line">    <span class="type">NSUnimplented</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里是我第一次尝试相同的算法，这样写似乎更正常 （我想要范围在 15 分钟之内）。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"></span><br><span class="line"><span class="comment">// get date and components</span></span><br><span class="line"><span class="keyword">var</span> dc = <span class="type">Calendar</span>.current.dateComponents(</span><br><span class="line"> [.year, .month, .day, .hour, .minute, .second, .calendar, .timeZone],</span><br><span class="line"> from: <span class="type">Date</span>()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// get originals and do rounding</span></span><br><span class="line"><span class="keyword">let</span> originalMinute = <span class="type">Double</span>(dc.minute ?? <span class="number">0</span>)</span><br><span class="line"><span class="keyword">let</span> roundTo = <span class="number">15.0</span></span><br><span class="line"><span class="keyword">let</span> roundedMinute = <span class="type">Int</span>(round(originalMinute / roundTo) * roundTo)</span><br><span class="line"></span><br><span class="line"><span class="comment">// modify components</span></span><br><span class="line">dc.minute = roundedMinute</span><br><span class="line">dc.second = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// generate new date</span></span><br><span class="line"><span class="keyword">let</span> roundedDate = dc.date! <span class="comment">// crashes on linux</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// fatal error: copy(with:) is not yet implemented: file Foundation/NSCalendar.swift, line 1434</span></span><br></pre></td></tr></table></figure>
+<p>我设置 分 为 roundedMinute , 秒 为 0，然后我问他们要新的日期，而不是以前那个我得到的时间间隔，然后添加和减去原来的。这部分在 Linux 上崩溃，因为 copyWithZone 没在 NSDate 上实现。你可能会感到有点意外。</p>
+<h2 id="经常在-Linux-上试验-20-05"><a href="#经常在-Linux-上试验-20-05" class="headerlink" title="经常在 Linux 上试验  (20:05)"></a>经常在 Linux 上试验  (20:05)</h2><p>你永远不知道什么时候 NSUnimplemented 或 copyWithZone 不执行。如果你是真的很关系，我会建议为每次提交设个 CI。我一直在使用一款叫做 Veertu;它在  app store 被沙盒化，免费，它在 headlist 模式中运行虚拟机。</p>
+<p>你不需要看到 Linux 的可怕 UI。它自动下载 Linux 并为您安装。</p>
+<h2 id="JSON-容易得多-21-21"><a href="#JSON-容易得多-21-21" class="headerlink" title="JSON 容易得多 (21:21)"></a>JSON 容易得多 (21:21)</h2><p>你已经知道如何处理 NSJSONSerialization。它仍然返回 data.jsonEncodedString，给你大多数的集合可以调用。然后每个字符串和其他一些事情有相反，所以你可以把任何字符串转换成对象，只要它是真实的 JSON。如果你想要处理，确实有些是在 try 抛出。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> PerfectLib</span><br><span class="line"><span class="keyword">let</span> data: [<span class="type">String</span> : <span class="type">Any</span>] = [</span><br><span class="line"> <span class="string">"date"</span> : <span class="string">"2016-01-01T12-12-00"</span>,</span><br><span class="line"> <span class="string">"name"</span> : <span class="string">"Billy"</span>,</span><br><span class="line"> <span class="string">"age"</span> : <span class="number">22</span>,</span><br><span class="line"> <span class="string">"emails"</span> : [</span><br><span class="line"> <span class="string">"something@something.com"</span>,</span><br><span class="line"> <span class="string">"somethingelse@something.com"</span></span><br><span class="line"> ]</span><br><span class="line">]</span><br><span class="line"><span class="keyword">let</span> json = <span class="keyword">try</span> data.jsonEncodedString()</span><br></pre></td></tr></table></figure>
+<h2 id="随机很难-21-58"><a href="#随机很难-21-58" class="headerlink" title="随机很难 (21:58)"></a>随机很难 (21:58)</h2><p>Linux 没 arc4random_uniform()，但我看到有些可以安装。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">#<span class="keyword">if</span> os(<span class="type">Linux</span>)</span><br><span class="line"><span class="keyword">import</span> Glibc</span><br><span class="line">#<span class="keyword">else</span></span><br><span class="line"><span class="keyword">import</span> Darwin</span><br><span class="line">#endif</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span> ... <span class="number">5</span> &#123;</span><br><span class="line"> #<span class="keyword">if</span> os(<span class="type">Linux</span>)</span><br><span class="line"> <span class="keyword">let</span> randomNumber = random()</span><br><span class="line"> #<span class="keyword">else</span></span><br><span class="line"> <span class="keyword">let</span> randomNumber = <span class="type">Int</span>(arc4random_uniform(<span class="type">UInt32</span>.<span class="built_in">max</span>))</span><br><span class="line"> #endif</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">"Round <span class="subst">\(i)</span>: <span class="subst">\(randomNumber)</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种循环生成五个随机数并将它们打印。如果它是在 Linux 上，它使用 Glibc 的 random() 函数。此随机数生成器是完全无用的。</p>
+<p>最简单的方法，我发现做随机数字已开放，对 devrandom 的访问和读取字节关闭它。它适用于 Mac 和 Linux，所以你不必单独做 arc4random。也有几个库比如 Turnstile 和 Crypto。</p>
+<h2 id="避免-if-os-Linux-24-25"><a href="#避免-if-os-Linux-24-25" class="headerlink" title="避免 #if os(Linux) (24:25)"></a>避免 #if os(Linux) (24:25)</h2><p>当你这样做时，你就失去 Xcode 的所有帮助。它不能做语法检查，它不能做的最基本的东西，和它绝对不能告诉是否它将工作。基本上，该代码在那块之间并不存在。我会建议避免它，另找一个解决方案，在这两个平台上运行。</p>
+<p>另一件事是，如果有时 Linux 的 Foundation 让你失望，你可以选择任何框架的新的 Foundation。Perfect 需要做的事情有很多，它是非常模块化。</p>
+<h2 id="线程-（26-13）"><a href="#线程-（26-13）" class="headerlink" title="线程 （26:13）"></a>线程 （26:13）</h2><p>线程不工作。你可以设置你的计时器，并手动发动，它将运行一次然后永远不会再次触发。我认为这是Perfect不得不做的; 他们有他们自己 runloop，与对 NSTimer 预期的不一样。</p>
+<p>Prefect 有自己的线程框架，和你可以自己创建线程。如果他们是串行或并行，你可以 dispatch。</p>
+<h2 id="不要强行解包-28-31"><a href="#不要强行解包-28-31" class="headerlink" title="不要强行解包 (28: 31)"></a>不要强行解包 (28: 31)</h2><p>不要强行解包。当你强打开某人的 iOS 应用程序上的东西，它会为了用户在设备上的崩溃。当你强迫打开服务器上的东西，它对每个人都崩溃。</p>
+<p>Q&amp;A （31：24）</p>
+<p>问︰ 当你调用 URLs 时，有什么其他限制？</p>
+<p>杰夫︰ 我喜欢写我的代码是清洁，速度较慢，且易于读取通过生成更多的对象，而不是再有他们在身边的方式。我不知道性能有多好，而且它还没有测试在荷载作用下。一般情况下，一些 Perfect 组员 做各种 Swift 网络框架和传统的 web 框架之间的性能比较, Swift 的似乎做得不错。但老实说没有测试它的性能。</p>
+<p>问︰ 未来的三到五年内，你对服务器端 Swift有什么看法？</p>
+<p>杰夫︰ 我认为现在是太早了。我认为至少要一年创业公司-Y 才有可能用它，大公司要多年以后了。</p>
+<p>问︰ 用 Swift 代替 Python 做了什么权衡？</p>
+<p>杰夫︰ 我发现 Xcode 的自动补全和其他的东西帮助巨大。我发现 类型检查 帮助很大。我们在 Python 中写的方式并不是真正的面向对象，仅仅因为每个人都认为它是那样。Python 对 JSON 类型数据结构处理的更好。</p>
+<hr>
+<p>PS：这么折腾，用 Go 不好吗 😂😂😂</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy Mage a coffee here 😉</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Artwalk WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Artwalk Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Artwalk Bitcoin"/>
+        <p>Bitcoin</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/21/New-Concept-English-2/" rel="next" title="New Concept English 2">
+                <i class="fa fa-chevron-left"></i> New Concept English 2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/24/A-primer-on-Artificial-Intelligence/" rel="prev" title="A primer on Artificial Intelligence">
+                A primer on Artificial Intelligence <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Artwalk" />
+            
+              <p class="site-author-name" itemprop="name">Artwalk</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">145</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Artwalk" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/art_holy" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#服务器端-Swift︰-经验教训"><span class="nav-number">1.</span> <span class="nav-text">服务器端 Swift︰ 经验教训</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍-0-36"><span class="nav-number">1.1.</span> <span class="nav-text">介绍 (0:36)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用程序和它怎么开始的-1-20"><span class="nav-number">1.2.</span> <span class="nav-text">应用程序和它怎么开始的 (1:20)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为啥用-Server端-Swift？-7-01"><span class="nav-number">1.3.</span> <span class="nav-text">为啥用 Server端 Swift？(7:01)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何构建-7-01"><span class="nav-number">1.4.</span> <span class="nav-text">如何构建 (7:01)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忘了-XcodeProj-11-02"><span class="nav-number">1.5.</span> <span class="nav-text">忘了 .XcodeProj (11:02)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Foundation-几乎是现在的-17-13"><span class="nav-number">1.6.</span> <span class="nav-text">Foundation 几乎是现在的 (17:13)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经常在-Linux-上试验-20-05"><span class="nav-number">1.7.</span> <span class="nav-text">经常在 Linux 上试验  (20:05)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-容易得多-21-21"><span class="nav-number">1.8.</span> <span class="nav-text">JSON 容易得多 (21:21)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机很难-21-58"><span class="nav-number">1.9.</span> <span class="nav-text">随机很难 (21:58)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免-if-os-Linux-24-25"><span class="nav-number">1.10.</span> <span class="nav-text">避免 #if os(Linux) (24:25)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程-（26-13）"><span class="nav-number">1.11.</span> <span class="nav-text">线程 （26:13）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要强行解包-28-31"><span class="nav-number">1.12.</span> <span class="nav-text">不要强行解包 (28: 31)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2012 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Artwalk</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Artwalk.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://artwalk.github.io/2016/12/23/Server-side-Swift/';
+          this.page.identifier = '2016/12/23/Server-side-Swift/';
+          this.page.title = 'Server side Swift';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Artwalk.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="W6tSHHKonS5D5zJBZVuUw0cq8L_u_q38qoqh0UBQL8k" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Programming," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Artwalk's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="之前用 C++，手动释放内存直接跪了 今天突然发现支持 Ruby 了 小试下果然如开挂了一样 不过这样可能就失去 Leetcode 的本意了 require &quot;profile&quot; #查看性能 Reverse Integer Ruby 中 负数 reverse 后成了正数 Int 越界要返回 0 (-2^32 ~ 2^32-1)  def reverse(x)  res = x.to_s.revers">
+<meta name="keywords" content="Programming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode With Ruby">
+<meta property="og:url" content="http://artwalk.github.io/2015/05/06/Leetcode-With-Ruby/index.html">
+<meta property="og:site_name" content="Artwalk&#39;s Blog">
+<meta property="og:description" content="之前用 C++，手动释放内存直接跪了 今天突然发现支持 Ruby 了 小试下果然如开挂了一样 不过这样可能就失去 Leetcode 的本意了 require &quot;profile&quot; #查看性能 Reverse Integer Ruby 中 负数 reverse 后成了正数 Int 越界要返回 0 (-2^32 ~ 2^32-1)  def reverse(x)  res = x.to_s.revers">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2016-05-14T05:48:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Leetcode With Ruby">
+<meta name="twitter:description" content="之前用 C++，手动释放内存直接跪了 今天突然发现支持 Ruby 了 小试下果然如开挂了一样 不过这样可能就失去 Leetcode 的本意了 require &quot;profile&quot; #查看性能 Reverse Integer Ruby 中 负数 reverse 后成了正数 Int 越界要返回 0 (-2^32 ~ 2^32-1)  def reverse(x)  res = x.to_s.revers">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://artwalk.github.io/2015/05/06/Leetcode-With-Ruby/"/>
+
+
+
+
+
+  <title>Leetcode With Ruby | Artwalk's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-45400676-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Artwalk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">游走的艺术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+            Books
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'ua5s4giqP1Qhp6X6k3tY','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/05/06/Leetcode-With-Ruby/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Leetcode With Ruby</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-06T20:58:02+08:00">
+                2015-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/05/06/Leetcode-With-Ruby/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/05/06/Leetcode-With-Ruby/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前用 <code>C++</code>，手动释放内存直接跪了</p>
+<p>今天突然发现支持 <code>Ruby</code> 了</p>
+<p>小试下果然如开挂了一样</p>
+<p>不过这样可能就失去 <code>Leetcode</code> 的本意了</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">"profile"</span> <span class="comment">#查看性能</span></span><br></pre></td></tr></table></figure>
+<h2 id="Reverse-Integer"><a href="#Reverse-Integer" class="headerlink" title="Reverse Integer"></a>Reverse Integer</h2><ul>
+<li>Ruby 中 负数 reverse 后成了正数</li>
+<li>Int 越界要返回 0 (-2^32 ~ 2^32-1)</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse</span><span class="params">(x)</span></span></span><br><span class="line">  res = x.to_s.reverse.to_i</span><br><span class="line">  <span class="keyword">if</span> res &gt; <span class="number">2147483647</span> <span class="keyword">or</span> res &lt; -<span class="number">2147483648</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> x &lt; <span class="number">0</span> ? -res : res</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="Reverse-Bits"><a href="#Reverse-Bits" class="headerlink" title="Reverse Bits"></a>Reverse Bits</h2><ul>
+<li>Ruby 中 to_s(2) 可以转换成二进制</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_bits</span><span class="params">(n)</span></span></span><br><span class="line">  zero = <span class="string">"00000000000000000000000000000000"</span></span><br><span class="line">  tmp = n.to_s(<span class="number">2</span>).reverse</span><br><span class="line">  res = tmp + zero[<span class="number">0</span>, <span class="number">32</span>-tmp.size]</span><br><span class="line">  <span class="keyword">return</span> res.to_i(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="Compare-Version-Numbers"><a href="#Compare-Version-Numbers" class="headerlink" title="Compare Version Numbers"></a>Compare Version Numbers</h2><ul>
+<li>“01” “1”   要返回 0</li>
+<li>会有多位小数点，如： “10.6.5”</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compare_version</span><span class="params">(version1, version2)</span></span></span><br><span class="line">  v1 = version1.split(<span class="string">'.'</span>)</span><br><span class="line">  v2 = version2.split(<span class="string">'.'</span>)</span><br><span class="line"></span><br><span class="line">  n = v1.size &gt; v2.size ? v1.size : v2.size</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..n</span><br><span class="line">    <span class="keyword">if</span> (res = compare_int(v1[i].to_i, v2[i].to_i)) != <span class="number">0</span></span><br><span class="line">      <span class="keyword">return</span> res</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compare_int</span><span class="params">(i1, i2)</span></span></span><br><span class="line">  <span class="keyword">if</span> i1 == i2</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> i1 &gt; i2 ? <span class="number">1</span><span class="symbol">:-</span><span class="number">1</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="Add-Binary"><a href="#Add-Binary" class="headerlink" title="Add Binary"></a>Add Binary</h2><ul>
+<li>开挂</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_binary</span><span class="params">(a, b)</span></span></span><br><span class="line">  <span class="keyword">return</span> (a.to_i(<span class="number">2</span>) + b.to_i(<span class="number">2</span>)).to_s(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="ZigZag-Conversion"><a href="#ZigZag-Conversion" class="headerlink" title="ZigZag Conversion"></a>ZigZag Conversion</h2><ul>
+<li>相同的一维数组 Array.new 是引用拷贝</li>
+<li>直接硬来，分配 s * num_rows 会超时，需要压缩矩阵</li>
+</ul>
+<p>比如 convert(123456789, 4)<br><figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">1 </span> <span class="number">7</span></span><br><span class="line"><span class="symbol">2 </span><span class="number">68</span></span><br><span class="line"><span class="symbol">35 </span><span class="number">9</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure></p>
+<p>可以压缩成</p>
+<figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">1 </span><span class="number">7</span></span><br><span class="line"><span class="number">268</span></span><br><span class="line"><span class="number">359</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert</span><span class="params">(s, num_rows)</span></span></span><br><span class="line">  <span class="keyword">return</span> s <span class="keyword">if</span> num_rows &lt;= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  columns = (s.size*<span class="number">1.0</span>/num_rows).ceil * <span class="number">2</span></span><br><span class="line">  rows = num_rows-<span class="number">1</span></span><br><span class="line"></span><br><span class="line">  puts columns</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment"># arr = Array.new(num_rows)&#123; Array.new(s.size, 's')&#125; # 这种居然是地址引用...</span></span><br><span class="line">  arr = eval ([[<span class="number">0</span>] * columns] * (rows+<span class="number">1</span>)).to_s</span><br><span class="line"></span><br><span class="line">  pos = <span class="number">0</span></span><br><span class="line">  (<span class="number">0</span>..columns).each <span class="keyword">do</span> <span class="params">|i|</span></span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span></span><br><span class="line">      (<span class="number">0</span>..rows).each <span class="keyword">do</span> <span class="params">|j|</span></span><br><span class="line">        <span class="keyword">break</span> <span class="keyword">if</span> pos &gt; s.size-<span class="number">1</span></span><br><span class="line">        arr[j][i] = s[pos]</span><br><span class="line">        pos+=<span class="number">1</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      j = rows - <span class="number">1</span></span><br><span class="line">      <span class="keyword">while</span> j &gt; <span class="number">0</span></span><br><span class="line">        <span class="keyword">break</span> <span class="keyword">if</span> pos &gt; s.size-<span class="number">1</span></span><br><span class="line">        arr[j][i] = s[pos]</span><br><span class="line">        pos+=<span class="number">1</span>; j-=<span class="number">1</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  res = <span class="string">''</span></span><br><span class="line">  arr.each <span class="keyword">do</span> <span class="params">|ar|</span></span><br><span class="line">    ar.each &#123; <span class="params">|c|</span> res+=c <span class="keyword">if</span> c.is_a?(String) &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy Mage a coffee here 😉</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Artwalk WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Artwalk Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Artwalk Bitcoin"/>
+        <p>Bitcoin</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Programming/" rel="tag"># Programming</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/04/16/iOS-CI-Jenkins-Phabricator-Slack/" rel="next" title="iOS CI (Jenkins + Phabricator + Slack)">
+                <i class="fa fa-chevron-left"></i> iOS CI (Jenkins + Phabricator + Slack)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/16/xcode-plugins-faild-to-be-loaded-after-update/" rel="prev" title="Xcode plugins faild to be loaded after updated">
+                Xcode plugins faild to be loaded after updated <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Artwalk" />
+            
+              <p class="site-author-name" itemprop="name">Artwalk</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">145</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Artwalk" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/art_holy" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Integer"><span class="nav-number">1.</span> <span class="nav-text">Reverse Integer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Bits"><span class="nav-number">2.</span> <span class="nav-text">Reverse Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compare-Version-Numbers"><span class="nav-number">3.</span> <span class="nav-text">Compare Version Numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Binary"><span class="nav-number">4.</span> <span class="nav-text">Add Binary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZigZag-Conversion"><span class="nav-number">5.</span> <span class="nav-text">ZigZag Conversion</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2012 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Artwalk</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Artwalk.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://artwalk.github.io/2015/05/06/Leetcode-With-Ruby/';
+          this.page.identifier = '2015/05/06/Leetcode-With-Ruby/';
+          this.page.title = 'Leetcode With Ruby';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Artwalk.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
