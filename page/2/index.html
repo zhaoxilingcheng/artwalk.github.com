@@ -287,6 +287,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2017/09/18/Codility-Sorting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/18/Codility-Sorting/" itemprop="url">Codility Sorting</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-18T00:22:18+08:00">
+                2017-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/18/Codility-Sorting/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/18/Codility-Sorting/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Please let me know if you have any questions about the algorithm. </p>
+<p>:)</p>
+<h2 id="Distinct"><a href="#Distinct" class="headerlink" title="Distinct"></a><a href="https://codility.com/programmers/lessons/6-sorting/distinct/" target="_blank" rel="noopener">Distinct</a></h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">solution</span><span class="params">(<span class="number">_</span> A : <span class="keyword">inout</span> [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">Set</span>(<span class="type">A</span>).<span class="built_in">count</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Triangle"><a href="#Triangle" class="headerlink" title="Triangle"></a><a href="https://codility.com/programmers/lessons/6-sorting/triangle/" target="_blank" rel="noopener">Triangle</a></h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">solution</span><span class="params">(<span class="number">_</span> A : <span class="keyword">inout</span> [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="type">A</span>.<span class="built_in">count</span> &lt; <span class="number">3</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> sortedA = <span class="type">A</span>.sorted()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">0</span>..&lt;sortedA.<span class="built_in">count</span>-<span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> iv = sortedA[i], ij = sortedA[i+<span class="number">1</span>], ik = sortedA[i+<span class="number">2</span>]</span><br><span class="line">        <span class="keyword">if</span> iv + ij &gt; ik &amp;&amp; iv + ik &gt; ij &amp;&amp; ij + ik &gt; iv &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="MaxProductOfThree"><a href="#MaxProductOfThree" class="headerlink" title="MaxProductOfThree"></a><a href="https://codility.com/programmers/lessons/6-sorting/max_product_of_three/" target="_blank" rel="noopener">MaxProductOfThree</a></h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">solution</span><span class="params">(<span class="number">_</span> A : <span class="keyword">inout</span> [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="type">A</span>.sorted()</span><br><span class="line">    <span class="keyword">let</span> n = a.<span class="built_in">count</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> b1 = a[<span class="number">0</span>] * a[<span class="number">1</span>] * a[n-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">let</span> b2 = a[n-<span class="number">3</span>] * a[n-<span class="number">2</span>] * a[n-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>  b1 &gt; b2 ? b1 : b2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2017/09/17/Codility-Prefix-Sums/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -830,148 +965,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2017/09/03/19-Remove-Nth-Node-From-End-of-List/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/03/19-Remove-Nth-Node-From-End-of-List/" itemprop="url">19 Remove Nth Node From End of List</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-03T23:16:26+08:00">
-                2017-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/03/19-Remove-Nth-Node-From-End-of-List/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/03/19-Remove-Nth-Node-From-End-of-List/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="19-Remove-Nth-Node-From-End-of-List"><a href="#19-Remove-Nth-Node-From-End-of-List" class="headerlink" title="19 Remove Nth Node From End of List"></a>19 Remove Nth Node From End of List</h1><p>Tips:</p>
-<p>Traverse all the Note and put their reference into a <code>[ListNode]</code> , once you can get their sequence number. </p>
-<p>Be careful that <code>list.count == n</code> which means you have to delete the <code>head</code></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/03/19-Remove-Nth-Node-From-End-of-List/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1021,7 +1019,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">145</span>
+                  <span class="site-state-item-count">146</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
