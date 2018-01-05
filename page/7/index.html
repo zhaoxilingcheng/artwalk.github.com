@@ -287,6 +287,145 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/07/26/Use-AppleScript-as-AutoHotkey-On-Mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/26/Use-AppleScript-as-AutoHotkey-On-Mac/" itemprop="url">Use AppleScript as AutoHotkey On Mac</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-26T22:01:34+08:00">
+                2016-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/26/Use-AppleScript-as-AutoHotkey-On-Mac/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/07/26/Use-AppleScript-as-AutoHotkey-On-Mac/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>For the good test of Soylent 1.6, I bought 20+ boxes recently.<br>But there was a problem that Safari does not support AutoFill Form in that website. So I have to input full informations of my credit card manually for the transport fee and the tariff.</p>
+<p>All the payment steps are merely number, date, cvv, password.</p>
+<p>I was broke down after repeated it again and agin.</p>
+<p>It should be automated.</p>
+<p>For God’s sake, it occurred to me that the AutoHotkey when I was still using Windows four years ago.</p>
+<p>Mac has the AppleScript which can simulate keyboard input and mouse click.</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"Safari"</span></span><br><span class="line">	<span class="built_in">activate</span></span><br><span class="line"><span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"System Events"</span></span><br><span class="line">	<span class="keyword">tell</span> process <span class="string">"Safari"</span></span><br><span class="line">		<span class="keyword">set</span> <span class="built_in">frontmost</span> <span class="keyword">to</span> <span class="literal">true</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">-- you can get the screen coordinate by `cmd+shift+4` easily</span></span><br><span class="line">		click <span class="keyword">at</span> &#123;<span class="number">1420</span>, <span class="number">500</span>&#125;</span><br><span class="line">		<span class="comment">-- delay 1s which is for wait the website to load</span></span><br><span class="line">		<span class="built_in">delay</span> <span class="number">1</span></span><br><span class="line">		click <span class="keyword">at</span> &#123;<span class="number">1305</span>, <span class="number">615</span>&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">delay</span> <span class="number">10</span></span><br><span class="line">		click <span class="keyword">at</span> &#123;<span class="number">1090</span>, <span class="number">369</span>&#125;</span><br><span class="line">		<span class="comment">-- simulate press **6** on keyboard</span></span><br><span class="line">		keystroke <span class="string">"6"</span></span><br><span class="line">		keystroke <span class="string">"6"</span></span><br><span class="line">		keystroke <span class="string">"0"</span></span><br><span class="line">		<span class="comment">-- ...</span></span><br><span class="line">		keystroke <span class="string">"6"</span></span><br><span class="line">		keystroke <span class="string">"4"</span></span><br><span class="line">		<span class="built_in">delay</span> <span class="number">1</span></span><br><span class="line">		click <span class="keyword">at</span> &#123;<span class="number">1083</span>, <span class="number">426</span>&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line">	</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">tell</span></span><br></pre></td></tr></table></figure>
+<p>And I found an interesting thing in this process which is the <strong>cvv</strong> can’t be clicked by the script.</p>
+<p>It seems the bank’s website really do something on security.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/07/19/Nothing-To-Say/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -821,142 +960,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/04/20/Proxy-Settings-on-Mac-for-Terminal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/20/Proxy-Settings-on-Mac-for-Terminal/" itemprop="url">Proxy Settings on Mac for Terminal</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-20T07:15:10+08:00">
-                2016-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/04/20/Proxy-Settings-on-Mac-for-Terminal/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/04/20/Proxy-Settings-on-Mac-for-Terminal/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><code>Pro xyCha ins</code> is not working because of the <code>SIP</code>.</p>
-<p>And you cannot directly set <code>socks5</code> as the terminal’s proxy, it’s not working too.</p>
-<p>Luckily, the <code>sur ge</code> turned the <code>ss</code> to a http(s) proxy.</p>
-<p>You can add this in your <code>~/.zshrc</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=<span class="variable">$ip</span>:<span class="variable">$port</span></span><br><span class="line"><span class="built_in">export</span> https_proxy=<span class="variable">$http_proxy</span></span><br></pre></td></tr></table></figure>
-<p>further more, two alias</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> startproxy=<span class="string">'export http_proxy=$ip:$port https_proxy=$ip:$port'</span></span><br><span class="line"><span class="built_in">alias</span> stopproxy=<span class="string">'unset http_proxy https_proxy'</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1011,7 +1014,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">146</span>
+                  <span class="site-state-item-count">147</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

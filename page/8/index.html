@@ -287,6 +287,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/04/20/Proxy-Settings-on-Mac-for-Terminal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/04/20/Proxy-Settings-on-Mac-for-Terminal/" itemprop="url">Proxy Settings on Mac for Terminal</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-20T07:15:10+08:00">
+                2016-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/04/20/Proxy-Settings-on-Mac-for-Terminal/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/04/20/Proxy-Settings-on-Mac-for-Terminal/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>Pro xyCha ins</code> is not working because of the <code>SIP</code>.</p>
+<p>And you cannot directly set <code>socks5</code> as the terminal’s proxy, it’s not working too.</p>
+<p>Luckily, the <code>sur ge</code> turned the <code>ss</code> to a http(s) proxy.</p>
+<p>You can add this in your <code>~/.zshrc</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=<span class="variable">$ip</span>:<span class="variable">$port</span></span><br><span class="line"><span class="built_in">export</span> https_proxy=<span class="variable">$http_proxy</span></span><br></pre></td></tr></table></figure>
+<p>further more, two alias</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> startproxy=<span class="string">'export http_proxy=$ip:$port https_proxy=$ip:$port'</span></span><br><span class="line"><span class="built_in">alias</span> stopproxy=<span class="string">'unset http_proxy https_proxy'</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/04/03/Segmentation-fault-11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -845,157 +981,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/02/25/iOS-App-Submission-Nightmare/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/25/iOS-App-Submission-Nightmare/" itemprop="url">iOS App Submission Nightmare</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-25T19:05:13+08:00">
-                2016-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/02/25/iOS-App-Submission-Nightmare/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/02/25/iOS-App-Submission-Nightmare/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="iOS-App-Submission-Nightmare"><a href="#iOS-App-Submission-Nightmare" class="headerlink" title="iOS App Submission Nightmare"></a>iOS App Submission Nightmare</h1><h2 id="bluetooth-peripheral"><a href="#bluetooth-peripheral" class="headerlink" title="bluetooth-peripheral"></a>bluetooth-peripheral</h2><ol>
-<li>the bluetooth correlative code no longer be used after redesgin app, you should del both code and:</li>
-<li>Targets -&gt; Capabilities -&gt; bluetooth</li>
-</ol>
-<h2 id="com-apple-security-application-groups"><a href="#com-apple-security-application-groups" class="headerlink" title="com.apple.security.application-groups"></a>com.apple.security.application-groups</h2><ol>
-<li>close <code>app group</code></li>
-<li>del <code>*.entitlements</code></li>
-<li><code>grep -R --include=&quot;*.*&quot; &quot;.entitlements&quot; .</code> you’ll find hidden entitlements in <code>Xcode -&gt; imeican -&gt; build setting</code></li>
-</ol>
-<h2 id="ITMS-90394-Missing-Icon"><a href="#ITMS-90394-Missing-Icon" class="headerlink" title="ITMS-90394 Missing Icon"></a>ITMS-90394 <code>Missing Icon</code></h2><ul>
-<li>We have <code>*29x29@3x.png</code> in Xcode </li>
-<li>In fact the .png is a .svg</li>
-<li>new a real <code>*29x29@3x.png</code></li>
-</ul>
-<h2 id="ITMS-90205-90206"><a href="#ITMS-90205-90206" class="headerlink" title="ITMS-90205 90206"></a>ITMS-90205 90206</h2><p>Embed Frameworks Archive del <code>carthage copy-frameworks</code></p>
-<h2 id="bcsymbolmap-39-gt-as-expected"><a href="#bcsymbolmap-39-gt-as-expected" class="headerlink" title=".bcsymbolmap&#39;&gt; as expected"></a><code>.bcsymbolmap&#39;&gt; as expected</code></h2><ul>
-<li>Enable Bitcode</li>
-</ul>
-<h2 id="ITMS-90087-90209-x84-64-i386"><a href="#ITMS-90087-90209-x84-64-i386" class="headerlink" title="ITMS-90087 90209 x84_64 i386"></a>ITMS-90087 90209 <code>x84_64 i386</code></h2><ul>
-<li>Targets(Embed Frameworks) -&gt; Run Script</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> [ <span class="string">"$&#123;CONFIGURATION&#125;"</span> != <span class="string">"Release"</span> ]; then</span><br><span class="line">    /usr/local/bin/carthage copy-frameworks</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1050,7 +1035,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">146</span>
+                  <span class="site-state-item-count">147</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
