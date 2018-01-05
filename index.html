@@ -379,7 +379,7 @@
 <p>the <code>max</code> function will return a two-dimensional vector, <code>m</code> is the value, and <code>p</code> is the max index in that row.</p>
 <h2 id="2-Neural-Networks"><a href="#2-Neural-Networks" class="headerlink" title="2 Neural Networks"></a>2 Neural Networks</h2><p>Finally, I touched the Neural Networks with so many classes after. 😳</p>
 <p>The $\theta1, \theta2$ are trained to predict.</p>
-<p>Before this, I wondering what is the process of prediction with a traned model. Is it the same with the training process?</p>
+<p>Before this, I wondering what is the process of prediction with a trained model. Is it the same with the training process?</p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a0x = <span class="built_in">ones</span>(m, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">A1 = [a0x, X];</span><br><span class="line">A2 = [a0x, sigmoid(A1 * Theta1<span class="string">')];</span></span><br><span class="line"><span class="string">A3 = sigmoid(A2 * Theta2'</span>);</span><br><span class="line"></span><br><span class="line">[v, p] =  max(A3, [], <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/ailb9HX.png" alt=""></p>
 <p>Amazing ha! 🤩</p>
