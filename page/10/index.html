@@ -287,6 +287,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/02/07/swift-useful-extensions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/07/swift-useful-extensions/" itemprop="url">Swift useful extensions</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-07T15:06:27+08:00">
+                2016-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/02/07/swift-useful-extensions/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/02/07/swift-useful-extensions/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Time-interval-Int-to-formatted-String"><a href="#Time-interval-Int-to-formatted-String" class="headerlink" title="Time interval (Int) to formatted String"></a>Time interval (Int) to formatted String</h3><p>KEY: <strong><code>yyyy-MM-dd EEE HH:mm:ss.SSS</code></strong></p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> yyyyMMddHHmm: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> date = <span class="type">NSDate</span>(timeIntervalSince1970: <span class="type">NSTimeInterval</span>(<span class="keyword">self</span>)/<span class="number">1000</span>)</span><br><span class="line">            <span class="keyword">let</span> dateFormatter = <span class="type">NSDateFormatter</span>()</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// don't forget to set locale, otherwise you may get **周五** instead of **FRI**</span></span><br><span class="line">            dateFormatter.locale = <span class="type">NSLocale</span>(localeIdentifier: <span class="string">"en_US"</span>)</span><br><span class="line">            </span><br><span class="line">            dateFormatter.dateFormat = <span class="string">"yyyy-MM-dd HH:mm"</span></span><br><span class="line">            <span class="keyword">return</span> dateFormatter.stringFromDate(date)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Trim-decimal-point-zero"><a href="#Trim-decimal-point-zero" class="headerlink" title="Trim decimal point zero"></a>Trim decimal point zero</h3><p>KEY: <strong><code>&quot;%g&quot;</code></strong></p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> trimZero: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="type">String</span>(format: <span class="string">"%g"</span>, <span class="type">Double</span>(<span class="keyword">self</span>))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Ramdom-alphanumberic-string"><a href="#Ramdom-alphanumberic-string" class="headerlink" title="Ramdom alphanumberic string"></a>Ramdom alphanumberic string</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> randomString: <span class="type">String</span> &#123;</span><br><span class="line">    <span class="keyword">get</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> letters : <span class="type">NSString</span> = <span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"</span></span><br><span class="line">        <span class="keyword">let</span> len = <span class="number">20</span> <span class="comment">// length</span></span><br><span class="line">        <span class="keyword">let</span> randomString : <span class="type">NSMutableString</span> = <span class="type">NSMutableString</span>(capacity: len)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            <span class="keyword">let</span> length = <span class="type">UInt32</span> (letters.length)</span><br><span class="line">            <span class="keyword">let</span> rand = arc4random_uniform(length)</span><br><span class="line">            randomString.appendFormat(<span class="string">"%C"</span>, letters.characterAtIndex(<span class="type">Int</span>(rand)))</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> randomString <span class="keyword">as</span> <span class="type">String</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Add-and-remove-subviews"><a href="#Add-and-remove-subviews" class="headerlink" title="Add and remove subviews"></a>Add and remove subviews</h3><p>KEY: <strong><code>...</code></strong></p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">addSubviews</span><span class="params">(views: UIView...)</span></span> &#123;</span><br><span class="line">        <span class="comment">// addArrangedSubviews if it's a UIStackView</span></span><br><span class="line">       views.forEach &#123; addSubview($<span class="number">0</span>) &#125; </span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">removeAllSubviews</span><span class="params">()</span></span> &#123;</span><br><span class="line">        subviews.forEach &#123; $<span class="number">0</span>.removeFromSuperview()&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Set-text-strikethrough-and-line-height-in-UILabel"><a href="#Set-text-strikethrough-and-line-height-in-UILabel" class="headerlink" title="Set text strikethrough and line height in UILabel"></a>Set text strikethrough and line height in UILabel</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UILabel</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setStrikethrough</span><span class="params">(text:String, color:UIColor = UIColor.blackColor<span class="params">()</span></span></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> attributedText = <span class="type">NSAttributedString</span>(string: text , attributes: [<span class="type">NSStrikethroughStyleAttributeName</span>: <span class="type">NSUnderlineStyle</span>.<span class="type">StyleSingle</span>.rawValue, <span class="type">NSStrikethroughColorAttributeName</span>: color])</span><br><span class="line">        <span class="keyword">self</span>.attributedText = attributedText</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setLineHeight</span><span class="params">(lineHeight: CGFloat)</span></span> &#123;</span><br><span class="line">        <span class="keyword">let</span> text = <span class="keyword">self</span>.text</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> text = text &#123;</span><br><span class="line">            <span class="keyword">let</span> attributeString = <span class="type">NSMutableAttributedString</span>(string: text)</span><br><span class="line">            <span class="keyword">let</span> style = <span class="type">NSMutableParagraphStyle</span>()</span><br><span class="line">            </span><br><span class="line">            style.lineSpacing = lineHeight</span><br><span class="line">            attributeString.addAttribute(<span class="type">NSParagraphStyleAttributeName</span>, value: style, range: <span class="type">NSMakeRange</span>(<span class="number">0</span>, text.characters.<span class="built_in">count</span>))</span><br><span class="line">            <span class="keyword">self</span>.attributedText = attributeString</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Scheme-Version-ShortVersion-BundleVersion"><a href="#Scheme-Version-ShortVersion-BundleVersion" class="headerlink" title="Scheme Version ShortVersion BundleVersion"></a>Scheme Version ShortVersion BundleVersion</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> firstScheme:<span class="type">String</span>? &#123;</span><br><span class="line">    <span class="keyword">get</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> schemes: <span class="type">AnyObject</span>? = <span class="type">NSBundle</span>.mainBundle().infoDictionary?[<span class="string">"CFBundleURLTypes"</span>]?[<span class="number">0</span>][<span class="string">"CFBundleURLSchemes"</span>] &#123;</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">let</span> scheme = schemes?[<span class="number">0</span>] <span class="keyword">as</span>? <span class="type">String</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> scheme</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bundleShortVersion:<span class="type">String</span>? &#123;</span><br><span class="line">    <span class="keyword">get</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> version = <span class="type">NSBundle</span>.mainBundle().infoDictionary?[<span class="string">"CFBundleShortVersionString"</span>] <span class="keyword">as</span>? <span class="type">String</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> version</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bundleVersion:<span class="type">String</span>? &#123;</span><br><span class="line">    <span class="keyword">get</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> version = <span class="type">NSBundle</span>.mainBundle().infoDictionary?[<span class="string">"CFBundleVersion"</span>] <span class="keyword">as</span>? <span class="type">String</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> version</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/01/22/When-a-company-become-bigger/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -838,153 +976,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/11/11/How-to-build-an-iOS-CI-without-jenkins/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/11/How-to-build-an-iOS-CI-without-jenkins/" itemprop="url">How to build an iOS CI without Jenkins</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-11T00:36:24+08:00">
-                2015-11-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2015/11/11/How-to-build-an-iOS-CI-without-jenkins/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2015/11/11/How-to-build-an-iOS-CI-without-jenkins/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>I used Jenkins with some Xcode plugins as our iOS CI half a year ago.</p>
-<p>The main function I want is to build our project daily in the middle night, and +1 on the build number, then push this commit to <code>Phabricator</code>,  if any of these steps is fail, it will post a notification to <code>Slack</code>.</p>
-<p>But after we are try to using <code>Carthage</code> instead of  <code>CocoaPod</code>, it need to <code>Carthage update</code> before building. The Jenkins can’t run commands before building. So I tried using shell directly.</p>
-<h2 id="update-code"><a href="#update-code" class="headerlink" title="update code"></a>update code</h2><p>First it should <code>cd</code> into the project’s folder, then checkout new commits and update new frameworks</p>
-<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> $(dirname <span class="variable">$0</span>)</span><br><span class="line">git checkout master</span><br><span class="line">git reset --hard origin/master</span><br><span class="line"></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/carthage update</span><br></pre></td></tr></table></figure>
-<p>then check that whether the last author is a coworker or the bot itself</p>
-<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">author=$(git <span class="built_in">log</span> -1 | head -2 | tail -1 | cut -d <span class="string">' '</span> -f2)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$author</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$author</span> != <span class="string">"bot"</span> ]; <span class="keyword">then</span></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span></span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-<p>if it’s a coworker</p>
-<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">projectName=$(find . -name <span class="string">"*.xcodeproj"</span> -depth 1 | cut -d <span class="string">'/'</span>  -f 2 | cut -d <span class="string">'.'</span> -f 1)</span><br><span class="line">plist=$(find <span class="variable">$projectName</span> -name <span class="string">"*.plist"</span> -d 1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># buildnum +1</span></span><br><span class="line">shortVersion=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleShortVersionString"</span> <span class="string">"<span class="variable">$&#123;plist&#125;</span>"</span>)</span><br><span class="line">buildnum=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleVersion"</span> <span class="string">"<span class="variable">$&#123;plist&#125;</span>"</span>)</span><br><span class="line">buildnum=$(expr <span class="variable">$buildnum</span> + 1)</span><br><span class="line"></span><br><span class="line">/usr/libexec/Plistbuddy -c <span class="string">"Set CFBundleVersion <span class="variable">$buildnum</span>"</span> <span class="string">"<span class="variable">$&#123;plist&#125;</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for AppleWatch</span></span><br><span class="line">WatchAppPlist=$(find WatchApp -name <span class="string">"*.plist"</span> -d 1)</span><br><span class="line">WatchAppExtensionPlist=$(find <span class="string">'WatchApp Extension'</span> -name <span class="string">"*.plist"</span> -d 1)</span><br><span class="line"></span><br><span class="line">/usr/libexec/Plistbuddy -c <span class="string">"Set CFBundleVersion <span class="variable">$buildnum</span>"</span> <span class="string">"<span class="variable">$&#123;WatchAppPlist&#125;</span>"</span></span><br><span class="line">/usr/libexec/Plistbuddy -c <span class="string">"Set CFBundleVersion <span class="variable">$buildnum</span>"</span> <span class="string">"<span class="variable">$&#123;WatchAppExtensionPlist&#125;</span>"</span></span><br></pre></td></tr></table></figure>
-<p>Here is how to xcodebuild your ipa in the <em>build</em> folder</p>
-<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">rm -rf build</span><br><span class="line"></span><br><span class="line">xcodebuild clean archive -archivePath build/<span class="variable">$YourApp</span>-Beta \</span><br><span class="line">-scheme <span class="variable">$YourAppScheme</span> </span><br><span class="line"></span><br><span class="line">xcodebuild -exportArchive \</span><br><span class="line">-exportFormat ipa \</span><br><span class="line">-archivePath <span class="string">"build/<span class="variable">$YourApp</span>-Beta.xcarchive"</span> \</span><br><span class="line">-exportPath <span class="string">"build/<span class="variable">$YourApp</span>-Beta.ipa"</span> \</span><br><span class="line">-exportProvisioningProfile <span class="string">"<span class="variable">$YourtProvisioningProfile</span>"</span></span><br></pre></td></tr></table></figure>
-<p>then you can upload your *.ipa to your server ( for instance using curl)</p>
-<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">rm -rf build <span class="comment"># clean up</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># push to remote</span></span><br><span class="line">git config user.email <span class="string">"bot@yourdomain.com"</span></span><br><span class="line">git config user.name <span class="string">"bot"</span></span><br><span class="line">git commit -a -m <span class="string">"<span class="variable">$buildnum</span>"</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-<p>How to post a message to Slack</p>
-<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># post2Slack $msg</span></span><br><span class="line"><span class="function"><span class="title">post2Slack</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">	SLACK_HOSTNAME=<span class="string">"hooks.slack.com"</span></span><br><span class="line">	SLACK_CHANNEL=“<span class="comment">#YourChannel”</span></span><br><span class="line">	SLACK_BOTNAME=<span class="string">"bot"</span></span><br><span class="line">	ICON=<span class="string">":x:"</span></span><br><span class="line">	SLACK_BOTEMOJI=<span class="string">":joy:"</span></span><br><span class="line">	MESSAGE=<span class="variable">$1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Send message to Slack</span></span><br><span class="line">PAYLOAD=<span class="string">"payload=&#123;\"channel\": \"<span class="variable">$&#123;SLACK_CHANNEL&#125;</span>\", \"username\": \"<span class="variable">$&#123;SLACK_BOTNAME&#125;</span>\", \"text\": \"<span class="variable">$&#123;ICON&#125;</span> <span class="variable">$&#123;MESSAGE&#125;</span>\", \"icon_emoji\": \"<span class="variable">$&#123;SLACK_BOTEMOJI&#125;</span>\"&#125;"</span>;</span><br><span class="line">curl -X POST --data-urlencode <span class="string">"<span class="variable">$PAYLOAD</span>"</span> <span class="variable">$getThisURLInYourSlackChannel</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># post2Slack &amp;&amp; exit</span></span><br><span class="line"><span class="function"><span class="title">post2SlackAndExitWithMsg</span></span>() &#123;</span><br><span class="line">	post2Slack <span class="string">"<span class="variable">$&#123;1&#125;</span>"</span> &amp;&amp; <span class="built_in">exit</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>then you can combine any commands like this:</p>
-<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">git push origin master || post2SlackAndExitWithMsg <span class="string">"git push failed"</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1039,7 +1030,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">147</span>
+                  <span class="site-state-item-count">148</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

@@ -287,6 +287,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2014/01/14/hexo-landscape-没有-comment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/01/14/hexo-landscape-没有-comment/" itemprop="url">hexo landscape 没有 comment.ejs</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-01-14T23:05:45+08:00">
+                2014-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2014/01/14/hexo-landscape-没有-comment/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2014/01/14/hexo-landscape-没有-comment/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天闲的蛋疼，想换个主题<br>发现hexo已经升级到 2.4.5 了<br><code>npm update -g hexo</code></p>
+<p>找来找去，发现新的 landscape 不错，按步奏操作<br><a href="https://github.com/hexojs/hexo-theme-landscape" target="_blank" rel="noopener">hexo-theme-landscape</a>  </p>
+<p>然后傻逼了，真是<strong>不作死就不会死</strong></p>
+<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>首先 <code>hexo g</code> 本地服务器theme是新的，deploy到 Github 样式乱七八糟的<br><code>rm theme/light</code> 之后 g 发现还是用light的theme  </p>
+<p>后来才知道要 <code>rm db.json</code></p>
+<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>原来设好的多说等<strong>插件</strong>统统木有了木有了，还要重新弄一遍<br>粘贴多说代码时，发现<code>comment.ejs</code>木有了</p>
+<p><code>grep -R --include=&quot;*.ejs&quot; comment</code> 发现合并到<code>article.ejs</code>里去了</p>
+<p>由于 Node.js <strong>完全不懂！！！</strong>，只能凭感觉了  </p>
+<ol>
+<li>分享<figure class="highlight erb"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">footer</span> <span class="attr">class</span>=<span class="string">"article-footer"</span>&gt;</span></span></span><br><span class="line"><span class="xml">	...</span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">%-</span></span></span><span class="ruby"> partial(<span class="string">'post/tag'</span>) </span><span class="xml"><span class="tag">%&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>里的<code>Share</code> 和 <code>Comments</code> 标签删掉<br>换成<a href="http://share.baidu.com/code" target="_blank" rel="noopener">百度分享</a></p>
+<ol>
+<li>多说<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">id</span>=<span class="string">"comments"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--多说代码--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>最后多说框框出来是出来了，但怕有副作用，懂得童鞋留言下哈</p>
+<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>引用的文字格式太丑了，太大不说，还居中…<br>看网页是 blockquote<br><code>grep -R --include=&quot;*.styl&quot; &#39;blockquote&#39; .</code>  </p>
+<p>发现是 <code>themes/landscape/source/css/_partial/article.styl</code></p>
+<p>把 blockquote 调整下：<br><figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">font-<span class="keyword">size</span>: <span class="number">0.9</span>em</span><br><span class="line"><span class="keyword">text</span>-<span class="keyword">align</span>: left</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2014/01/14/为什么要学哲学/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -854,167 +1005,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2014/01/09/如何和父母沟通/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/01/09/如何和父母沟通/" itemprop="url">如何和父母沟通</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-01-09T23:36:20+08:00">
-                2014-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2014/01/09/如何和父母沟通/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2014/01/09/如何和父母沟通/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>心寒不至于，倒是蛮无语的</p>
-<p>毕业选择工作，让我考研<br>刚工作，每次通话都让我考公务员（那些说要不时打个电话，常联系的，这种情况怎么办？）<br>Gap Year（没问父母要一分钱），仍然天天嫌弃我</p>
-<p>总之就是感觉你是他们的私有财产，LZ把你带到世上的，不按我说的来？<br>靠！长大了翅膀硬了就不听话了是吧，是可忍孰不可忍！</p>
-<p>然后开始，对你指手画脚，妄图篡改你的人生：</p>
-<ol>
-<li>动用强权、洗脑（从小就开始了，现在只要打开开关就行）<br>搬出莫须有的 “君要臣死，臣不得不死。父要子亡，子不得不亡。”<br>断章取义 “父母在，不远游”（游必有方）<br>百善孝为先<br>……</li>
-</ol>
-<p>PS：他们是看过《1984》吗？我见识浅薄了啊。。。</p>
-<p>但你可能接受过西方平等思想的沐浴，拜读过<br>卢梭的《论人类不平等的起源》，罗素的《西方哲学史》，梭罗的《瓦尔登湖》等一系列巨作<br>走向了思想独立，不鸟孔孟那一套</p>
-<p>没关系：</p>
-<ol>
-<li>用物质手段绑架你<br>常见：全款、首付、安排工作等等</li>
-</ol>
-<p>根据《影响力》，给对方一点好处，对方别觉得亏欠了你，从而能获得更大的好处<br>也就是“吃人家的嘴软，拿人家的手软”</p>
-<p>但你可能弱冠之年便已拜读了克里希那穆提的《人生不可不想的事》，老子的《道德经》，《当下的力量》<br>懂得人生应该解放自己，最求内在的宁静<br>并且实力上比较牛逼，LZ能自力更生，这些东东统统不要，照样活的好好的</p>
-<p>哥经济也独立了，不能怎么着我了吧</p>
-<p>没关系，这还有呢：</p>
-<ol>
-<li>苦肉计<br>就算你牛逼的一塌胡涂，但<br>人非草木，孰能无情，毕竟血浓于水<br>他们便试图用亲情绑架你<br>“这辈子就是为你而活”，“不要责怪父母，他们已经给了你最好的了”</li>
-</ol>
-<p>我去，你认为“最好的”是我想要的吗？</p>
-<p>“我们都为你这样了，你对得起我吗？”<br>O__O”…<br>这酸溜溜的赶脚哪来的？（《少有人走的路》中曾提到这种带深深的牺牲精神的父母，囧）</p>
-<p>“我们是你父母，当然要关心你”<br>拜托，这明明是想控制别人，算哪门子关心<br>关心一个人，是用那种语气？？？</p>
-<p>PS：爱人之间也有这个问题</p>
-<hr>
-<p>上面用词有些严重哈<br>其实父母那一代（他们也曾年轻过好吧），大部分人成了教育缺失的大环境下的牺牲品<br>非黑即白的思维，人云亦云、没有独立思考的能力</p>
-<p>导致他们意识不到自己的思维、想法、态度、语气的不妥之处<br>不顾客观事实，一根筋的认为自己是对的，毕竟自己吃的盐比孩纸吃的饭还多，颇有“我说的就是宇宙真理”的架势，讲道理是毫无作用的</p>
-<p>作为孩子，知道不是他们的原因，看到他们用那种语气，也蛮难过的<br>最好的方式（我现在能想到的）可能只剩迎合，做一些“善意的谎言”，哄哄他们开心<br>但碰到大事儿，纸总归包不住火，冲突还是不可避免</p>
-<p>由于年龄，老人接触新思想几乎是不可能的事情，要求上一代改变已不现实<br>但我们可以着手下一代——不知各位是否意识到我们这一代也要当爸爸妈妈了</p>
-<p>所以我们可以提问如：“如何和父母沟通” ，“如何不让父母生气”，“有什么办法让自己认为父母的建议是正确的”，“如何做一个听话的孩纸”，“我要 考公务员/研/博/博后 OR 留在家乡，父母不让，如何说服他们”</p>
-<p>然后旁敲侧击的提醒他们上知乎</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1069,7 +1059,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">147</span>
+                  <span class="site-state-item-count">148</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

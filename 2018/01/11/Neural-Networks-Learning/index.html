@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="LeetCode," />
+  <meta name="keywords" content="AI,Machine Learning," />
 
 
 
@@ -85,18 +85,21 @@
 
 
 
-<meta name="description" content="22 Generate ParenthesesTips:  If there is a ( on the left, it should have a ) somewhere on the right N will have one more () comparing with N-1  Therefore, Iterate all items in N-1 array, for each Par">
-<meta name="keywords" content="LeetCode">
+<meta name="description" content="First, I have to say, it’s the hardest exercise I have ever made when I began this course. 1.3 Feedforward and cost functionJ(\theta )=\dfrac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[-y_{k}^{(i)}log((h_\thet">
+<meta name="keywords" content="AI,Machine Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="22 Generate Parentheses">
-<meta property="og:url" content="http://artwalk.github.io/2017/09/07/22-Generate-Parentheses/index.html">
+<meta property="og:title" content="Neural Networks: Learning">
+<meta property="og:url" content="http://artwalk.github.io/2018/01/11/Neural-Networks-Learning/index.html">
 <meta property="og:site_name" content="Artwalk&#39;s Blog">
-<meta property="og:description" content="22 Generate ParenthesesTips:  If there is a ( on the left, it should have a ) somewhere on the right N will have one more () comparing with N-1  Therefore, Iterate all items in N-1 array, for each Par">
+<meta property="og:description" content="First, I have to say, it’s the hardest exercise I have ever made when I began this course. 1.3 Feedforward and cost functionJ(\theta )=\dfrac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[-y_{k}^{(i)}log((h_\thet">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-07T13:23:52.000Z">
+<meta property="og:image" content="https://i.imgur.com/LqYfS7h.png">
+<meta property="og:image" content="https://i.imgur.com/c1wo2Cy.png">
+<meta property="og:updated_time" content="2018-01-11T04:17:04.848Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="22 Generate Parentheses">
-<meta name="twitter:description" content="22 Generate ParenthesesTips:  If there is a ( on the left, it should have a ) somewhere on the right N will have one more () comparing with N-1  Therefore, Iterate all items in N-1 array, for each Par">
+<meta name="twitter:title" content="Neural Networks: Learning">
+<meta name="twitter:description" content="First, I have to say, it’s the hardest exercise I have ever made when I began this course. 1.3 Feedforward and cost functionJ(\theta )=\dfrac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[-y_{k}^{(i)}log((h_\thet">
+<meta name="twitter:image" content="https://i.imgur.com/LqYfS7h.png">
 
 
 
@@ -126,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://artwalk.github.io/2017/09/07/22-Generate-Parentheses/"/>
+  <link rel="canonical" href="http://artwalk.github.io/2018/01/11/Neural-Networks-Learning/"/>
 
 
 
 
 
-  <title>22 Generate Parentheses | Artwalk's Blog</title>
+  <title>Neural Networks: Learning | Artwalk's Blog</title>
   
 
 
@@ -288,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2017/09/07/22-Generate-Parentheses/">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/01/11/Neural-Networks-Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Artwalk">
@@ -305,7 +308,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">22 Generate Parentheses</h2>
+          <h2 class="post-title" itemprop="name headline">Neural Networks: Learning</h2>
         
 
         <div class="post-meta">
@@ -317,8 +320,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-07T00:52:09+08:00">
-                2017-09-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-11T11:27:14+08:00">
+                2018-01-11
               </time>
             
 
@@ -336,9 +339,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/09/07/22-Generate-Parentheses/#comments" itemprop="discussionUrl">
+                <a href="/2018/01/11/Neural-Networks-Learning/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/07/22-Generate-Parentheses/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/01/11/Neural-Networks-Learning/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -366,25 +369,16 @@
       
 
       
-        <h1 id="22-Generate-Parentheses"><a href="#22-Generate-Parentheses" class="headerlink" title="22 Generate Parentheses"></a>22 Generate Parentheses</h1><p>Tips:</p>
-<ul>
-<li>If there is a <code>(</code> on the left, it should have a <code>)</code> somewhere on the right</li>
-<li><strong>N</strong> will have one more <code>()</code> comparing with <strong>N-1</strong></li>
-</ul>
-<p>Therefore, Iterate all items in <strong>N-1</strong> array, for each Parentheses String, </p>
-<ul>
-<li>Left → Right, if the char is <code>(</code>, insert a <code>()</code> behind</li>
-<li>Add <code>()</code> in the Leftmost</li>
-</ul>
-<p>Put these two new strings into a Set collection to eliminate redundancy.</p>
+        <p>First, I have to say, it’s the hardest exercise I have ever made when I began this course.</p>
+<h2 id="1-3-Feedforward-and-cost-function"><a href="#1-3-Feedforward-and-cost-function" class="headerlink" title="1.3 Feedforward and cost function"></a>1.3 Feedforward and cost function</h2><script type="math/tex; mode=display">J(\theta )=\dfrac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[-y_{k}^{(i)}log((h_\theta(x^{(i)})_k) -(1-y_{k}^{(i)})log(1-(h_\theta(x^{(i)}))_k )]</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a1 = [ones(m, <span class="number">1</span>), X];</span><br><span class="line">z2 = a1*Theta1';</span><br><span class="line">a2 = [ones(m, <span class="number">1</span>), sigmoid(z2)];</span><br><span class="line">z3 = a2*Theta2';</span><br><span class="line">a3 = sigmoid(z3);</span><br><span class="line"></span><br><span class="line">I = <span class="built_in">eye</span>(num_labels);</span><br><span class="line">Y = I(y, :);</span><br><span class="line"></span><br><span class="line">J = sum(sum((-Y.*<span class="built_in">log</span>(a3) - (<span class="number">1</span>-Y).*<span class="built_in">log</span>(<span class="number">1</span>-a3) ) / m));</span><br></pre></td></tr></table></figure>
+<p>For now, I still confused about <code>I(y, :)</code>, how can it makes y(5000:1) to Y(5000:10) with the match index in each row?</p>
+<h2 id="1-4-Regularized-cost-function"><a href="#1-4-Regularized-cost-function" class="headerlink" title="1.4 Regularized cost function"></a>1.4 Regularized cost function</h2><script type="math/tex; mode=display">J(\theta )=\dfrac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[-y_{k}^{(i)}log((h_\theta(x^{(i)})_k) -(1-y_{k}^{(i)})log(1-(h_\theta(x^{(i)}))_k )]+\dfrac{\lambda }{2m}[\sum_{j=1}^{25}\sum_{k=1}^{400}(\Theta _{j,k}^{(1)})^{2} + \sum_{j=1}^{10}\sum_{k=1}^{25}(\Theta _{j,k}^{(2)})^{2}]</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">r = lambda/<span class="number">2</span>/m * (sum(sum(Theta1(:,<span class="number">2</span>:<span class="keyword">end</span>).^<span class="number">2</span>)) + sum(sum(Theta2(:,<span class="number">2</span>:<span class="keyword">end</span>).^<span class="number">2</span>)));</span><br><span class="line">J = J + r;</span><br></pre></td></tr></table></figure>
+<h2 id="2-1-Sigmoid-gradient"><a href="#2-1-Sigmoid-gradient" class="headerlink" title="2.1 Sigmoid gradient"></a>2.1 Sigmoid gradient</h2><script type="math/tex; mode=display">g'(z)=\dfrac{d}{dz}g(z)=g(z)(1-g(z))</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">g = sigmoid(z).*(<span class="number">1</span>-sigmoid(z));</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-Backpropagation"><a href="#2-3-Backpropagation" class="headerlink" title="2.3 Backpropagation"></a>2.3 Backpropagation</h2><script type="math/tex; mode=display">\delta _{k}^{(3)} = (a_{k}^{(3)} - y_{k})</script><script type="math/tex; mode=display">\delta ^{2} = (\Theta ^{(2)})^T\delta ^{(3)}.*g'(z^{(2)})</script><script type="math/tex; mode=display">\Delta ^{(l)} = \Delta ^{(l)} + \delta ^{(l+1)}(a^{(l)})^T</script><script type="math/tex; mode=display">\dfrac{\partial }{\partial \Theta _{ij}^{(l)}}J(\Theta ) = D_{ij}^{(l)} = \dfrac{1}{m}\Delta _{ij}^{(l)}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">d3 = a3-Y;</span><br><span class="line">d2 = d3*Theta2.*[ones(m, <span class="number">1</span>), sigmoidGradient(z2)];</span><br><span class="line"></span><br><span class="line">D1 = d2(:,<span class="number">2</span>:<span class="keyword">end</span>)'*a1;</span><br><span class="line">D2 = d3'*a2;</span><br><span class="line"></span><br><span class="line">Theta1_grad = Theta1_grad + D1/m;</span><br><span class="line">Theta2_grad = Theta2_grad + D2/m;</span><br></pre></td></tr></table></figure>
+<h2 id="2-5-Regularized-Neural-Networks"><a href="#2-5-Regularized-Neural-Networks" class="headerlink" title="2.5 Regularized Neural Networks"></a>2.5 Regularized Neural Networks</h2><script type="math/tex; mode=display">\dfrac{\partial }{\partial \Theta _{ij}^{(l)}}J(\Theta ) = D_{ij}^{(l)} = \dfrac{1}{m}\Delta _{ij}^{(l)} \quad for j = 0</script><script type="math/tex; mode=display">\dfrac{\partial }{\partial \Theta _{ij}^{(l)}}J(\Theta ) = D_{ij}^{(l)} = \dfrac{1}{m}\Delta _{ij}^{(l)} + \dfrac{\lambda }{m}\Theta _{ij}^{(l)}  \quad for j \geq 1</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Theta1_grad(:,<span class="number">2</span>:<span class="keyword">end</span>) = Theta1_grad(:,<span class="number">2</span>:<span class="keyword">end</span>) + lambda/m*Theta1(:,<span class="number">2</span>:<span class="keyword">end</span>);</span><br><span class="line">Theta2_grad(:,<span class="number">2</span>:<span class="keyword">end</span>) = Theta2_grad(:,<span class="number">2</span>:<span class="keyword">end</span>) + lambda/m*Theta2(:,<span class="number">2</span>:<span class="keyword">end</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="The-hidden-layer"><a href="#The-hidden-layer" class="headerlink" title="The hidden layer"></a>The hidden layer</h2><p><img src="https://i.imgur.com/LqYfS7h.png" alt=""></p>
 <a id="more"></a>
-<p>对于 N-1 的集合里的每个 String, </p>
-<ul>
-<li>遍历，从左往右，碰到左括号，插入<code>()</code></li>
-<li>最左边补 <code>()</code></li>
-</ul>
-<p>放到 Set 里去重</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> dict: [<span class="type">Int</span>:[<span class="type">String</span>]] = [<span class="number">0</span>:[], <span class="number">1</span>:[<span class="string">"()"</span>], <span class="number">2</span>:[<span class="string">"(())"</span>, <span class="string">"()()"</span>]]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">generateParenthesis</span><span class="params">(<span class="number">_</span> n: Int)</span></span> -&gt; [<span class="type">String</span>] &#123;</span><br><span class="line">        <span class="keyword">if</span> n &lt; <span class="number">0</span> &#123; <span class="keyword">return</span> [] &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> res = dict[n] &#123;</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> setN = <span class="type">Set</span>&lt;<span class="type">String</span>&gt;()</span><br><span class="line">            <span class="keyword">let</span> pre = generateParenthesis(n-<span class="number">1</span>)</span><br><span class="line">            pre.forEach &#123;</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;$<span class="number">0</span>.characters.<span class="built_in">count</span> &#123;</span><br><span class="line">                    <span class="keyword">let</span> index = $<span class="number">0</span>.index($<span class="number">0</span>.startIndex, offsetBy: i)</span><br><span class="line">                    <span class="keyword">let</span> char: <span class="type">Character</span> = $<span class="number">0</span>[index]</span><br><span class="line">                    <span class="keyword">if</span> <span class="type">String</span>(char) == <span class="string">"("</span> &#123;</span><br><span class="line">                        <span class="keyword">let</span> index = $<span class="number">0</span>.index($<span class="number">0</span>.startIndex, offsetBy: i+<span class="number">1</span>)</span><br><span class="line">                        <span class="keyword">let</span> str = $<span class="number">0</span>.substring(to: index) + <span class="string">"()"</span> + $<span class="number">0</span>.substring(from: index)</span><br><span class="line">                        setN.insert(str)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            pre.forEach &#123;</span><br><span class="line">                setN.insert(<span class="string">"()"</span> + $<span class="number">0</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> res = <span class="type">Array</span>(setN)</span><br><span class="line">            dict[n] = res</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/c1wo2Cy.png" alt=""></p>
 
       
     </div>
@@ -436,7 +430,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
         </div>
       
@@ -449,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/04/18-4Sum/" rel="next" title="18 4Sum">
-                <i class="fa fa-chevron-left"></i> 18 4Sum
+              <a href="/2018/01/06/Neural-Networks-Representation/" rel="next" title="Neural Networks Representation">
+                <i class="fa fa-chevron-left"></i> Neural Networks Representation
               </a>
             
           </div>
@@ -458,10 +454,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/09/Codility/" rel="prev" title="codility">
-                codility <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -621,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#22-Generate-Parentheses"><span class="nav-number">1.</span> <span class="nav-text">22 Generate Parentheses</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Feedforward-and-cost-function"><span class="nav-number">1.</span> <span class="nav-text">1.3 Feedforward and cost function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Regularized-cost-function"><span class="nav-number">2.</span> <span class="nav-text">1.4 Regularized cost function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Sigmoid-gradient"><span class="nav-number">3.</span> <span class="nav-text">2.1 Sigmoid gradient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Backpropagation"><span class="nav-number">4.</span> <span class="nav-text">2.3 Backpropagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Regularized-Neural-Networks"><span class="nav-number">5.</span> <span class="nav-text">2.5 Regularized Neural Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-hidden-layer"><span class="nav-number">6.</span> <span class="nav-text">The hidden layer</span></a></li></ol></div>
             
 
           </div>
@@ -784,9 +776,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://artwalk.github.io/2017/09/07/22-Generate-Parentheses/';
-          this.page.identifier = '2017/09/07/22-Generate-Parentheses/';
-          this.page.title = '22 Generate Parentheses';
+          this.page.url = 'http://artwalk.github.io/2018/01/11/Neural-Networks-Learning/';
+          this.page.identifier = '2018/01/11/Neural-Networks-Learning/';
+          this.page.title = 'Neural Networks: Learning';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Artwalk.disqus.com/embed.js';
