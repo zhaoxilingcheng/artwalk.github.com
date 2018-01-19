@@ -287,6 +287,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2017/12/29/Machine-Learning-by-Stanford-University/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/29/Machine-Learning-by-Stanford-University/" itemprop="url">Machine Learning by Stanford University</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-29T18:16:21+08:00">
+                2017-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/29/Machine-Learning-by-Stanford-University/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/29/Machine-Learning-by-Stanford-University/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Machine-Learning-by-Stanford-University"><a href="#Machine-Learning-by-Stanford-University" class="headerlink" title="Machine Learning by Stanford University"></a>Machine Learning by Stanford University</h1><p>It is a note about the process that I’m trying to learn Machine Learning on coursera. </p>
+<p>I heard AI a year ago, but never really look into it as an elderly who is hardly to accept new things. </p>
+<p>But it seems I will loss job at this generation AI🤖️ revolution, therefore I’ll try my best to learn it.</p>
+<p>Still, I am too old to learn and have no confidence to guarantee I can really master it one day.</p>
+<p>😂😂😂</p>
+<hr>
+<h2 id="1-Linear-Regression-with-One-Variable"><a href="#1-Linear-Regression-with-One-Variable" class="headerlink" title="1 Linear Regression with One Variable"></a>1 Linear Regression with One Variable</h2><h2 id="2-Linear-Regression-with-Multiple-Variables"><a href="#2-Linear-Regression-with-Multiple-Variables" class="headerlink" title="2 Linear Regression with Multiple Variables"></a>2 Linear Regression with Multiple Variables</h2><h3 id="ex1"><a href="#ex1" class="headerlink" title="ex1"></a>ex1</h3><p>This is my favorite part, I love coding 😄.</p>
+<h4 id="ComputeCost"><a href="#ComputeCost" class="headerlink" title="ComputeCost"></a>ComputeCost</h4><p>You see, the cost function here </p>
+<p>(OMG: the formula code is <code>J(\theta) = \cfrac{1}{2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)} )^2</code> in markdown) 🤯</p>
+<script type="math/tex; mode=display">J(\theta) = \cfrac{1}{2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)} )^2</script><script type="math/tex; mode=display">h_\theta(x) = \theta^Tx = \theta_0x_0 + \theta_1x_1 + … + \theta_nx_n</script><p>In fact, I found it is <code>X * theta</code> in the real calculation by <code>Octave</code> instead of <code>theta&#39; * X</code> as the formula shows.</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">J = sum(((X * theta) - y).^<span class="number">2</span>)/<span class="number">2</span>/m</span><br></pre></td></tr></table></figure>
+<h4 id="GradientDescent"><a href="#GradientDescent" class="headerlink" title="GradientDescent"></a>GradientDescent</h4><p>Similarly, the Gradient Descent here:</p>
+<p>repeat until convergence: {</p>
+<p>​    <script type="math/tex">\theta_j:=\theta_j-\alpha\cfrac{1}{m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)} )x_j^{(i)}</script></p>
+<p>​    <script type="math/tex">(for\  j := 0…n)</script></p>
+<p>}</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">theta = theta - alpha/m*(X' * ((X * theta) - y))</span><br></pre></td></tr></table></figure>
+<p>It take me hours 💥 to figure out why should I using  <code>X&#39; *  ((X * theta) - y))</code> </p>
+<p>Because all the variables X, theta , y, each of them is a vector, X’ * (…) equal to <code>sum()</code> part as the formule shows.</p>
+<p>I am still a little bit confused although I passed the test. 😵</p>
+<h2 id="3-Logistic-Regression"><a href="#3-Logistic-Regression" class="headerlink" title="3 Logistic Regression"></a>3 Logistic Regression</h2><p>To Be Continued…</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/29/Machine-Learning-by-Stanford-University/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2017/10/23/Batch-replace-NamedColors-to-RGB-in-Storyboard/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -826,140 +981,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2017/09/17/Codility-Prefix-Sums/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/17/Codility-Prefix-Sums/" itemprop="url">Codility Prefix Sums</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-17T23:45:41+08:00">
-                2017-09-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/17/Codility-Prefix-Sums/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/17/Codility-Prefix-Sums/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Please let me know if you have any questions about the algorithm. </p>
-<p>:)</p>
-<h2 id="PassingCars"><a href="#PassingCars" class="headerlink" title="PassingCars"></a><a href="https://codility.com/programmers/lessons/5-prefix_sums/passing_cars/" target="_blank" rel="noopener">PassingCars</a></h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">solution</span><span class="params">(<span class="number">_</span> A : <span class="keyword">inout</span> [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> sum = <span class="type">A</span>.<span class="built_in">reduce</span>(<span class="number">0</span>) &#123; $<span class="number">0</span> + $<span class="number">1</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">0</span>..&lt;<span class="type">A</span>.<span class="built_in">count</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="type">A</span>[i] == <span class="number">0</span> &#123;</span><br><span class="line">            res += sum</span><br><span class="line">            <span class="keyword">if</span> res &gt; <span class="number">1000000000</span> &#123;</span><br><span class="line">                res = -<span class="number">1</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            sum -= <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="CountDiv"><a href="#CountDiv" class="headerlink" title="CountDiv"></a><a href="https://codility.com/programmers/lessons/5-prefix_sums/count_div/" target="_blank" rel="noopener">CountDiv</a></h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">solution</span><span class="params">(<span class="number">_</span> A : Int, <span class="number">_</span> B : Int, <span class="number">_</span> K : Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> i = (<span class="type">Double</span>(<span class="type">A</span>) / <span class="type">Double</span>(<span class="type">K</span>)).rounded(.up)</span><br><span class="line">    <span class="keyword">let</span> j = (<span class="type">Double</span>(<span class="type">B</span>) / <span class="type">Double</span>(<span class="type">K</span>)).rounded(.down)</span><br><span class="line">    <span class="keyword">return</span>  <span class="type">Int</span>(j - i) + <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1014,7 +1035,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">149</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
