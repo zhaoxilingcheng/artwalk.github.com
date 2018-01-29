@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://artwalk.github.io/"/>
-  <updated>2018-01-19T15:38:25.402Z</updated>
+  <updated>2018-01-29T16:59:33.370Z</updated>
   <id>http://artwalk.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Unsupervised Learning</title>
+    <link href="http://artwalk.github.io/2018/01/30/Unsupervised-Learning/"/>
+    <id>http://artwalk.github.io/2018/01/30/Unsupervised-Learning/</id>
+    <published>2018-01-29T16:04:36.000Z</published>
+    <updated>2018-01-29T16:59:33.370Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-1-1-Finding-closest-centroids"><a href="#1-1-1-Finding-closest-centroids" class="headerlink" title="1.1.1 Finding closest centroids"></a>1.1.1 Finding closest centroids</h2><script type="math/tex; mode=display">c^{(i)} :=  j , min \left (   \left \| x^{(i)}-\mu _j \right \|^2 \right )</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">v = [];</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:K</span><br><span class="line">    v = [v, sum((X - centroids(j,:)).^<span class="number">2</span>, <span class="number">2</span>)];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">[v, idx] = min(v, [], <span class="number">2</span>);</span><br></pre></td></tr></table></figure><p>The $\left |  \right |$ symbol means <a href="https://en.wikipedia.org/wiki/Norm_(mathematics" target="_blank" rel="noopener">Norm</a>) not Absolute value the first time as I thought. 😂</p><h2 id="1-1-2-Computing-centroid-means"><a href="#1-1-2-Computing-centroid-means" class="headerlink" title="1.1.2 Computing centroid means"></a>1.1.2 Computing centroid means</h2><script type="math/tex; mode=display">\mu _k := \dfrac{1}{\left | C_k \right |}\sum_{i\in  C_k}^{ }x^{(i)}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:K</span><br><span class="line">    <span class="built_in">j</span> = (idx == <span class="built_in">i</span>);</span><br><span class="line">    v = X(<span class="built_in">j</span>, :);</span><br><span class="line">    n = <span class="built_in">size</span>(v, <span class="number">1</span>);</span><br><span class="line">    centroids(<span class="built_in">i</span>, :) = sum(v)/n;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><p><img src="https://i.imgur.com/UEBpwso.gif" alt=""></p><h2 id="2-2-Implementing-PCA"><a href="#2-2-Implementing-PCA" class="headerlink" title="2.2 Implementing PCA"></a>2.2 Implementing PCA</h2><script type="math/tex; mode=display">\sum = \dfrac{1}{m}X^TX</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sigma = X'*X/m;</span><br><span class="line">[U, S, V] = svd(sigma);</span><br></pre></td></tr></table></figure><h2 id="2-3-1-Projecting-the-data-onto-the-principal-components"><a href="#2-3-1-Projecting-the-data-onto-the-principal-components" class="headerlink" title="2.3.1 Projecting the data onto the principal components"></a>2.3.1 Projecting the data onto the principal components</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Z = X * U;</span><br><span class="line">Z = Z(:,<span class="number">1</span>:K);</span><br></pre></td></tr></table></figure><h2 id="2-3-2-Reconstructing-an-approximation-of-the-data"><a href="#2-3-2-Reconstructing-an-approximation-of-the-data" class="headerlink" title="2.3.2 Reconstructing an approximation of the data"></a>2.3.2 Reconstructing an approximation of the data</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">X_rec = Z * U(:,<span class="number">1</span>:K)';</span><br></pre></td></tr></table></figure><p><img src="https://i.imgur.com/TjyYT8G.gif" alt=""></p><a id="more"></a><p><img src="https://i.imgur.com/duSTjdI.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-1-1-Finding-closest-centroids&quot;&gt;&lt;a href=&quot;#1-1-1-Finding-closest-centroids&quot; class=&quot;headerlink&quot; title=&quot;1.1.1 Finding closest centroids&quot;&gt;&lt;/a&gt;1.1.1 Finding closest centroids&lt;/h2&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;c^{(i)} :=  j , min \left (   \left \| x^{(i)}-\mu _j \right \|^2 \right )&lt;/script&gt;&lt;figure class=&quot;highlight matlab&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;v = [];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;j&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:K&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    v = [v, sum((X - centroids(j,:)).^&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[v, idx] = min(v, [], &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;The $\left |  \right |$ symbol means &lt;a href=&quot;https://en.wikipedia.org/wiki/Norm_(mathematics&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Norm&lt;/a&gt;) not Absolute value the first time as I thought. 😂&lt;/p&gt;
+&lt;h2 id=&quot;1-1-2-Computing-centroid-means&quot;&gt;&lt;a href=&quot;#1-1-2-Computing-centroid-means&quot; class=&quot;headerlink&quot; title=&quot;1.1.2 Computing centroid means&quot;&gt;&lt;/a&gt;1.1.2 Computing centroid means&lt;/h2&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;\mu _k := \dfrac{1}{\left | C_k \right |}\sum_{i\in  C_k}^{ }x^{(i)}&lt;/script&gt;&lt;figure class=&quot;highlight matlab&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:K&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;j&lt;/span&gt; = (idx == &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    v = X(&lt;span class=&quot;built_in&quot;&gt;j&lt;/span&gt;, :);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    n = &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;(v, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    centroids(&lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;, :) = sum(v)/n;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/UEBpwso.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;2-2-Implementing-PCA&quot;&gt;&lt;a href=&quot;#2-2-Implementing-PCA&quot; class=&quot;headerlink&quot; title=&quot;2.2 Implementing PCA&quot;&gt;&lt;/a&gt;2.2 Implementing PCA&lt;/h2&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sum = \dfrac{1}{m}X^TX&lt;/script&gt;&lt;figure class=&quot;highlight matlab&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sigma = X&#39;*X/m;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[U, S, V] = svd(sigma);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;2-3-1-Projecting-the-data-onto-the-principal-components&quot;&gt;&lt;a href=&quot;#2-3-1-Projecting-the-data-onto-the-principal-components&quot; class=&quot;headerlink&quot; title=&quot;2.3.1 Projecting the data onto the principal components&quot;&gt;&lt;/a&gt;2.3.1 Projecting the data onto the principal components&lt;/h2&gt;&lt;figure class=&quot;highlight matlab&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Z = X * U;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Z = Z(:,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:K);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;2-3-2-Reconstructing-an-approximation-of-the-data&quot;&gt;&lt;a href=&quot;#2-3-2-Reconstructing-an-approximation-of-the-data&quot; class=&quot;headerlink&quot; title=&quot;2.3.2 Reconstructing an approximation of the data&quot;&gt;&lt;/a&gt;2.3.2 Reconstructing an approximation of the data&lt;/h2&gt;&lt;figure class=&quot;highlight matlab&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;X_rec = Z * U(:,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:K)&#39;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/TjyYT8G.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="AI" scheme="http://artwalk.github.io/tags/AI/"/>
+    
+      <category term="Machine Learning" scheme="http://artwalk.github.io/tags/Machine-Learning/"/>
+    
+  </entry>
   
   <entry>
     <title>Support Vector Machines</title>
@@ -525,27 +554,6 @@
     
     
       <category term="MagicLang" scheme="http://artwalk.github.io/tags/MagicLang/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Softwares speed up your learning</title>
-    <link href="http://artwalk.github.io/2017/05/18/Softwares-speed-up-your-learning/"/>
-    <id>http://artwalk.github.io/2017/05/18/Softwares-speed-up-your-learning/</id>
-    <published>2017-05-17T22:23:19.000Z</published>
-    <updated>2017-05-17T23:33:24.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Podcasts and videos are a typical way to study online, but they are numberless and as the collect is in human’s nature, how to increase this speed become more essential.</p><p>Typically, people can deal with native languages at a high speed.<br>As for me, 2x is comfortable, 3x is acceptable, 4x is fine with subtitle.</p><h2 id="Desktop"><a href="#Desktop" class="headerlink" title="Desktop"></a>Desktop</h2><p>A few years ago, I used to use Windows when I was still a university student, KMPlayer was the best in all type of video players, because other players may got distorted sound while changing. Later, the author left the company and rewrote a new one with <code>C++</code> and renamed it to <a href="https://potplayer.daum.net/" target="_blank" rel="noopener">PotPlayer</a>.</p><p>As on macOS, Movist is my first choice, which is also come from Korea. needless to say its brilliance and simplicity, it provide 4x without too much losses in audio track.<br>Other players like <a href="https://mpv.io/" target="_blank" rel="noopener">MPV</a>, although it provide no rate limit( yes, you can speed up to whatever you like) and open sourced, but you have to modify <code>~/.config/mpv/mpv.conf</code> each time if you want to change the default settings.</p><h2 id="Mobile"><a href="#Mobile" class="headerlink" title="Mobile"></a>Mobile</h2><p>The good news is Podcasts on iPhone already have 2x (the odd thing is iTunes Podcasts don’t), and many study type apps also have this useful feature.</p><p>But I haven’t found any app provide more than 2x.</p><p>According to <a href="https://developer.apple.com/reference/avfoundation/avplayer#//apple_ref/occ/instp/AVPlayer/rate" target="_blank" rel="noopener"></a></p><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> player = <span class="type">AVAudioPlayer</span>()</span><br><span class="line">player.prepareToPlay()</span><br><span class="line">player.enableRate = <span class="literal">true</span></span><br><span class="line">player.rate = <span class="number">2.0</span></span><br><span class="line">player.play()</span><br></pre></td></tr></table></figure><p>It seems merely change the <code>player.rate = 3.0</code> can do it if the audio is a file-based media. Dose this would cause distortion?</p><p>I’ll try it if I spare time one day.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Podcasts and videos are a typical way to study online, but they are numberless and as the collect is in human’s nature, how to increase t
-      
-    
-    </summary>
-    
     
   </entry>
   

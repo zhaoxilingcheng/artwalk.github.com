@@ -287,6 +287,145 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/07/08/Xcode-6-x-cannot-run-on-EI-Capitan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/07/08/Xcode-6-x-cannot-run-on-EI-Capitan/" itemprop="url">Xcode 6.x cannot run on EI Capitan</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-08T09:55:46+08:00">
+                2015-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/07/08/Xcode-6-x-cannot-run-on-EI-Capitan/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/07/08/Xcode-6-x-cannot-run-on-EI-Capitan/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>I watched WWDC and updated OS X to EI Capitan(10.11).<br>Everything seemed fine until I opened Xcode:  </p>
+<blockquote>
+<p>You can’t use this version of the application “Xcode” with this version of OS X.<br>You have “Xcode” 6.x.  </p>
+</blockquote>
+<p>Swift 2.0 is awesome, but according to Apple, if you want to submit an app which written by 2.0 to App Store, you need to wait until September.</p>
+<p>Fortunately I found a hack command:  </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/Applications/Xcode.app/Contents/MacOS/Xcode &lt; /dev/null &amp;&gt; /dev/null &amp;</span><br></pre></td></tr></table></figure>
+<p>Which means you run Xcode from <code>/dev/null</code> and redirect output &amp; error output to <code>/dev/null</code> in background.  </p>
+<p>Everything perfect in past several weeks.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/06/17/How-to-update-homebrew-daily/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -848,177 +987,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/04/16/iOS-CI-Jenkins-Phabricator-Slack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/04/16/iOS-CI-Jenkins-Phabricator-Slack/" itemprop="url">iOS CI (Jenkins + Phabricator + Slack)</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-16T20:59:31+08:00">
-                2015-04-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2015/04/16/iOS-CI-Jenkins-Phabricator-Slack/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2015/04/16/iOS-CI-Jenkins-Phabricator-Slack/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><code>shell</code> 里 <code>brew install jenkins</code><br>然后 <code>jenkins</code> 启动，牛腩器中输入 127.0.0.1:8080 跳坑</p>
-<p>Jenkins 里 <code>xcode</code> 相关插件装上<br>步骤别的博客都有，Google <em>ios ci 持续集成</em>，比如：  </p>
-<ul>
-<li><a href="http://www.itiger.me/?p=30" target="_blank" rel="noopener">Jenkins+Github+Testflight在Mac下搭建持续集成环境</a> ，</li>
-<li><a href="http://www.jianshu.com/p/63073573e2ee" target="_blank" rel="noopener">iOS项目持续集成之Travis CI</a></li>
-</ul>
-<p>版本可能旧一点，但能脑补上</p>
-<p>我们这用的 Phabricator，由于是 iOS，放在本地 Mac 上而非服务器，所以私钥配好就行了，Jenkins 和 Phabricator 回调交互啥的就不管了  </p>
-<p>另外主要遇到几个问题：</p>
-<h3 id="jenkins-plugins-slack-ActiveNotifier-hudson-model-listeners-npe"><a href="#jenkins-plugins-slack-ActiveNotifier-hudson-model-listeners-npe" class="headerlink" title="jenkins.plugins.slack.ActiveNotifier  hudson.model.listeners npe"></a>jenkins.plugins.slack.ActiveNotifier  hudson.model.listeners npe</h3><p>test 推送消息却好好的<br>弄了俩小时也不知怎么回事，睡一觉第二天正常了…</p>
-<p>貌似知道原因了，<em>Project Channel</em> 那里不能为空</p>
-<h3 id="ResourceRules-plist"><a href="#ResourceRules-plist" class="headerlink" title="ResourceRules.plist"></a>ResourceRules.plist</h3><p>第一天 提示 ResourceRules.plist 不对， 于是在工程和 Jenkins 配置里都加了这个<br><code>Custom xcodebuild arguments $(SDKROOT)/ResourceRules.plist</code>  </p>
-<p>结果第二天提示找不到 ResourceRules.plist，Jenkins 里删掉这个反而 OK 了，真奇葩  </p>
-<h3 id="iPhone-Developer-no-identity-found"><a href="#iPhone-Developer-no-identity-found" class="headerlink" title="iPhone Developer: no identity found"></a>iPhone Developer: no identity found</h3><p><code>swift-stdlib-tool failed with exit code 1</code></p>
-<p>去 developer.apple.com 下载了各种证书，都不管用<br>实在没办法，直接用 xcode 打开了 <code>~/.jenkins/jobs/****</code> 下面的工程，想做个对比，结果发现 keychain 里多出来个证书，然后就 success 了…  </p>
-<hr>
-<p><del>另外企业账号还没买，Jenkins 没开账号系统，继续等坑</del></p>
-<h3 id="DUNS-邓白氏码"><a href="#DUNS-邓白氏码" class="headerlink" title="DUNS(邓白氏码)"></a>DUNS(邓白氏码)</h3><p>之前企业账号一直卡在这里，苹果邮件迟迟没回应，所以一定要去电话苹果客服，一两天就 OK 了</p>
-<h3 id="bundle-identifier"><a href="#bundle-identifier" class="headerlink" title="bundle identifier"></a>bundle identifier</h3><p>之前 company 账号中 .alpha .beta 占用掉了，企业账号这里无法创建相同的证书，只好<em>删除原来账号里</em> 或 <em>改 ID</em>  </p>
-<p>结果删除时发现需要 app 需要是其中几个状态，官方文档：<a href="https://developer.apple.com/library/mac/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Chapters/TransferringAndDeletingApps.html" target="_blank" rel="noopener">TransferringAndDeletingApps</a></p>
-<p>之前 beta 作为 testflight，并没上传 AppStore，Email 苹果，回复：</p>
-<blockquote>
-<p>Currently, your app does not have at least one approved version.</p>
-</blockquote>
-<p>…<br>只好改了 ID</p>
-<h3 id="over-the-air-distribution"><a href="#over-the-air-distribution" class="headerlink" title="over the air distribution"></a>over the air distribution</h3><p>万事俱备了，赶紧导出，结果发现 Xcode 6 之后，导 ipa 只有一个 .ipa 没有配套的 .plist，要自己手写…（还好 Jenkins 还能自动生成），大致长这样的：<a href="https://gist.github.com/Artwalk/f292d65163b26a2169d4" target="_blank" rel="noopener">plist</a> ($ $ 里对应的改一下)</p>
-<p>然后<code>python -m SimpleHTTPServer</code>，iPhone 上 Safari 打开，结果… 还是不行…</p>
-<p>后来发现服务器必须是 https 的…</p>
-<h3 id="build-number"><a href="#build-number" class="headerlink" title="build number"></a>build number</h3><p><code>targets -&gt; Build Phases -&gt; + New Run Script Phase</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">buildNumber=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$&#123;PROJECT_DIR&#125;/$&#123;INFOPLIST_FILE&#125;")</span><br><span class="line">buildNumber=$(($buildNumber + 1))</span><br><span class="line">/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $buildNumber" "$&#123;PROJECT_DIR&#125;/$&#123;INFOPLIST_FILE&#125;"</span><br></pre></td></tr></table></figure>
-<p>这样 scheme 是 release 的时候，build 会自动 +1</p>
-<p>PS:<br>其实这个可以写到 Jenkins build 步骤的 shell 中，然后 push 到 origin/master，再把 *.ipa 上传到服务器  </p>
-<h3 id="OS-X-Server"><a href="#OS-X-Server" class="headerlink" title="OS X Server"></a>OS X Server</h3><p>坑，有时间整理一个</p>
-<h3 id="DistributionProvisioningProfiles"><a href="#DistributionProvisioningProfiles" class="headerlink" title="DistributionProvisioningProfiles"></a>DistributionProvisioningProfiles</h3><p>直接把下载的 <code>*. mobileprovision</code>，写路径发现是不行的，只好自己手动打包</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xcodebuild -exportArchive -exportFormat IPA -archivePath "$Yourarchive" \</span><br><span class="line"> -exportPath imeican-Beta-xcodebuild.ipa \</span><br><span class="line"> -exportProvisioningProfile $YourDistributionProvisioningProfiles</span><br></pre></td></tr></table></figure>
-<p>总结：<br>一路走来一路坑  </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1068,7 +1041,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">151</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
