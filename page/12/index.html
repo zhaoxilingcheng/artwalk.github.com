@@ -287,6 +287,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/11/11/How-to-build-an-iOS-CI-without-jenkins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/11/11/How-to-build-an-iOS-CI-without-jenkins/" itemprop="url">How to build an iOS CI without Jenkins</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-11T00:36:24+08:00">
+                2015-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/11/11/How-to-build-an-iOS-CI-without-jenkins/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/11/11/How-to-build-an-iOS-CI-without-jenkins/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>I used Jenkins with some Xcode plugins as our iOS CI half a year ago.</p>
+<p>The main function I want is to build our project daily in the middle night, and +1 on the build number, then push this commit to <code>Phabricator</code>,  if any of these steps is fail, it will post a notification to <code>Slack</code>.</p>
+<p>But after we are try to using <code>Carthage</code> instead of  <code>CocoaPod</code>, it need to <code>Carthage update</code> before building. The Jenkins can’t run commands before building. So I tried using shell directly.</p>
+<h2 id="update-code"><a href="#update-code" class="headerlink" title="update code"></a>update code</h2><p>First it should <code>cd</code> into the project’s folder, then checkout new commits and update new frameworks</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> $(dirname <span class="variable">$0</span>)</span><br><span class="line">git checkout master</span><br><span class="line">git reset --hard origin/master</span><br><span class="line"></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/carthage update</span><br></pre></td></tr></table></figure>
+<p>then check that whether the last author is a coworker or the bot itself</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">author=$(git <span class="built_in">log</span> -1 | head -2 | tail -1 | cut -d <span class="string">' '</span> -f2)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$author</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$author</span> != <span class="string">"bot"</span> ]; <span class="keyword">then</span></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span></span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>if it’s a coworker</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">projectName=$(find . -name <span class="string">"*.xcodeproj"</span> -depth 1 | cut -d <span class="string">'/'</span>  -f 2 | cut -d <span class="string">'.'</span> -f 1)</span><br><span class="line">plist=$(find <span class="variable">$projectName</span> -name <span class="string">"*.plist"</span> -d 1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># buildnum +1</span></span><br><span class="line">shortVersion=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleShortVersionString"</span> <span class="string">"<span class="variable">$&#123;plist&#125;</span>"</span>)</span><br><span class="line">buildnum=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleVersion"</span> <span class="string">"<span class="variable">$&#123;plist&#125;</span>"</span>)</span><br><span class="line">buildnum=$(expr <span class="variable">$buildnum</span> + 1)</span><br><span class="line"></span><br><span class="line">/usr/libexec/Plistbuddy -c <span class="string">"Set CFBundleVersion <span class="variable">$buildnum</span>"</span> <span class="string">"<span class="variable">$&#123;plist&#125;</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for AppleWatch</span></span><br><span class="line">WatchAppPlist=$(find WatchApp -name <span class="string">"*.plist"</span> -d 1)</span><br><span class="line">WatchAppExtensionPlist=$(find <span class="string">'WatchApp Extension'</span> -name <span class="string">"*.plist"</span> -d 1)</span><br><span class="line"></span><br><span class="line">/usr/libexec/Plistbuddy -c <span class="string">"Set CFBundleVersion <span class="variable">$buildnum</span>"</span> <span class="string">"<span class="variable">$&#123;WatchAppPlist&#125;</span>"</span></span><br><span class="line">/usr/libexec/Plistbuddy -c <span class="string">"Set CFBundleVersion <span class="variable">$buildnum</span>"</span> <span class="string">"<span class="variable">$&#123;WatchAppExtensionPlist&#125;</span>"</span></span><br></pre></td></tr></table></figure>
+<p>Here is how to xcodebuild your ipa in the <em>build</em> folder</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">rm -rf build</span><br><span class="line"></span><br><span class="line">xcodebuild clean archive -archivePath build/<span class="variable">$YourApp</span>-Beta \</span><br><span class="line">-scheme <span class="variable">$YourAppScheme</span> </span><br><span class="line"></span><br><span class="line">xcodebuild -exportArchive \</span><br><span class="line">-exportFormat ipa \</span><br><span class="line">-archivePath <span class="string">"build/<span class="variable">$YourApp</span>-Beta.xcarchive"</span> \</span><br><span class="line">-exportPath <span class="string">"build/<span class="variable">$YourApp</span>-Beta.ipa"</span> \</span><br><span class="line">-exportProvisioningProfile <span class="string">"<span class="variable">$YourtProvisioningProfile</span>"</span></span><br></pre></td></tr></table></figure>
+<p>then you can upload your *.ipa to your server ( for instance using curl)</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">rm -rf build <span class="comment"># clean up</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># push to remote</span></span><br><span class="line">git config user.email <span class="string">"bot@yourdomain.com"</span></span><br><span class="line">git config user.name <span class="string">"bot"</span></span><br><span class="line">git commit -a -m <span class="string">"<span class="variable">$buildnum</span>"</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p>How to post a message to Slack</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># post2Slack $msg</span></span><br><span class="line"><span class="function"><span class="title">post2Slack</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">	SLACK_HOSTNAME=<span class="string">"hooks.slack.com"</span></span><br><span class="line">	SLACK_CHANNEL=“<span class="comment">#YourChannel”</span></span><br><span class="line">	SLACK_BOTNAME=<span class="string">"bot"</span></span><br><span class="line">	ICON=<span class="string">":x:"</span></span><br><span class="line">	SLACK_BOTEMOJI=<span class="string">":joy:"</span></span><br><span class="line">	MESSAGE=<span class="variable">$1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Send message to Slack</span></span><br><span class="line">PAYLOAD=<span class="string">"payload=&#123;\"channel\": \"<span class="variable">$&#123;SLACK_CHANNEL&#125;</span>\", \"username\": \"<span class="variable">$&#123;SLACK_BOTNAME&#125;</span>\", \"text\": \"<span class="variable">$&#123;ICON&#125;</span> <span class="variable">$&#123;MESSAGE&#125;</span>\", \"icon_emoji\": \"<span class="variable">$&#123;SLACK_BOTEMOJI&#125;</span>\"&#125;"</span>;</span><br><span class="line">curl -X POST --data-urlencode <span class="string">"<span class="variable">$PAYLOAD</span>"</span> <span class="variable">$getThisURLInYourSlackChannel</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># post2Slack &amp;&amp; exit</span></span><br><span class="line"><span class="function"><span class="title">post2SlackAndExitWithMsg</span></span>() &#123;</span><br><span class="line">	post2Slack <span class="string">"<span class="variable">$&#123;1&#125;</span>"</span> &amp;&amp; <span class="built_in">exit</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>then you can combine any commands like this:</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">git push origin master || post2SlackAndExitWithMsg <span class="string">"git push failed"</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/10/10/However-no-eggs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -834,140 +981,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/07/15/how-to-batch-reverse-First-and-Last-names-in-Mac-OS-X-Contacts/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/07/15/how-to-batch-reverse-First-and-Last-names-in-Mac-OS-X-Contacts/" itemprop="url">How to batch reverse the First and Last names in Mac OS X Contacts</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-15T16:35:52+08:00">
-                2015-07-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2015/07/15/how-to-batch-reverse-First-and-Last-names-in-Mac-OS-X-Contacts/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2015/07/15/how-to-batch-reverse-First-and-Last-names-in-Mac-OS-X-Contacts/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>I was wondering why the family name was always behind the given name in my Contacts, no matter when I check my iPhone or Mac. First I believe some configs was not correct, until I found I messed up the First and Last name.   </p>
-<p>In fact, given name was known as the first name, which was opposite in China.</p>
-<p>Althought only dozens of people in my Contacts, but I still don’t want to edit them manually as an iOS programmer →_→</p>
-<p>So, just open Xcode and new an <code>OS X Application -&gt; command line tool</code> and paster the snippet below to your <code>main.swift</code>, then <code>cmd + R</code> …</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> AddressBook</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> addressBook = <span class="type">ABAddressBook</span>.sharedAddressBook()</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> firstKey = <span class="string">"First"</span></span><br><span class="line"><span class="keyword">let</span> lastKey = <span class="string">"Last"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> people <span class="keyword">in</span> addressBook.people() &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> p = people <span class="keyword">as</span>? <span class="type">ABPerson</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> f: <span class="type">AnyObject</span>? = p.valueForKey(firstKey)</span><br><span class="line">        <span class="keyword">let</span> l: <span class="type">AnyObject</span>? = p.valueForKey(lastKey)</span><br><span class="line">        p.setValue(l, forKey: firstKey)</span><br><span class="line">        p.setValue(f, forKey: lastKey)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addressBook.save()</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1022,7 +1035,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">152</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1035,7 +1048,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

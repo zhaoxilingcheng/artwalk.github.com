@@ -287,6 +287,140 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/07/15/how-to-batch-reverse-First-and-Last-names-in-Mac-OS-X-Contacts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/07/15/how-to-batch-reverse-First-and-Last-names-in-Mac-OS-X-Contacts/" itemprop="url">How to batch reverse the First and Last names in Mac OS X Contacts</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-15T16:35:52+08:00">
+                2015-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/07/15/how-to-batch-reverse-First-and-Last-names-in-Mac-OS-X-Contacts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/07/15/how-to-batch-reverse-First-and-Last-names-in-Mac-OS-X-Contacts/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>I was wondering why the family name was always behind the given name in my Contacts, no matter when I check my iPhone or Mac. First I believe some configs was not correct, until I found I messed up the First and Last name.   </p>
+<p>In fact, given name was known as the first name, which was opposite in China.</p>
+<p>Althought only dozens of people in my Contacts, but I still don’t want to edit them manually as an iOS programmer →_→</p>
+<p>So, just open Xcode and new an <code>OS X Application -&gt; command line tool</code> and paster the snippet below to your <code>main.swift</code>, then <code>cmd + R</code> …</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> AddressBook</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> addressBook = <span class="type">ABAddressBook</span>.sharedAddressBook()</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> firstKey = <span class="string">"First"</span></span><br><span class="line"><span class="keyword">let</span> lastKey = <span class="string">"Last"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> people <span class="keyword">in</span> addressBook.people() &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> p = people <span class="keyword">as</span>? <span class="type">ABPerson</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> f: <span class="type">AnyObject</span>? = p.valueForKey(firstKey)</span><br><span class="line">        <span class="keyword">let</span> l: <span class="type">AnyObject</span>? = p.valueForKey(lastKey)</span><br><span class="line">        p.setValue(l, forKey: firstKey)</span><br><span class="line">        p.setValue(f, forKey: lastKey)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addressBook.save()</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/07/13/Calculating-God/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -849,143 +983,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/06/16/xcode-plugins-faild-to-be-loaded-after-update/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/06/16/xcode-plugins-faild-to-be-loaded-after-update/" itemprop="url">Xcode plugins faild to be loaded after updated</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-16T21:33:02+08:00">
-                2015-06-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2015/06/16/xcode-plugins-faild-to-be-loaded-after-update/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2015/06/16/xcode-plugins-faild-to-be-loaded-after-update/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>You can type the command in terminal after Xcode updated</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I&#123;&#125; defaults write &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add `defaults <span class="built_in">read</span> /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID`</span><br></pre></td></tr></table></figure>
-<p>this will added your new Xcode UUID to <code>DVTPlugInCompatibilityUUID</code>  </p>
-<p>But that is a risky way, for instance my Xcode 6.3.2 always crash after I ran this command without brain.</p>
-<p>So I had to open the folder <code>~/Library/Application Support/Developer/Shared/Xcode/Plug-ins</code> and deleted some suspicious plugins.</p>
-<p>Of course also you can check the <code>tail -f /var/log/system.log</code>, and found which plugin cause the Xcode crash exactly in <code>~/Library/Logs/DiagnosticReports/Xcode_$time_$macbookname.crash</code></p>
-<p>Finally，with my best wishes :)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1040,7 +1037,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">152</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1053,7 +1050,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

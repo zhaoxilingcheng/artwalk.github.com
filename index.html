@@ -287,6 +287,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/02/26/Programming-Assignment-Scrooge-Coin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/26/Programming-Assignment-Scrooge-Coin/" itemprop="url">Programming Assignment: Scrooge Coin</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-26T10:45:54+08:00">
+                2018-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/26/Programming-Assignment-Scrooge-Coin/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/26/Programming-Assignment-Scrooge-Coin/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>This is the worst assignment I ever had.</p>
+<p>The <code>TxHandler.java</code> cannot build and run, everything have to guess. As I’m not familiar with <code>JAVA</code>, I met  millions of  grammar errors after submit.</p>
+<p>I have to:</p>
+<ul>
+<li>import packages by manually</li>
+<li>add <code>;</code> after each line</li>
+<li><code>()</code> after <code>if</code></li>
+<li>declare the type of a variable</li>
+</ul>
+<p>That’s why I hate <code>JAVA</code> 😡😡😡.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TxHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> UTXOPool utxoPool;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Creates a public ledger whose current UTXOPool (collection of unspent transaction outputs) is</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> utxoPool&#125;. This should make a copy of utxoPool by using the UTXOPool(UTXOPool uPool)</span></span><br><span class="line"><span class="comment">     * constructor.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TxHandler</span><span class="params">(UTXOPool utxoPool)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.utxoPool = <span class="keyword">new</span> UTXOPool(utxoPool);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> true if:</span></span><br><span class="line"><span class="comment">     * (1) all outputs claimed by &#123;<span class="doctag">@code</span> tx&#125; are in the current UTXO pool,</span></span><br><span class="line"><span class="comment">     * (2) the signatures on each input of &#123;<span class="doctag">@code</span> tx&#125; are valid,</span></span><br><span class="line"><span class="comment">     * (3) no UTXO is claimed multiple times by &#123;<span class="doctag">@code</span> tx&#125;,</span></span><br><span class="line"><span class="comment">     * (4) all of &#123;<span class="doctag">@code</span> tx&#125;s output values are non-negative, and</span></span><br><span class="line"><span class="comment">     * (5) the sum of &#123;<span class="doctag">@code</span> tx&#125;s input values is greater than or equal to the sum of its output</span></span><br><span class="line"><span class="comment">     *     values; and false otherwise.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidTx</span><span class="params">(Transaction tx)</span> </span>&#123;</span><br><span class="line">        UTXOPool utxoSet = <span class="keyword">new</span> UTXOPool();</span><br><span class="line">        <span class="keyword">double</span> pSum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">double</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tx.numInputs(); i++) &#123;</span><br><span class="line">            Transaction.Input in = tx.getInput(i);</span><br><span class="line">            UTXO u = <span class="keyword">new</span> UTXO(in.prevTxHash, in.outputIndex);</span><br><span class="line">            Transaction.Output out = utxoPool.getTxOutput(u);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ((!utxoPool.contains(u)) || (!Crypto.verifySignature(out.address, tx.getRawDataToSign(i), in.signature)) || (utxoSet.contains(u))) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            utxoSet.addUTXO(u, out);</span><br><span class="line">            pSum += out.value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Transaction.Output out : tx.getOutputs()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (out.value &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            sum += out.value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pSum &lt; sum) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handles each epoch by receiving an unordered array of proposed transactions, checking each</span></span><br><span class="line"><span class="comment">     * transaction for correctness, returning a mutually valid array of accepted transactions, and</span></span><br><span class="line"><span class="comment">     * updating the current UTXO pool as appropriate.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Transaction[] handleTxs(Transaction[] possibleTxs) &#123;</span><br><span class="line">        Set&lt;Transaction&gt; vTxs = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Transaction tx : possibleTxs) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isValidTx(tx)) &#123;</span><br><span class="line">                vTxs.add(tx);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (Transaction.Input in : tx.getInputs()) &#123;</span><br><span class="line">                    UTXO u = <span class="keyword">new</span> UTXO(in.prevTxHash, in.outputIndex);</span><br><span class="line">                    utxoPool.removeUTXO(u);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tx.numOutputs(); i++) &#123;</span><br><span class="line">                    Transaction.Output out = tx.getOutput(i);</span><br><span class="line">                    UTXO u = <span class="keyword">new</span> UTXO(tx.getHash(), i);</span><br><span class="line">                    utxoPool.addUTXO(u, out);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Transaction[] vTxArr = <span class="keyword">new</span> Transaction[vTxs.size()];</span><br><span class="line">        <span class="keyword">return</span> vTxs.toArray(vTxArr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/02/11/Anomaly-Detection-Recommender-Systems/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -840,148 +981,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/01/11/Neural-Networks-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/11/Neural-Networks-Learning/" itemprop="url">Neural Networks: Learning</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-11T11:27:14+08:00">
-                2018-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/11/Neural-Networks-Learning/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/11/Neural-Networks-Learning/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>First, I have to say, it’s the hardest exercise I have ever made when I began this course.</p>
-<h2 id="1-3-Feedforward-and-cost-function"><a href="#1-3-Feedforward-and-cost-function" class="headerlink" title="1.3 Feedforward and cost function"></a>1.3 Feedforward and cost function</h2><script type="math/tex; mode=display">J(\theta )=\dfrac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[-y_{k}^{(i)}log((h_\theta(x^{(i)})_k) -(1-y_{k}^{(i)})log(1-(h_\theta(x^{(i)}))_k )]</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a1 = [ones(m, <span class="number">1</span>), X];</span><br><span class="line">z2 = a1*Theta1';</span><br><span class="line">a2 = [ones(m, <span class="number">1</span>), sigmoid(z2)];</span><br><span class="line">z3 = a2*Theta2';</span><br><span class="line">a3 = sigmoid(z3);</span><br><span class="line"></span><br><span class="line">I = <span class="built_in">eye</span>(num_labels);</span><br><span class="line">Y = I(y, :);</span><br><span class="line"></span><br><span class="line">J = sum(sum((-Y.*<span class="built_in">log</span>(a3) - (<span class="number">1</span>-Y).*<span class="built_in">log</span>(<span class="number">1</span>-a3) ) / m));</span><br></pre></td></tr></table></figure>
-<p>For now, I still confused about <code>I(y, :)</code>, how can it makes y(5000:1) to Y(5000:10) with the match index in each row?</p>
-<h2 id="1-4-Regularized-cost-function"><a href="#1-4-Regularized-cost-function" class="headerlink" title="1.4 Regularized cost function"></a>1.4 Regularized cost function</h2><script type="math/tex; mode=display">J(\theta )=\dfrac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}[-y_{k}^{(i)}log((h_\theta(x^{(i)})_k) -(1-y_{k}^{(i)})log(1-(h_\theta(x^{(i)}))_k )]+\dfrac{\lambda }{2m}[\sum_{j=1}^{25}\sum_{k=1}^{400}(\Theta _{j,k}^{(1)})^{2} + \sum_{j=1}^{10}\sum_{k=1}^{25}(\Theta _{j,k}^{(2)})^{2}]</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">r = lambda/<span class="number">2</span>/m * (sum(sum(Theta1(:,<span class="number">2</span>:<span class="keyword">end</span>).^<span class="number">2</span>)) + sum(sum(Theta2(:,<span class="number">2</span>:<span class="keyword">end</span>).^<span class="number">2</span>)));</span><br><span class="line">J = J + r;</span><br></pre></td></tr></table></figure>
-<h2 id="2-1-Sigmoid-gradient"><a href="#2-1-Sigmoid-gradient" class="headerlink" title="2.1 Sigmoid gradient"></a>2.1 Sigmoid gradient</h2><script type="math/tex; mode=display">g'(z)=\dfrac{d}{dz}g(z)=g(z)(1-g(z))</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">g = sigmoid(z).*(<span class="number">1</span>-sigmoid(z));</span><br></pre></td></tr></table></figure>
-<h2 id="2-3-Backpropagation"><a href="#2-3-Backpropagation" class="headerlink" title="2.3 Backpropagation"></a>2.3 Backpropagation</h2><script type="math/tex; mode=display">\delta _{k}^{(3)} = (a_{k}^{(3)} - y_{k})</script><script type="math/tex; mode=display">\delta ^{2} = (\Theta ^{(2)})^T\delta ^{(3)}.*g'(z^{(2)})</script><script type="math/tex; mode=display">\Delta ^{(l)} = \Delta ^{(l)} + \delta ^{(l+1)}(a^{(l)})^T</script><script type="math/tex; mode=display">\dfrac{\partial }{\partial \Theta _{ij}^{(l)}}J(\Theta ) = D_{ij}^{(l)} = \dfrac{1}{m}\Delta _{ij}^{(l)}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">d3 = a3-Y;</span><br><span class="line">d2 = d3*Theta2.*[ones(m, <span class="number">1</span>), sigmoidGradient(z2)];</span><br><span class="line"></span><br><span class="line">D1 = d2(:,<span class="number">2</span>:<span class="keyword">end</span>)'*a1;</span><br><span class="line">D2 = d3'*a2;</span><br><span class="line"></span><br><span class="line">Theta1_grad = Theta1_grad + D1/m;</span><br><span class="line">Theta2_grad = Theta2_grad + D2/m;</span><br></pre></td></tr></table></figure>
-<h2 id="2-5-Regularized-Neural-Networks"><a href="#2-5-Regularized-Neural-Networks" class="headerlink" title="2.5 Regularized Neural Networks"></a>2.5 Regularized Neural Networks</h2><script type="math/tex; mode=display">\dfrac{\partial }{\partial \Theta _{ij}^{(l)}}J(\Theta ) = D_{ij}^{(l)} = \dfrac{1}{m}\Delta _{ij}^{(l)} \quad for j = 0</script><script type="math/tex; mode=display">\dfrac{\partial }{\partial \Theta _{ij}^{(l)}}J(\Theta ) = D_{ij}^{(l)} = \dfrac{1}{m}\Delta _{ij}^{(l)} + \dfrac{\lambda }{m}\Theta _{ij}^{(l)}  \quad for j \geq 1</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Theta1_grad(:,<span class="number">2</span>:<span class="keyword">end</span>) = Theta1_grad(:,<span class="number">2</span>:<span class="keyword">end</span>) + lambda/m*Theta1(:,<span class="number">2</span>:<span class="keyword">end</span>);</span><br><span class="line">Theta2_grad(:,<span class="number">2</span>:<span class="keyword">end</span>) = Theta2_grad(:,<span class="number">2</span>:<span class="keyword">end</span>) + lambda/m*Theta2(:,<span class="number">2</span>:<span class="keyword">end</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="The-hidden-layer"><a href="#The-hidden-layer" class="headerlink" title="The hidden layer"></a>The hidden layer</h2><p><img src="https://i.imgur.com/LqYfS7h.png" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/11/Neural-Networks-Learning/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1036,7 +1035,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">152</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1049,7 +1048,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

@@ -287,6 +287,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/08/22/Sync-macOS-ssh-config-with-iCloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/22/Sync-macOS-ssh-config-with-iCloud/" itemprop="url">Sync macOS ssh config with iCloud</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-22T23:17:28+08:00">
+                2016-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/22/Sync-macOS-ssh-config-with-iCloud/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/22/Sync-macOS-ssh-config-with-iCloud/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>As a developer, I have to restore backups sometime because of the <code>beta</code> system.</p>
+<p>Fortunately, most data was on server these days. Not only Safari, Photos, Calendar, Note, Reminders, but also other apps use iCloud storage. This was great progress, I only have to re-download apps from App Store and <code>brew shell</code> after reinstall the system.</p>
+<p>But the setting of ssh, configs, etc., were really annoying, furthermore I may lose my private keys.</p>
+<p>So I new a folder which named <code>macOS</code> in iCloud Drive folder, and copied all the files without <code>.</code>, For example, <code>.gitconfig</code> ~&gt; <code>gitconfig</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">macOS=~/Library/Mobile\ Documents/com\~apple\~CloudDocs/macOS</span><br><span class="line"></span><br><span class="line">ln -s <span class="variable">$macOS</span>/gitignore .gitignore</span><br><span class="line">ln -s <span class="variable">$macOS</span>/gitignore .gitignore_global</span><br><span class="line"></span><br><span class="line">ln -s <span class="variable">$macOS</span>/config  .config</span><br><span class="line">ln -s <span class="variable">$macOS</span>/ssh  .ssh</span><br><span class="line"></span><br><span class="line">mkdir -p Blog</span><br><span class="line">ln -s <span class="variable">$macOS</span>/Blog/<span class="built_in">source</span> Blog/<span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+<p>In fact, any cloud drive (like Dropbox) can do it, but<br>considering privacy and this letter <a href="http://www.apple.com/customer-letter/" target="_blank" rel="noopener">A Message to Our Customers</a> written by Tim Cook</p>
+<p>iCloud was my choice ;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/07/26/Use-AppleScript-as-AutoHotkey-On-Mac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -824,142 +961,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/05/17/The-side-effect-of-Polyphasic-sleep/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/05/17/The-side-effect-of-Polyphasic-sleep/" itemprop="url">The side effect of Polyphasic sleep</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-17T22:04:46+08:00">
-                2016-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/05/17/The-side-effect-of-Polyphasic-sleep/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/05/17/The-side-effect-of-Polyphasic-sleep/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>I tried <a href="https://en.wikipedia.org/wiki/Polyphasic_sleep" target="_blank" rel="noopener">Polyphasic sleep</a> when the first time I heard about it. It’s almost 2 years after that time.</p>
-<p>It’s not a rigorous Polyphasic sleep, for I’m using 6 hour major sleep episode and three 30-minute power naps. And I use hypnosis when I have naps at the same time.</p>
-<p>It’s really good. Usually I’ll wake up at 6 in the morning and do tons of work, then I feel tired and have the first nap at 10 or 11 and wake up with many Chinese people. I’ll have the second nap after lunch, the third when I went home.</p>
-<p>This hack method gives me an illusion that daytime is stretched, because every time I wake up from a nap, I feel it’s totally a new day.</p>
-<p>But I found a side effect recently, which is the malaise was also magnified. Especially I’m in anxiety these days.  </p>
-<p>It’s not polyphasic sleep’s fault, I think, time to read Burns David’s <em>When Panic Attacks</em>.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1014,7 +1015,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">152</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1027,7 +1028,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
