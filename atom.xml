@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://artwalk.github.io/"/>
-  <updated>2018-02-26T02:56:27.881Z</updated>
+  <updated>2018-03-25T12:30:53.838Z</updated>
   <id>http://artwalk.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>How to schedule iMessages on Mac</title>
+    <link href="http://artwalk.github.io/2018/03/25/How-to-schedule-iMessages-on-Mac/"/>
+    <id>http://artwalk.github.io/2018/03/25/How-to-schedule-iMessages-on-Mac/</id>
+    <published>2018-03-25T11:25:04.000Z</published>
+    <updated>2018-03-25T12:30:53.838Z</updated>
+    
+    <content type="html"><![CDATA[<p>First open <code>Terminal</code> on your Mac and copy and paste these command lines as follows:</p><h2 id="Send-iMessage-by-Shell"><a href="#Send-iMessage-by-Shell" class="headerlink" title="Send iMessage by Shell"></a>Send iMessage by <code>Shell</code></h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">file=<span class="string">"<span class="variable">$HOME</span>/Documents/sendiMessage.sh"</span></span><br><span class="line">str=<span class="string">'tell application "Messages" to send "TEXT" to buddy "NAME"'</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"#!/bin/zsh \nosascript -e '<span class="variable">$str</span>'"</span> &gt; <span class="variable">$file</span></span><br><span class="line">open <span class="variable">$file</span></span><br></pre></td></tr></table></figure><p>You will see a file opened by your default text edit app and the file shows:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#/bin/zsh </span></span><br><span class="line">osascript -e <span class="string">'tell application "Messages" to send "TEXT" to buddy "NAME"'</span></span><br></pre></td></tr></table></figure><p>Notice that you should replace <code>TEXT</code> with the text you what to send and <code>NAME</code> with the name in your <strong>Contacts</strong> app.</p><p>Don’t forget to <strong>Save</strong> the file.</p><h2 id="Crontab-on-mac"><a href="#Crontab-on-mac" class="headerlink" title="Crontab on mac"></a><code>Crontab</code> on mac</h2> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo touch /etc/crontab</span><br></pre></td></tr></table></figure><p>You should run this line above as the  <code>com.vix.cron</code> will check the <code>/etc/crontab</code> is exist or not on macOS.</p><p>Type your password of the Mac.</p><h2 id="Schedule-the-shell-with-Crontab"><a href="#Schedule-the-shell-with-Crontab" class="headerlink" title="Schedule the shell with Crontab"></a>Schedule the shell with <code>Crontab</code></h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">00 10 25 3 * zsh ~/Documents/sendiMessage.sh</span><br></pre></td></tr></table></figure><p>As the <a href="http://www.adminschoice.com/crontab-quick-reference" target="_blank" rel="noopener">Crontab – Quick Reference</a> shows:</p><figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">00    10    <span class="symbol">*</span>   <span class="symbol">*</span>    <span class="symbol">*</span>        command to be executed</span><br><span class="line">-     -     -   -    -</span><br><span class="line">|<span class="string">     </span>|<span class="string">     </span>|<span class="string">   </span>|<span class="string">    </span>|</span><br><span class="line">|<span class="string">     </span>|<span class="string">     </span>|<span class="string">   </span>|<span class="string">    +----- day of week (0 - 6) (Sunday=0)</span></span><br><span class="line">|<span class="string">     </span>|<span class="string">     </span>|<span class="string">   +------- month (1 - 12)</span></span><br><span class="line">|<span class="string">     </span>|<span class="string">     +--------- day of        month (1 - 31)</span></span><br><span class="line">|<span class="string">     +----------- hour (0 - 23)</span></span><br><span class="line"><span class="string">+------------- min (0 - 59)</span></span><br></pre></td></tr></table></figure><p>This shell means your Mac will send the iMessage on 10:00 Mar. 25.</p><p>Modify it to you ideal time then </p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure><p>The following step you are using <code>vim</code>, I think that is the hardest part.</p><ol><li>Press <code>i</code>, you will see <code>-- INSERT --</code> on the left bottom of the <code>Terminal</code></li><li>Paste <code>00 10 25 3 * zsh ~/Documents/sendiMessage.sh</code></li><li>Press <code>shift + :</code>  then  type <code>qw</code> , <code>enter</code></li></ol><h2 id="Check-Crontab"><a href="#Check-Crontab" class="headerlink" title="Check Crontab"></a>Check <code>Crontab</code></h2><p><code>crontab -l</code></p><p>You can see <code>00 10 25 3 * zsh ~/Documents/sendiMessage.sh</code> if everything was right.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;First open &lt;code&gt;Terminal&lt;/code&gt; on your Mac and copy and paste these command lines as follows:&lt;/p&gt;
+&lt;h2 id=&quot;Send-iMessage-by-Shell&quot;&gt;&lt;a hr
+      
+    
+    </summary>
+    
+    
+      <category term="Mac" scheme="http://artwalk.github.io/tags/Mac/"/>
+    
+  </entry>
   
   <entry>
     <title>Programming Assignment: Scrooge Coin</title>
@@ -542,28 +566,6 @@
     
     
       <category term="LeetCode" scheme="http://artwalk.github.io/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>How to trust MitM Certificate on iPhone Simulator</title>
-    <link href="http://artwalk.github.io/2017/06/07/How-to-trust-MitM-Certificate-on-iPhone-Simulator/"/>
-    <id>http://artwalk.github.io/2017/06/07/How-to-trust-MitM-Certificate-on-iPhone-Simulator/</id>
-    <published>2017-06-07T03:25:04.000Z</published>
-    <updated>2017-06-07T03:30:59.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="How-to-trust-MitM-Certificate-on-iPhone-Simulator"><a href="#How-to-trust-MitM-Certificate-on-iPhone-Simulator" class="headerlink" title="How to trust MitM Certificate on iPhone Simulator"></a>How to trust MitM Certificate on iPhone Simulator</h1><p>Open Keychain and export the MitM Root certificate as .cer ( not .p12 ), drag it to the simulator, then go to <code>Settings.General.About.CertificateTrustSettings.ENABLE FULL TRUST FOR ROOT CERTIFICATES</code>, open the <code>Switch</code> which is your MitM. </p><a id="more"></a><p>Before that, I dragged .p12, and it can trusted in <code>Settings.General.Profiles</code>, but can’t be see in <code>Settings.General.About.Certificate Trust Settings</code>.</p><p>This wasted lots of time, and I found something like: <a href="https://stackoverflow.com/questions/2219707/adding-a-self-signed-certificate-to-iphone-simulator" target="_blank" rel="noopener">Modify TrustStore.sqlite3</a></p><p>That is terrible. There it no need to say the <code>TrustStore.sqlite3</code> no longer in at that path. </p><p>After read <a href="https://developer.apple.com/library/content/qa/qa1948/_index.html" target="_blank" rel="noopener">Installing a CA’s Root Certificate on Your Test Device</a> and found nothing.</p><p>I’m glad tried .cer several days later, now I can watch all requests on specific domains by <a href="https://itunes.apple.com/us/app/surge-web-developer-tool-and-proxy-utility/id1040100637?mt=8" target="_blank" rel="noopener">Surge</a>.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;How-to-trust-MitM-Certificate-on-iPhone-Simulator&quot;&gt;&lt;a href=&quot;#How-to-trust-MitM-Certificate-on-iPhone-Simulator&quot; class=&quot;headerlink&quot; title=&quot;How to trust MitM Certificate on iPhone Simulator&quot;&gt;&lt;/a&gt;How to trust MitM Certificate on iPhone Simulator&lt;/h1&gt;&lt;p&gt;Open Keychain and export the MitM Root certificate as .cer ( not .p12 ), drag it to the simulator, then go to &lt;code&gt;Settings.General.About.CertificateTrustSettings.ENABLE FULL TRUST FOR ROOT CERTIFICATES&lt;/code&gt;, open the &lt;code&gt;Switch&lt;/code&gt; which is your MitM. &lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Surge" scheme="http://artwalk.github.io/tags/Surge/"/>
-    
-      <category term="Simulator" scheme="http://artwalk.github.io/tags/Simulator/"/>
     
   </entry>
   

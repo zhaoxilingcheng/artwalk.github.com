@@ -287,6 +287,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/12/20/Custom-UIViewController-Presentation-Transitions-with-UIStoryboardSegue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/20/Custom-UIViewController-Presentation-Transitions-with-UIStoryboardSegue/" itemprop="url">Custom UIViewController Presentation Transitions with UIStoryboardSegue</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-20T22:37:39+08:00">
+                2016-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/20/Custom-UIViewController-Presentation-Transitions-with-UIStoryboardSegue/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/12/20/Custom-UIViewController-Presentation-Transitions-with-UIStoryboardSegue/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Custom-UIViewController-Presentation-Transitions-with-UIStoryboardSegue"><a href="#Custom-UIViewController-Presentation-Transitions-with-UIStoryboardSegue" class="headerlink" title="Custom UIViewController Presentation Transitions with UIStoryboardSegue"></a>Custom UIViewController Presentation Transitions with UIStoryboardSegue</h1><p>The most popular way is <code>UIViewControllerAnimatedTransitioning</code></p>
+<p>In order to do that, you have to: </p>
+<ul>
+<li><p>New a subclass which may called <code>XXXTransitioning</code> inherit from <code>NSObject</code> and implement two functions of protocol <code>UIViewControllerAnimatedTransitioning</code> </p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">transitionDuration</span><span class="params">(using transitionContext: UIViewControllerContextTransitioning?)</span></span> -&gt; <span class="type">TimeInterval</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">animateTransition</span><span class="params">(using transitionContext: UIViewControllerContextTransitioning)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Then: </p>
+<ol>
+<li>New an instance of the <code>XXXTransitioning</code> in the <code>ViewController</code></li>
+<li>Set <code>transitioningDelegate = self</code></li>
+<li>Extension the <code>ViewController</code> with UIViewControllerTransitioningDelegate and implement</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">animationController</span><span class="params">(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController)</span></span> -&gt; <span class="type">UIViewControllerAnimatedTransitioning</span>?</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Do it again for dismiss</p>
+</li>
+</ul>
+<hr>
+<p>I noticed <code>Storyboard Segue</code> has a <code>Custom</code> Kind </p>
+<p><img src="img/Custom-UIViewController-Presentation-Transitions-with-UIStoryboardSegue@2x.png" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XXXModalSegue</span>: <span class="title">UIStoryboardSegue</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">perform</span><span class="params">()</span></span> &#123;</span><br><span class="line">    	<span class="keyword">let</span> fromVC = source</span><br><span class="line">        <span class="keyword">let</span> toVC = destination</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> fromView = fromVC.view!</span><br><span class="line">        <span class="keyword">let</span> toView  = toVC.view!</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> (w, h) = (<span class="type">UIScreen</span>.main.bounds.width, <span class="type">UIScreen</span>.main.bounds.height)</span><br><span class="line">        </span><br><span class="line">        toView.alpha = <span class="number">0</span></span><br><span class="line">        toView.frame = <span class="type">CGRect</span>(x: w/<span class="number">2</span>, y: <span class="number">0</span>, width: w, height: h)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> window = <span class="type">UIApplication</span>.shared.keyWindow</span><br><span class="line">        window?.insertSubview(toView, aboveSubview: fromView)</span><br><span class="line">        </span><br><span class="line">        <span class="type">UIView</span>.animate(withDuration: <span class="number">0.4</span>, animations: &#123;</span><br><span class="line">            toView.alpha = <span class="number">1</span></span><br><span class="line">            toView.frame = toView.frame.offsetBy(dx: -w/<span class="number">2</span>, dy: <span class="number">0</span>)</span><br><span class="line">        &#125;) &#123; (b) <span class="keyword">in</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">self</span>.source.present(<span class="keyword">self</span>.destination, animated: <span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">            <span class="comment">// OR: self.source.dismiss(animated: false, completion: nil)</span></span><br><span class="line">        s</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s it, no more coding <code>delegate</code> and <code>Extension</code>. Simple and clean :)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/11/06/Time-Capsule-on-PandoraBox/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -883,167 +1035,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/08/29/How-to-learn-English-as-a-Chinese/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/29/How-to-learn-English-as-a-Chinese/" itemprop="url">How to learn English as a Chinese</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-29T22:06:23+08:00">
-                2016-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/29/How-to-learn-English-as-a-Chinese/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/29/How-to-learn-English-as-a-Chinese/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>I hate remember words in a brutal way as 99% of Chinese students does. When we were kid, we learned our mother tongue natural without any pain.  </p>
-<p>So when I was in my poor primary school, I never remember a word.  </p>
-<p>In fact, the truth is I can’t remember words. Believe it or not, no matter how hard I tried, I just can’t remember them. Each time it’s my row’s turn to write words on blackboard, I had to watch left and right carefully and copied each character one by one. </p>
-<p>As a teenager at that time, I’m curious that why they can do it. It must be the method incompatible with my brain.  </p>
-<p>Fortunately, I read another method on a gramma book that a former top scorer announced that she did not remember words either. All she was doing is repeat NCE 100+ times loudly.</p>
-<p>Hum, that’s great, so I tried it and this method helps me a lot, for it let me got a fair score in college entrance examination and passed the CET6 in university, even I did know what I’m reading sometimes.</p>
-<p>Until IELTS, all the English tests early were merely a joke.</p>
-<p>And there is another blind spot I realised recently, exam is exam, one should get the point and leave ASAP.</p>
-<p>Before that, I firmly believed that as long as my true level raise, I will be capable of the exam with no extra effort like do the test paper everyday.  </p>
-<p>But in fact, this required a very high quality far more than the exam required, this is an endless road.</p>
-<p>14 years passed after first time I got to know English, I feel I just make one little step after I communicated with the resident a few month ago.</p>
-<p>Now I know the language is more like an instinct of mankind, when baby grow up, the neurone cells will be cleaned by our brain cause there is no use for our ancestors to learn another language when they were kids, according to evolutionary psychology.  </p>
-<p>But we are in modern world, as far as I know, there is only two methods which sound reasonable, and more importantly, economic.</p>
-<ol>
-<li><a href="https://www.goodreads.com/book/show/18868451?from_search=true" target="_blank" rel="noopener">把你的英语用起来</a><ol>
-<li>赖世雄美语音标</li>
-<li>ESLPOD</li>
-<li>American Accent Training</li>
-<li>Read at least 10 original edition books per year</li>
-</ol>
-</li>
-<li><a href="http://www.geekonomics10000.com/870" target="_blank" rel="noopener">一点实用主义的学英语心得</a><ol>
-<li>Learn 600 GRE words per day</li>
-<li>Repeat it by Ebbinghaus forgetting curve</li>
-<li>Intensive reading</li>
-<li>Past exam paper</li>
-</ol>
-</li>
-</ol>
-<p>Now you see, ironically No. 2 kicks me to origin: I have to remember words!</p>
-<p>But at least one things is different this time, I choose it by my free will.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1098,7 +1089,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">154</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

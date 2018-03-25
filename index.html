@@ -287,6 +287,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/03/25/How-to-schedule-iMessages-on-Mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/25/How-to-schedule-iMessages-on-Mac/" itemprop="url">How to schedule iMessages on Mac</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-25T19:25:04+08:00">
+                2018-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/25/How-to-schedule-iMessages-on-Mac/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/25/How-to-schedule-iMessages-on-Mac/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>First open <code>Terminal</code> on your Mac and copy and paste these command lines as follows:</p>
+<h2 id="Send-iMessage-by-Shell"><a href="#Send-iMessage-by-Shell" class="headerlink" title="Send iMessage by Shell"></a>Send iMessage by <code>Shell</code></h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">file=<span class="string">"<span class="variable">$HOME</span>/Documents/sendiMessage.sh"</span></span><br><span class="line">str=<span class="string">'tell application "Messages" to send "TEXT" to buddy "NAME"'</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"#!/bin/zsh \nosascript -e '<span class="variable">$str</span>'"</span> &gt; <span class="variable">$file</span></span><br><span class="line">open <span class="variable">$file</span></span><br></pre></td></tr></table></figure>
+<p>You will see a file opened by your default text edit app and the file shows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#/bin/zsh </span></span><br><span class="line">osascript -e <span class="string">'tell application "Messages" to send "TEXT" to buddy "NAME"'</span></span><br></pre></td></tr></table></figure>
+<p>Notice that you should replace <code>TEXT</code> with the text you what to send and <code>NAME</code> with the name in your <strong>Contacts</strong> app.</p>
+<p>Don’t forget to <strong>Save</strong> the file.</p>
+<h2 id="Crontab-on-mac"><a href="#Crontab-on-mac" class="headerlink" title="Crontab on mac"></a><code>Crontab</code> on mac</h2> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo touch /etc/crontab</span><br></pre></td></tr></table></figure>
+<p>You should run this line above as the  <code>com.vix.cron</code> will check the <code>/etc/crontab</code> is exist or not on macOS.</p>
+<p>Type your password of the Mac.</p>
+<h2 id="Schedule-the-shell-with-Crontab"><a href="#Schedule-the-shell-with-Crontab" class="headerlink" title="Schedule the shell with Crontab"></a>Schedule the shell with <code>Crontab</code></h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">00 10 25 3 * zsh ~/Documents/sendiMessage.sh</span><br></pre></td></tr></table></figure>
+<p>As the <a href="http://www.adminschoice.com/crontab-quick-reference" target="_blank" rel="noopener">Crontab – Quick Reference</a> shows:</p>
+<figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">00    10    <span class="symbol">*</span>   <span class="symbol">*</span>    <span class="symbol">*</span>        command to be executed</span><br><span class="line">-     -     -   -    -</span><br><span class="line">|<span class="string">     </span>|<span class="string">     </span>|<span class="string">   </span>|<span class="string">    </span>|</span><br><span class="line">|<span class="string">     </span>|<span class="string">     </span>|<span class="string">   </span>|<span class="string">    +----- day of week (0 - 6) (Sunday=0)</span></span><br><span class="line">|<span class="string">     </span>|<span class="string">     </span>|<span class="string">   +------- month (1 - 12)</span></span><br><span class="line">|<span class="string">     </span>|<span class="string">     +--------- day of        month (1 - 31)</span></span><br><span class="line">|<span class="string">     +----------- hour (0 - 23)</span></span><br><span class="line"><span class="string">+------------- min (0 - 59)</span></span><br></pre></td></tr></table></figure>
+<p>This shell means your Mac will send the iMessage on 10:00 Mar. 25.</p>
+<p>Modify it to you ideal time then </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
+<p>The following step you are using <code>vim</code>, I think that is the hardest part.</p>
+<ol>
+<li>Press <code>i</code>, you will see <code>-- INSERT --</code> on the left bottom of the <code>Terminal</code></li>
+<li>Paste <code>00 10 25 3 * zsh ~/Documents/sendiMessage.sh</code></li>
+<li>Press <code>shift + :</code>  then  type <code>qw</code> , <code>enter</code></li>
+</ol>
+<h2 id="Check-Crontab"><a href="#Check-Crontab" class="headerlink" title="Check Crontab"></a>Check <code>Crontab</code></h2><p><code>crontab -l</code></p>
+<p>You can see <code>00 10 25 3 * zsh ~/Documents/sendiMessage.sh</code> if everything was right.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/02/26/Programming-Assignment-Scrooge-Coin/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -842,145 +995,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/01/16/Advice-for-Applying-Machine-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/16/Advice-for-Applying-Machine-Learning/" itemprop="url">Advice for Applying Machine Learning</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-16T12:04:50+08:00">
-                2018-01-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/16/Advice-for-Applying-Machine-Learning/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/16/Advice-for-Applying-Machine-Learning/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-2-Regularized-linear-regression-cost-function"><a href="#1-2-Regularized-linear-regression-cost-function" class="headerlink" title="1.2 Regularized linear regression cost function"></a>1.2 Regularized linear regression cost function</h2><script type="math/tex; mode=display">J(\theta ) = \dfrac{1}{2m}\left ( \sum_{i=1}^{m}(h_{\theta }(x^{(i)}) - y^{(i)}  )^2 \right ) + \dfrac{\lambda }{2m}\left ( \sum_{j=1}^{n} \theta _{j}^{2} \right )</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">J = <span class="number">1</span>/(<span class="number">2</span>*m)*sum( (X*theta - y).^<span class="number">2</span> ) + lambda/(<span class="number">2</span>*m)*sum(theta(<span class="number">2</span>:<span class="keyword">end</span>).^<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="1-3-Regularized-linear-regression-gradient"><a href="#1-3-Regularized-linear-regression-gradient" class="headerlink" title="1.3 Regularized linear regression gradient"></a>1.3 Regularized linear regression gradient</h2><script type="math/tex; mode=display">\dfrac{\partial J(\theta )}{\partial \theta_{0} } = \dfrac{1}{m}\sum_{i=1}^{m}(h_{\theta }(x^{(i)}) - y^{(i)}  )x_{j}^{(i)}; j=0</script><script type="math/tex; mode=display">\dfrac{\partial J(\theta )}{\partial \theta_{j} } = \left (  \dfrac{1}{m}\sum_{i=1}^{m}(h_{\theta }(x^{(i)}) - y^{(i)}  )x_{j}^{(i)}\right ) + \dfrac{\lambda }{m}\theta _{j} ; j\geqslant 1</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">r = theta; r(<span class="number">1</span>) = <span class="number">0</span>;</span><br><span class="line">grad = <span class="number">1</span>/m*(X'*(X*theta-y)) + lambda/m*r;</span><br></pre></td></tr></table></figure>
-<h2 id="2-1-Learning-curves"><a href="#2-1-Learning-curves" class="headerlink" title="2.1 Learning curves"></a>2.1 Learning curves</h2><script type="math/tex; mode=display">J_{train}(\theta ) = \dfrac{1}{2m}\left [ \sum_{i=1}^{m}(h_{\theta }(x^{(i)}) - y^{(i)}  )^2 \right ]</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:m</span><br><span class="line">    xi = X(<span class="number">1</span>:<span class="built_in">i</span>,:); yi = y(<span class="number">1</span>:<span class="built_in">i</span>);</span><br><span class="line"></span><br><span class="line">    theta = trainLinearReg(xi, yi, lambda);</span><br><span class="line">    error_train(<span class="built_in">i</span>) = linearRegCostFunction(xi, yi, theta, <span class="number">0</span>)</span><br><span class="line">    error_val(<span class="built_in">i</span>) = linearRegCostFunction(Xval, yval, theta, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-Polynomial-regression"><a href="#3-Polynomial-regression" class="headerlink" title="3 Polynomial regression"></a>3 Polynomial regression</h2><script type="math/tex; mode=display">h_{\theta }(x) = \theta _{0} + \theta _{1}*(waterLevel) + \theta _{2}*(waterLevel)^{2} + ... + \theta _{p}*(waterLevel)^{p}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">X_poly = X.^[<span class="number">1</span>:<span class="number">1</span>:p];</span><br></pre></td></tr></table></figure>
-<h2 id="3-3-Selecting-λ-using-a-cross-validation-set"><a href="#3-3-Selecting-λ-using-a-cross-validation-set" class="headerlink" title="3.3 Selecting λ using a cross validation set"></a>3.3 Selecting λ using a cross validation set</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">length</span>(lambda_vec)</span><br><span class="line">    lambda = lambda_vec(<span class="built_in">i</span>);</span><br><span class="line"></span><br><span class="line">    theta = trainLinearReg(X, y, lambda);</span><br><span class="line">    error_train(<span class="built_in">i</span>) = linearRegCostFunction(X, y, theta, <span class="number">0</span>)</span><br><span class="line">    error_val(<span class="built_in">i</span>) = linearRegCostFunction(Xval, yval, theta, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/16/Advice-for-Applying-Machine-Learning/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1035,7 +1049,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">154</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

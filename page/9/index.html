@@ -287,6 +287,145 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/05/17/View-blurred-after-CGAffineTransformMakeRotation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/17/View-blurred-after-CGAffineTransformMakeRotation/" itemprop="url">View blurred after CGAffineTransformMakeRotation</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-17T22:53:04+08:00">
+                2016-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/05/17/View-blurred-after-CGAffineTransformMakeRotation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/05/17/View-blurred-after-CGAffineTransformMakeRotation/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomView</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="meta">@IBInspectable</span> <span class="keyword">var</span> rotation: <span class="type">CGFloat</span> = <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            transform = <span class="type">CGAffineTransformMakeRotation</span>(rotation * <span class="type">CGFloat</span>(<span class="type">M_PI</span>) / <span class="number">180.0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>OOPS!</p>
+<p><img src="./images/ViewBlurred1.png" alt=""></p>
+<p><code>layer.shouldRasterize = true</code></p>
+<p>But If you have cornerRadius on this view, it will be blurry</p>
+<p><img src="./images/ViewBlurred2.png" alt=""></p>
+<p>You should added </p>
+<p><code>layer.rasterizationScale = UIScreen.mainScreen().scale</code></p>
+<p><img src="./images/ViewBlurred3.png" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomView</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="meta">@IBInspectable</span> <span class="keyword">var</span> rotation: <span class="type">CGFloat</span> = <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            transform = <span class="type">CGAffineTransformMakeRotation</span>(rotation * <span class="type">CGFloat</span>(<span class="type">M_PI</span>) / <span class="number">180.0</span>)</span><br><span class="line">            layer.shouldRasterize = <span class="literal">true</span></span><br><span class="line">            layer.rasterizationScale = <span class="type">UIScreen</span>.mainScreen().scale</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@IBInspectable</span> <span class="keyword">var</span> cornerRadius: <span class="type">CGFloat</span> = <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            layer.cornerRadius = cornerRadius</span><br><span class="line">            clipsToBounds = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/05/17/The-side-effect-of-Polyphasic-sleep/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -830,155 +969,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/03/25/Chrome-to-Safari/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/25/Chrome-to-Safari/" itemprop="url">Chrome to Safari</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-25T14:20:11+08:00">
-                2016-03-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/03/25/Chrome-to-Safari/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/03/25/Chrome-to-Safari/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>I use Chrome from the very beginning. I was impressed by it is simplicity and variety. Even I upgrade my laptop to Macbook, I’m still using it because of three main reasons</p>
-<ul>
-<li>Plugin</li>
-<li>Shortcut</li>
-<li>Develop</li>
-<li>Flash</li>
-</ul>
-<p>But after my TL <em>amway</em> me, I tried Safari  deeply, and found:</p>
-<h2 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h2><ul>
-<li>Adblock Plus</li>
-<li>1Password</li>
-<li>Evernote</li>
-<li>AutoPagerize</li>
-<li>Clean Links for Google</li>
-</ul>
-<h2 id="Shortcut"><a href="#Shortcut" class="headerlink" title="Shortcut"></a>Shortcut</h2><p>I can use <code>opt+cmd+&gt;</code> on Chrome to change tabs, it is <code>shift+cmd+[</code> on Safari<br><code>shift+cmd+z</code> to unclose the most recent closed tabs, it’s no corresponding key on Safari, I can only use history instead.</p>
-<h2 id="Develop"><a href="#Develop" class="headerlink" title="Develop"></a>Develop</h2><p>I used to opt+cmd+i in chrome to simulate iPhone, I can compare iOS version with front end in this way.<br>When I got to know what’s safari’s Develop look like, (<code>cmd+, -&gt; Advanced -&gt; Show Develop menu in menu bar</code> or <code>opt+cmd+r</code>) I surrendered.</p>
-<p><img src="/images/Safari Develop.png" alt=""></p>
-<h2 id="Flash"><a href="#Flash" class="headerlink" title="Flash"></a>Flash</h2><p>Finally, I accept that different device have their own place. So as for most Chinese video Website still using flash, I chose chrome to watch them.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1033,7 +1023,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">154</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

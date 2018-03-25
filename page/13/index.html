@@ -287,6 +287,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/07/26/Adding-Slack-User-rule-to-Shadowsocks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/07/26/Adding-Slack-User-rule-to-Shadowsocks/" itemprop="url">Adding Slack User-rule to Shadowsocks</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-26T08:30:20+08:00">
+                2015-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/07/26/Adding-Slack-User-rule-to-Shadowsocks/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/07/26/Adding-Slack-User-rule-to-Shadowsocks/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Slack was always loading even if I use shadowsocks with <code>Auto Proxy Mode</code>.</p>
+<p>I found that the domain of slack was accessible in chrome console so the real reason was <code>amazonaws</code> server was blocked.</p>
+<p>Refer to <a href="https://adblockplus.org/en/filter-cheatsheet" target="_blank" rel="noopener">Adblock Plus filters explained</a>, I added two rules in <code>Edit User Rule for ...</code>  </p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="string">||global.ssl.fastly.net^</span></span><br><span class="line"><span class="string">||amazonaws.com^</span></span><br></pre></td></tr></table></figure>
+<p>And <strong>don’t forget</strong> to click <code>update PAC from ...</code> once again, otherwise the new user rules you just added won’t take effect immediately.</p>
+<p>It seems also fixed <code>trello.com</code> incidentally.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/07/15/how-to-batch-reverse-First-and-Last-names-in-Mac-OS-X-Contacts/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -838,151 +974,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2015/06/17/homebrew-cannot-run-C-compiled-programs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/06/17/homebrew-cannot-run-C-compiled-programs/" itemprop="url">Homebrew cannot run C compiled programs</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-17T09:31:07+08:00">
-                2015-06-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2015/06/17/homebrew-cannot-run-C-compiled-programs/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2015/06/17/homebrew-cannot-run-C-compiled-programs/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>I can’t resist the temptation to upgrade my Mac to 10.11, but several tragedies happened, such as:</p>
-<ul>
-<li>Proxifier - could not initialize Proxifier kext ( I already sent an email to the author, and replied that  they are working to find a real reason of this error.)</li>
-<li>istat menus - I never see it again, but can’t watching the network traffic which seems not a big deal</li>
-<li>cleanmymac - I download the newest version as it guided and sadly found that they are the same version</li>
-</ul>
-<p>but brew - configure: error: cannot run C compiled programs.</p>
-<p>so, <code>brew doctor</code> , it shows:</p>
-<blockquote>
-<p>Warning: You are using OS X 10.11.<br>We do not provide support for this pre-release version.<br>You may encounter build failures or other breakage.</p>
-<p>Warning: Your Xcode (6.3.2) is outdated<br><strong>Please update to Xcode 7.0.</strong><br>Xcode can be updated from the App Store.</p>
-</blockquote>
-<p>Then setup my Xcode-beta as the system default Xcode</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo xcode-select -switch /Applications/Xcode-beta.app/Contents/Developer/</span><br></pre></td></tr></table></figure>
-<p>:)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1037,7 +1028,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-count">154</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
