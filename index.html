@@ -287,6 +287,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/04/16/Struct-Codable-Alamofire-Generics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/16/Struct-Codable-Alamofire-Generics/" itemprop="url">Struct Codable Alamofire Generics</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T20:16:23+08:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/16/Struct-Codable-Alamofire-Generics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/16/Struct-Codable-Alamofire-Generics/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>I wrote <a href="http://artwalk.github.io/2016/12/27/Swift-Generics-in-protocol-and-enum/">Swift Generics in protocol and enum</a> a half an year ago in order to solve the network responds data to a Generics type.</p>
+<p>After Swift 4, the <a href="https://developer.apple.com/documentation/foundation/jsonserialization" target="_blank" rel="noopener">JSONSerialization</a> way is a bit out of style.</p>
+<p>In the updating progress, I found a better way to do it.</p>
+<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools:"></a>Tools:</h2><ul>
+<li><a href="https://app.quicktype.io" target="_blank" rel="noopener">Quicktype</a></li>
+<li><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="noopener">Alamofire</a></li>
+</ul>
+<p>Assume we have a Json structure:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"List"</span>: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="attr">"C"</span>: &#123;</span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After you paste it to Quicktype with select <strong>Alamofire extensions</strong>, you will get:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"><span class="keyword">import</span> Alamofire</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> id: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> list: [<span class="type">Int</span>]? <span class="comment">// optional, in case some date has no list</span></span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">c</span>: <span class="type">C</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">CodingKeys</span>: <span class="title">String</span>, <span class="title">CodingKey</span> </span>&#123;</span><br><span class="line">        <span class="keyword">case</span> id</span><br><span class="line">        <span class="keyword">case</span> list = <span class="string">"List"</span></span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">c</span> = <span class="string">"C"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> id: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: - Alamofire response handlers</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">DataRequest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="function"><span class="keyword">func</span> <span class="title">decodableResponseSerializer</span>&lt;T: Decodable&gt;<span class="params">()</span></span> -&gt; <span class="type">DataResponseSerializer</span>&lt;<span class="type">T</span>&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">DataResponseSerializer</span> &#123; <span class="number">_</span>, response, data, error <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">guard</span> error == <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> .failure(error!) &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> data = data <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> .failure(<span class="type">AFError</span>.responseSerializationFailed(reason: .inputDataNil))</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="type">Result</span> &#123; <span class="keyword">try</span> <span class="type">JSONDecoder</span>().decode(<span class="type">T</span>.<span class="keyword">self</span>, from: data) &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @discardableResult</span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="function"><span class="keyword">func</span> <span class="title">responseDecodable</span>&lt;T: Decodable&gt;<span class="params">(queue: DispatchQueue? = <span class="literal">nil</span>, completionHandler: @escaping <span class="params">(DataResponse&lt;T&gt;)</span></span></span> -&gt; <span class="type">Void</span>) -&gt; <span class="type">Self</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> response(queue: queue, responseSerializer: decodableResponseSerializer(), completionHandler: completionHandler)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @discardableResult</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">responseA</span><span class="params">(queue: DispatchQueue? = <span class="literal">nil</span>, completionHandler: @escaping <span class="params">(DataResponse&lt;A&gt;)</span></span></span> -&gt; <span class="type">Void</span>) -&gt; <span class="type">Self</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> responseDecodable(queue: queue, completionHandler: completionHandler)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Notice the <code>func responseA</code> is a static type only suitable for the spacial API which responds the json you pasted. Therefore we need a generics type for all APIs.</p>
+<p>Therefore we can delete the <code>func responseA</code> and define a protocol <code>MYRequest</code> as follows:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MYRequest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> router: <span class="type">String</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> api: <span class="type">String</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line"></span><br><span class="line">    associatedtype <span class="type">T</span>: <span class="type">Decodable</span> <span class="comment">// generics type</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">MYRequest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> api: <span class="type">String</span> &#123; <span class="keyword">return</span> <span class="string">"v1"</span> &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> domain: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"https://domain.com"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// T is used in DataResponse&lt;T&gt;</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">request</span><span class="params">(completionHandler: @escaping <span class="params">(DataResponse&lt;T&gt;)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> url = <span class="string">"<span class="subst">\(domain)</span>/<span class="subst">\(api)</span>/<span class="subst">\(router)</span>"</span></span><br><span class="line">        <span class="type">Alamofire</span>.request(url).responseDecodable(completionHandler: completionHandler)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Now we can implement different Requset as we want:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ARequset</span>: <span class="title">MYRequest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> router = <span class="string">"a"</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">T</span> = <span class="type">A</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BRequset</span>: <span class="title">MYRequest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> router = <span class="string">"b"</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">T</span> = <span class="type">B</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Also, we can define another protocol which has the same <code>var api: String { get }</code> in MYRequest in case  we have a new <code>CRequset</code> and API upgraded to v2,</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">V2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> api: <span class="type">String</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">V2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> api: <span class="type">String</span> &#123; <span class="keyword">return</span> <span class="string">"v2"</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span>: <span class="title">Request</span>, <span class="title">V2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> router = <span class="string">"c"</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">T</span> = <span class="type">C</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Finally, the request in ViewController would like this:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">ARequset</span>().request &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] response <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> a = response.result.value &#123; <span class="comment">// a is A, not Any</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">BRequset</span>().request &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] response <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> b = response.result.value &#123; <span class="comment">// b is B, not Any</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/03/25/How-to-schedule-iMessages-on-Mac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -853,148 +1003,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/01/19/Support-Vector-Machines/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/19/Support-Vector-Machines/" itemprop="url">Support Vector Machines</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-19T22:33:07+08:00">
-                2018-01-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/19/Support-Vector-Machines/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/19/Support-Vector-Machines/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>I heard SVM many times before, and got to see what it is now. 😄</p>
-<h2 id="1-2-1-Gaussian-Kernel"><a href="#1-2-1-Gaussian-Kernel" class="headerlink" title="1.2.1 Gaussian Kernel"></a>1.2.1 Gaussian Kernel</h2><script type="math/tex; mode=display">K_{gaussian}(x^{(i)}, x^{(j)}) =exp\left ( -\dfrac{\left \| x^{(i)} - x^{(j) } \right \|^2}{2\sigma ^{2}} \right ) = exp\left ( -\dfrac{\sum_{k=1}^{n}(x_k^{(i)} - x_k^{(j)})^2}{2\sigma ^{2}} \right )</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sim = <span class="built_in">exp</span>(-sum((x2-x1).^<span class="number">2</span>)./(<span class="number">2</span>*sigma.^<span class="number">2</span>));</span><br></pre></td></tr></table></figure>
-<h2 id="1-2-3-Example-Dataset-3"><a href="#1-2-3-Example-Dataset-3" class="headerlink" title="1.2.3 Example Dataset 3"></a>1.2.3 Example Dataset 3</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">l = [<span class="number">0.01</span>, <span class="number">0.03</span>, <span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">10</span>, <span class="number">30</span>];</span><br><span class="line">mix = <span class="built_in">realmax</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> c = l</span><br><span class="line">    <span class="keyword">for</span> s = l</span><br><span class="line">        model= svmTrain(X, y, c, @(x1, x2) gaussianKernel(x1, x2, s));</span><br><span class="line"></span><br><span class="line">        p = svmPredict(model, Xval);</span><br><span class="line">        m = mean(double(p ~= yval));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> m &lt; mix</span><br><span class="line">            C = c;sigma = s;mix = m;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>I wrote the Gaussian Kernel function in a way that it can be pass sigma as a vector and get a sim vector, therefore  <code>g = gaussianKernel(x1, x2, s)</code>  is a vector and can skip <code>for s = l</code>  which is a redundant compute in <code>for c = l</code> loop. Then if the <code>svmTrain</code> can be computer as a vector, the <code>for c = l</code> can also be skip.</p>
-<p>But it can’t. 😢</p>
-<p>Is it has any connections with the functional programming?</p>
-<h2 id="2-1-1-Vocabulary-List"><a href="#2-1-1-Vocabulary-List" class="headerlink" title="2.1.1 Vocabulary List"></a>2.1.1 Vocabulary List</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="built_in">i</span> = <span class="built_in">find</span>(strcmp(vocabList, str));</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">i</span></span><br><span class="line">    word_indices = [word_indices; i];</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-2-Extracting-Features-from-Emails"><a href="#2-2-Extracting-Features-from-Emails" class="headerlink" title="2.2 Extracting Features from Emails"></a>2.2 Extracting Features from Emails</h2><script type="math/tex; mode=display">x = \begin{bmatrix} 0 \\ \vdots \\ 1 \\ 0 \\ \vdots \\ 1 \\ 0 \\ \vdots \\ 0 \\ \end{bmatrix} \in \mathbb{R}^n</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = word_indices</span><br><span class="line">    x(<span class="built_in">i</span>) = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/19/Support-Vector-Machines/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1049,7 +1057,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">154</span>
+                  <span class="site-state-item-count">155</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
