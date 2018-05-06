@@ -287,6 +287,148 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/01/30/Unsupervised-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/30/Unsupervised-Learning/" itemprop="url">Unsupervised Learning</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-30T00:04:36+08:00">
+                2018-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/30/Unsupervised-Learning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/01/30/Unsupervised-Learning/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-1-1-Finding-closest-centroids"><a href="#1-1-1-Finding-closest-centroids" class="headerlink" title="1.1.1 Finding closest centroids"></a>1.1.1 Finding closest centroids</h2><script type="math/tex; mode=display">c^{(i)} :=  j , min \left (   \left \| x^{(i)}-\mu _j \right \|^2 \right )</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">v = [];</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:K</span><br><span class="line">    v = [v, sum((X - centroids(j,:)).^<span class="number">2</span>, <span class="number">2</span>)];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">[v, idx] = min(v, [], <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>The $\left |  \right |$ symbol means <a href="https://en.wikipedia.org/wiki/Norm_(mathematics" target="_blank" rel="noopener">Norm</a>) not Absolute value the first time as I thought. 😂</p>
+<h2 id="1-1-2-Computing-centroid-means"><a href="#1-1-2-Computing-centroid-means" class="headerlink" title="1.1.2 Computing centroid means"></a>1.1.2 Computing centroid means</h2><script type="math/tex; mode=display">\mu _k := \dfrac{1}{\left | C_k \right |}\sum_{i\in  C_k}^{ }x^{(i)}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:K</span><br><span class="line">    <span class="built_in">j</span> = (idx == <span class="built_in">i</span>);</span><br><span class="line">    v = X(<span class="built_in">j</span>, :);</span><br><span class="line">    n = <span class="built_in">size</span>(v, <span class="number">1</span>);</span><br><span class="line">    centroids(<span class="built_in">i</span>, :) = sum(v)/n;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/UEBpwso.gif" alt=""></p>
+<h2 id="2-2-Implementing-PCA"><a href="#2-2-Implementing-PCA" class="headerlink" title="2.2 Implementing PCA"></a>2.2 Implementing PCA</h2><script type="math/tex; mode=display">\sum = \dfrac{1}{m}X^TX</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sigma = X'*X/m;</span><br><span class="line">[U, S, V] = svd(sigma);</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-1-Projecting-the-data-onto-the-principal-components"><a href="#2-3-1-Projecting-the-data-onto-the-principal-components" class="headerlink" title="2.3.1 Projecting the data onto the principal components"></a>2.3.1 Projecting the data onto the principal components</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Z = X * U;</span><br><span class="line">Z = Z(:,<span class="number">1</span>:K);</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-2-Reconstructing-an-approximation-of-the-data"><a href="#2-3-2-Reconstructing-an-approximation-of-the-data" class="headerlink" title="2.3.2 Reconstructing an approximation of the data"></a>2.3.2 Reconstructing an approximation of the data</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">X_rec = Z * U(:,<span class="number">1</span>:K)';</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/TjyYT8G.gif" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/30/Unsupervised-Learning/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/01/19/Support-Vector-Machines/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -853,153 +995,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/01/03/Logistic-Regression/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/03/Logistic-Regression/" itemprop="url">Logistic Regression</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-03T21:59:14+08:00">
-                2018-01-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/03/Logistic-Regression/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/03/Logistic-Regression/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-2-1-Warmup-exercise-sigmoid-function"><a href="#1-2-1-Warmup-exercise-sigmoid-function" class="headerlink" title="1.2.1 Warmup exercise: sigmoid function"></a>1.2.1 Warmup exercise: sigmoid function</h2><p>As the sigmoid function is defined as:</p>
-<script type="math/tex; mode=display">g(z) = \dfrac{1}{1+e^{-z}}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">g = <span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-z))</span><br></pre></td></tr></table></figure>
-<h2 id="1-2-2-Cost-function-and-gradient"><a href="#1-2-2-Cost-function-and-gradient" class="headerlink" title="1.2.2 Cost function and gradient"></a>1.2.2 Cost function and gradient</h2><script type="math/tex; mode=display">J(\theta ) = \dfrac{1}{m}\sum_{i=1}^{m} [-y^{(i)}log(h_\theta (x^{i})) - (1-y^{(i)})log(1-h_\theta (x^{(i)}))]</script><script type="math/tex; mode=display">\dfrac{\partial J(\theta )}{\partial \theta _{j}} = \dfrac{1}{m}\sum_{i=1}^{m}(h_{\theta} (x^{(i)}) - y^{(i)})x_{j}^{(i)}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">J = (-y'*<span class="built_in">log</span>(sigmoid(X*theta)) - (<span class="number">1</span>-y)'*<span class="built_in">log</span>(<span class="number">1</span>-sigmoid(X*theta)))/m</span><br><span class="line">grad = (X'*(sigmoid(X*theta) - y))/m</span><br></pre></td></tr></table></figure>
-<h2 id="2-3-Cost-function-and-gradient"><a href="#2-3-Cost-function-and-gradient" class="headerlink" title="2.3 Cost function and gradient"></a>2.3 Cost function and gradient</h2><script type="math/tex; mode=display">J(\theta ) = \dfrac{1}{m}\sum_{i=1}^{m} [-y^{(i)}log(h_\theta (x^{i})) - (1-y^{(i)})log(1-h_\theta (x^{(i)}))] + \dfrac{\lambda }{2m}\sum_{j=1}^{n}\theta _{j}^{2}</script><script type="math/tex; mode=display">\dfrac{\partial J(\theta )}{\partial \theta _{j}} = \dfrac{1}{m}\sum_{i=1}^{m}(h_{\theta} (x^{(i)}) - y^{(i)})x_{j}^{(i)} + \dfrac{\lambda }{m}\theta _{j}</script><p>for $j = 0$, the $+ \lambda\theta$ part = 0</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">r1 = sum(theta(<span class="number">2</span>:<span class="keyword">end</span>).^<span class="number">2</span>)*lambda/<span class="number">2</span>/m</span><br><span class="line">J = (-y'*<span class="built_in">log</span>(sigmoid(X*theta)) - (<span class="number">1</span>-y)'*<span class="built_in">log</span>(<span class="number">1</span>-sigmoid(X*theta)))/m + r1</span><br><span class="line"></span><br><span class="line">r2 = <span class="built_in">ones</span>(<span class="built_in">size</span>(theta))</span><br><span class="line">r2(<span class="number">1</span>) = <span class="number">0</span></span><br><span class="line">grad = (X'*(sigmoid(X*theta) - y))/m + (theta.*r2)*lambda/m</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/94LgVsH.png" alt="costFunctionReg"></p>
-<p>Yes, yes, I know I passed. 😄</p>
-<p>But, god knows what happened? 🤔</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/03/Logistic-Regression/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1049,7 +1049,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">156</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1062,7 +1062,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

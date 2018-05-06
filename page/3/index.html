@@ -287,6 +287,148 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/01/03/Logistic-Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/03/Logistic-Regression/" itemprop="url">Logistic Regression</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-03T21:59:14+08:00">
+                2018-01-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/03/Logistic-Regression/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/01/03/Logistic-Regression/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-2-1-Warmup-exercise-sigmoid-function"><a href="#1-2-1-Warmup-exercise-sigmoid-function" class="headerlink" title="1.2.1 Warmup exercise: sigmoid function"></a>1.2.1 Warmup exercise: sigmoid function</h2><p>As the sigmoid function is defined as:</p>
+<script type="math/tex; mode=display">g(z) = \dfrac{1}{1+e^{-z}}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">g = <span class="number">1.</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-z))</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-2-Cost-function-and-gradient"><a href="#1-2-2-Cost-function-and-gradient" class="headerlink" title="1.2.2 Cost function and gradient"></a>1.2.2 Cost function and gradient</h2><script type="math/tex; mode=display">J(\theta ) = \dfrac{1}{m}\sum_{i=1}^{m} [-y^{(i)}log(h_\theta (x^{i})) - (1-y^{(i)})log(1-h_\theta (x^{(i)}))]</script><script type="math/tex; mode=display">\dfrac{\partial J(\theta )}{\partial \theta _{j}} = \dfrac{1}{m}\sum_{i=1}^{m}(h_{\theta} (x^{(i)}) - y^{(i)})x_{j}^{(i)}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">J = (-y'*<span class="built_in">log</span>(sigmoid(X*theta)) - (<span class="number">1</span>-y)'*<span class="built_in">log</span>(<span class="number">1</span>-sigmoid(X*theta)))/m</span><br><span class="line">grad = (X'*(sigmoid(X*theta) - y))/m</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-Cost-function-and-gradient"><a href="#2-3-Cost-function-and-gradient" class="headerlink" title="2.3 Cost function and gradient"></a>2.3 Cost function and gradient</h2><script type="math/tex; mode=display">J(\theta ) = \dfrac{1}{m}\sum_{i=1}^{m} [-y^{(i)}log(h_\theta (x^{i})) - (1-y^{(i)})log(1-h_\theta (x^{(i)}))] + \dfrac{\lambda }{2m}\sum_{j=1}^{n}\theta _{j}^{2}</script><script type="math/tex; mode=display">\dfrac{\partial J(\theta )}{\partial \theta _{j}} = \dfrac{1}{m}\sum_{i=1}^{m}(h_{\theta} (x^{(i)}) - y^{(i)})x_{j}^{(i)} + \dfrac{\lambda }{m}\theta _{j}</script><p>for $j = 0$, the $+ \lambda\theta$ part = 0</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">r1 = sum(theta(<span class="number">2</span>:<span class="keyword">end</span>).^<span class="number">2</span>)*lambda/<span class="number">2</span>/m</span><br><span class="line">J = (-y'*<span class="built_in">log</span>(sigmoid(X*theta)) - (<span class="number">1</span>-y)'*<span class="built_in">log</span>(<span class="number">1</span>-sigmoid(X*theta)))/m + r1</span><br><span class="line"></span><br><span class="line">r2 = <span class="built_in">ones</span>(<span class="built_in">size</span>(theta))</span><br><span class="line">r2(<span class="number">1</span>) = <span class="number">0</span></span><br><span class="line">grad = (X'*(sigmoid(X*theta) - y))/m + (theta.*r2)*lambda/m</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/94LgVsH.png" alt="costFunctionReg"></p>
+<p>Yes, yes, I know I passed. 😄</p>
+<p>But, god knows what happened? 🤔</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/03/Logistic-Regression/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2017/12/29/Machine-Learning-by-Stanford-University/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -850,146 +992,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2017/09/18/Codility-Sorting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/18/Codility-Sorting/" itemprop="url">Codility Sorting</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-18T00:22:18+08:00">
-                2017-09-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/18/Codility-Sorting/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/18/Codility-Sorting/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Please let me know if you have any questions about the algorithm. </p>
-<p>:)</p>
-<h2 id="Distinct"><a href="#Distinct" class="headerlink" title="Distinct"></a><a href="https://codility.com/programmers/lessons/6-sorting/distinct/" target="_blank" rel="noopener">Distinct</a></h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">solution</span><span class="params">(<span class="number">_</span> A : <span class="keyword">inout</span> [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">Set</span>(<span class="type">A</span>).<span class="built_in">count</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Triangle"><a href="#Triangle" class="headerlink" title="Triangle"></a><a href="https://codility.com/programmers/lessons/6-sorting/triangle/" target="_blank" rel="noopener">Triangle</a></h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">solution</span><span class="params">(<span class="number">_</span> A : <span class="keyword">inout</span> [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="type">A</span>.<span class="built_in">count</span> &lt; <span class="number">3</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> sortedA = <span class="type">A</span>.sorted()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">0</span>..&lt;sortedA.<span class="built_in">count</span>-<span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> iv = sortedA[i], ij = sortedA[i+<span class="number">1</span>], ik = sortedA[i+<span class="number">2</span>]</span><br><span class="line">        <span class="keyword">if</span> iv + ij &gt; ik &amp;&amp; iv + ik &gt; ij &amp;&amp; ij + ik &gt; iv &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="MaxProductOfThree"><a href="#MaxProductOfThree" class="headerlink" title="MaxProductOfThree"></a><a href="https://codility.com/programmers/lessons/6-sorting/max_product_of_three/" target="_blank" rel="noopener">MaxProductOfThree</a></h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">solution</span><span class="params">(<span class="number">_</span> A : <span class="keyword">inout</span> [Int])</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="type">A</span>.sorted()</span><br><span class="line">    <span class="keyword">let</span> n = a.<span class="built_in">count</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> b1 = a[<span class="number">0</span>] * a[<span class="number">1</span>] * a[n-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">let</span> b2 = a[n-<span class="number">3</span>] * a[n-<span class="number">2</span>] * a[n-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>  b1 &gt; b2 ? b1 : b2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1039,7 +1046,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">156</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1052,7 +1059,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

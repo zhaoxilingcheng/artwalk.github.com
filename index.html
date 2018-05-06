@@ -287,6 +287,148 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/05/06/How-to-build-tesseract-4-beta-on-macOS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/06/How-to-build-tesseract-4-beta-on-macOS/" itemprop="url">How to build tesseract 4 beta on macOS</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-06T21:19:16+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/06/How-to-build-tesseract-4-beta-on-macOS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/06/How-to-build-tesseract-4-beta-on-macOS/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew info tesseract</span><br><span class="line"></span><br><span class="line">tesseract: stable 3.05.01 (bottled), HEAD</span><br><span class="line">OCR (Optical Character Recognition) engine</span><br></pre></td></tr></table></figure>
+<p>The result of recognition on <code>Chinese - Simplified</code>  is a little bit terrifying. </p>
+<p>I noticed that it added a new neural network system based on LSTMs after 4.0.0+</p>
+<p>But it need to be build from source code on macOS. </p>
+<p>Thankfully, the manul is quit specify on their README.md</p>
+<h2 id="Install-dependencies"><a href="#Install-dependencies" class="headerlink" title="Install dependencies"></a>Install dependencies</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install automake autoconf autoconf-archive libtool</span><br><span class="line">brew install pkgconfig</span><br><span class="line">brew install icu4c</span><br><span class="line">brew install leptonica</span><br><span class="line">brew install gcc</span><br></pre></td></tr></table></figure>
+<h2 id="Compile"><a href="#Compile" class="headerlink" title="Compile"></a>Compile</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/tesseract-ocr/tesseract/</span><br><span class="line"><span class="built_in">cd</span> tesseract</span><br><span class="line">./autogen.sh</span><br><span class="line">./configure CC=gcc CXX=g++ CPPFLAGS=-I/usr/<span class="built_in">local</span>/opt/icu4c/include LDFLAGS=-L/usr/<span class="built_in">local</span>/opt/icu4c/lib</span><br><span class="line">make -j</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>Their best trained <a href="https://github.com/tesseract-ocr/tessdata_best" target="_blank" rel="noopener">modes</a>, download the language <code>chi_sim.traineddata</code> and put it under <code>tesseract/4.0.0.1/tessdata/</code> </p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tesseract image.png image -l chi_sim</span><br><span class="line">cat image.txt</span><br></pre></td></tr></table></figure>
+<p>OK, it is still terrible under the  <code>Song typeface</code> font. It need to be trained a new model by myself.</p>
+<hr>
+<p>Finally, ignoring the <code>tesseract</code>, I found drag the <strong>image</strong> to <strong>OneNote</strong>, and <code>Ctrl + Click</code> -&gt; <code>Copy Text from Picture</code> will get more Accuracy. 😓</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/04/16/Struct-Codable-Alamofire-Generics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -861,153 +1003,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2018/01/30/Unsupervised-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/30/Unsupervised-Learning/" itemprop="url">Unsupervised Learning</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-30T00:04:36+08:00">
-                2018-01-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/30/Unsupervised-Learning/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/30/Unsupervised-Learning/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-1-1-Finding-closest-centroids"><a href="#1-1-1-Finding-closest-centroids" class="headerlink" title="1.1.1 Finding closest centroids"></a>1.1.1 Finding closest centroids</h2><script type="math/tex; mode=display">c^{(i)} :=  j , min \left (   \left \| x^{(i)}-\mu _j \right \|^2 \right )</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">v = [];</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:K</span><br><span class="line">    v = [v, sum((X - centroids(j,:)).^<span class="number">2</span>, <span class="number">2</span>)];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">[v, idx] = min(v, [], <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<p>The $\left |  \right |$ symbol means <a href="https://en.wikipedia.org/wiki/Norm_(mathematics" target="_blank" rel="noopener">Norm</a>) not Absolute value the first time as I thought. 😂</p>
-<h2 id="1-1-2-Computing-centroid-means"><a href="#1-1-2-Computing-centroid-means" class="headerlink" title="1.1.2 Computing centroid means"></a>1.1.2 Computing centroid means</h2><script type="math/tex; mode=display">\mu _k := \dfrac{1}{\left | C_k \right |}\sum_{i\in  C_k}^{ }x^{(i)}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:K</span><br><span class="line">    <span class="built_in">j</span> = (idx == <span class="built_in">i</span>);</span><br><span class="line">    v = X(<span class="built_in">j</span>, :);</span><br><span class="line">    n = <span class="built_in">size</span>(v, <span class="number">1</span>);</span><br><span class="line">    centroids(<span class="built_in">i</span>, :) = sum(v)/n;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/UEBpwso.gif" alt=""></p>
-<h2 id="2-2-Implementing-PCA"><a href="#2-2-Implementing-PCA" class="headerlink" title="2.2 Implementing PCA"></a>2.2 Implementing PCA</h2><script type="math/tex; mode=display">\sum = \dfrac{1}{m}X^TX</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sigma = X'*X/m;</span><br><span class="line">[U, S, V] = svd(sigma);</span><br></pre></td></tr></table></figure>
-<h2 id="2-3-1-Projecting-the-data-onto-the-principal-components"><a href="#2-3-1-Projecting-the-data-onto-the-principal-components" class="headerlink" title="2.3.1 Projecting the data onto the principal components"></a>2.3.1 Projecting the data onto the principal components</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Z = X * U;</span><br><span class="line">Z = Z(:,<span class="number">1</span>:K);</span><br></pre></td></tr></table></figure>
-<h2 id="2-3-2-Reconstructing-an-approximation-of-the-data"><a href="#2-3-2-Reconstructing-an-approximation-of-the-data" class="headerlink" title="2.3.2 Reconstructing an approximation of the data"></a>2.3.2 Reconstructing an approximation of the data</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">X_rec = Z * U(:,<span class="number">1</span>:K)';</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/TjyYT8G.gif" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/30/Unsupervised-Learning/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1057,7 +1057,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">156</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1070,7 +1070,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

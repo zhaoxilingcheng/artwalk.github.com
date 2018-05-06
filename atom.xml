@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://artwalk.github.io/"/>
-  <updated>2018-04-16T12:16:55.655Z</updated>
+  <updated>2018-05-06T14:20:56.484Z</updated>
   <id>http://artwalk.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>How to build tesseract 4 beta on macOS</title>
+    <link href="http://artwalk.github.io/2018/05/06/How-to-build-tesseract-4-beta-on-macOS/"/>
+    <id>http://artwalk.github.io/2018/05/06/How-to-build-tesseract-4-beta-on-macOS/</id>
+    <published>2018-05-06T13:19:16.000Z</published>
+    <updated>2018-05-06T14:20:56.484Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew info tesseract</span><br><span class="line"></span><br><span class="line">tesseract: stable 3.05.01 (bottled), HEAD</span><br><span class="line">OCR (Optical Character Recognition) engine</span><br></pre></td></tr></table></figure><p>The result of recognition on <code>Chinese - Simplified</code>  is a little bit terrifying. </p><p>I noticed that it added a new neural network system based on LSTMs after 4.0.0+</p><p>But it need to be build from source code on macOS. </p><p>Thankfully, the manul is quit specify on their README.md</p><h2 id="Install-dependencies"><a href="#Install-dependencies" class="headerlink" title="Install dependencies"></a>Install dependencies</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install automake autoconf autoconf-archive libtool</span><br><span class="line">brew install pkgconfig</span><br><span class="line">brew install icu4c</span><br><span class="line">brew install leptonica</span><br><span class="line">brew install gcc</span><br></pre></td></tr></table></figure><h2 id="Compile"><a href="#Compile" class="headerlink" title="Compile"></a>Compile</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/tesseract-ocr/tesseract/</span><br><span class="line"><span class="built_in">cd</span> tesseract</span><br><span class="line">./autogen.sh</span><br><span class="line">./configure CC=gcc CXX=g++ CPPFLAGS=-I/usr/<span class="built_in">local</span>/opt/icu4c/include LDFLAGS=-L/usr/<span class="built_in">local</span>/opt/icu4c/lib</span><br><span class="line">make -j</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>Their best trained <a href="https://github.com/tesseract-ocr/tessdata_best" target="_blank" rel="noopener">modes</a>, download the language <code>chi_sim.traineddata</code> and put it under <code>tesseract/4.0.0.1/tessdata/</code> </p><h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tesseract image.png image -l chi_sim</span><br><span class="line">cat image.txt</span><br></pre></td></tr></table></figure><p>OK, it is still terrible under the  <code>Song typeface</code> font. It need to be trained a new model by myself.</p><hr><p>Finally, ignoring the <code>tesseract</code>, I found drag the <strong>image</strong> to <strong>OneNote</strong>, and <code>Ctrl + Click</code> -&gt; <code>Copy Text from Picture</code> will get more Accuracy. 😓</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew info tesseract&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="AI" scheme="http://artwalk.github.io/tags/AI/"/>
+    
+      <category term="LSTM" scheme="http://artwalk.github.io/tags/LSTM/"/>
+    
+  </entry>
   
   <entry>
     <title>Struct Codable Alamofire Generics</title>
@@ -546,28 +571,6 @@
 &lt;p&gt;Just like 3Sum, sort array first, then&lt;/p&gt;
 &lt;figure class=&quot;highlight swift&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;   [-&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, -&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//  i→&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//      j→&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//          k→      ←f&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;When i, j, k, f, are iterating, the same value should be skipped for saving time.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="LeetCode" scheme="http://artwalk.github.io/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>19 Remove Nth Node From End of List</title>
-    <link href="http://artwalk.github.io/2017/09/03/19-Remove-Nth-Node-From-End-of-List/"/>
-    <id>http://artwalk.github.io/2017/09/03/19-Remove-Nth-Node-From-End-of-List/</id>
-    <published>2017-09-03T15:16:26.000Z</published>
-    <updated>2017-09-03T15:25:11.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="19-Remove-Nth-Node-From-End-of-List"><a href="#19-Remove-Nth-Node-From-End-of-List" class="headerlink" title="19 Remove Nth Node From End of List"></a>19 Remove Nth Node From End of List</h1><p>Tips:</p><p>Traverse all the Note and put their reference into a <code>[ListNode]</code> , once you can get their sequence number. </p><p>Be careful that <code>list.count == n</code> which means you have to delete the <code>head</code></p><a id="more"></a><p>Note 的值并不重要，遍历一遍的同时把他们的地址引用扔到一个数组里面，序列号就有了，删除时把上一个的 next 指针指向 next.next</p><p>另外要注意下 n 是 head 时，上一个 note 是 nil</p><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> val: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> next: <span class="type">ListNode</span>?</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="number">_</span> val: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.val = val</span><br><span class="line">        <span class="keyword">self</span>.next = <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">removeNthFromEnd</span><span class="params">(<span class="number">_</span> head: ListNode?, <span class="number">_</span> n: Int)</span></span> -&gt; <span class="type">ListNode</span>? &#123;</span><br><span class="line">        <span class="keyword">var</span> list = [<span class="type">ListNode</span>]()</span><br><span class="line">        <span class="keyword">var</span> root = head</span><br><span class="line">        <span class="keyword">var</span> cur: <span class="type">ListNode</span>? = root</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur != <span class="literal">nil</span> &#123;</span><br><span class="line">            list.append(cur!)</span><br><span class="line">            cur = cur!.next</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> i = list.<span class="built_in">count</span> - n</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span> &#123;</span><br><span class="line">            root = root?.next</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            list[i-<span class="number">1</span>].next = list[i-<span class="number">1</span>].next?.next</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printList</span><span class="params">(<span class="number">_</span> head: ListNode?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> cur: <span class="type">ListNode</span>? = head</span><br><span class="line">    <span class="keyword">while</span> cur != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(cur!.val)</span><br><span class="line">        cur = cur?.next</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ---------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> head = <span class="type">ListNode</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> cur: <span class="type">ListNode</span>? = head</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">2</span>...<span class="number">5</span> &#123;</span><br><span class="line">    cur?.next = <span class="type">ListNode</span>(i)</span><br><span class="line">    cur = cur?.next</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printList(head)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s = <span class="type">Solution</span>()</span><br><span class="line"><span class="keyword">let</span> s1 = s.removeNthFromEnd(head, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"\n"</span>)</span><br><span class="line">printList(s1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s2 = s.removeNthFromEnd(s1, <span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"\n"</span>)</span><br><span class="line">printList(s2)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;19-Remove-Nth-Node-From-End-of-List&quot;&gt;&lt;a href=&quot;#19-Remove-Nth-Node-From-End-of-List&quot; class=&quot;headerlink&quot; title=&quot;19 Remove Nth Node From End of List&quot;&gt;&lt;/a&gt;19 Remove Nth Node From End of List&lt;/h1&gt;&lt;p&gt;Tips:&lt;/p&gt;
-&lt;p&gt;Traverse all the Note and put their reference into a &lt;code&gt;[ListNode]&lt;/code&gt; , once you can get their sequence number. &lt;/p&gt;
-&lt;p&gt;Be careful that &lt;code&gt;list.count == n&lt;/code&gt; which means you have to delete the &lt;code&gt;head&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     
