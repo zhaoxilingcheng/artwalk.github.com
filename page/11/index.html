@@ -287,6 +287,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/02/25/iOS-App-Submission-Nightmare/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/25/iOS-App-Submission-Nightmare/" itemprop="url">iOS App Submission Nightmare</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-25T19:05:13+08:00">
+                2016-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/02/25/iOS-App-Submission-Nightmare/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/02/25/iOS-App-Submission-Nightmare/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="iOS-App-Submission-Nightmare"><a href="#iOS-App-Submission-Nightmare" class="headerlink" title="iOS App Submission Nightmare"></a>iOS App Submission Nightmare</h1><h2 id="bluetooth-peripheral"><a href="#bluetooth-peripheral" class="headerlink" title="bluetooth-peripheral"></a>bluetooth-peripheral</h2><ol>
+<li>the bluetooth correlative code no longer be used after redesgin app, you should del both code and:</li>
+<li>Targets -&gt; Capabilities -&gt; bluetooth</li>
+</ol>
+<h2 id="com-apple-security-application-groups"><a href="#com-apple-security-application-groups" class="headerlink" title="com.apple.security.application-groups"></a>com.apple.security.application-groups</h2><ol>
+<li>close <code>app group</code></li>
+<li>del <code>*.entitlements</code></li>
+<li><code>grep -R --include=&quot;*.*&quot; &quot;.entitlements&quot; .</code> you’ll find hidden entitlements in <code>Xcode -&gt; imeican -&gt; build setting</code></li>
+</ol>
+<h2 id="ITMS-90394-Missing-Icon"><a href="#ITMS-90394-Missing-Icon" class="headerlink" title="ITMS-90394 Missing Icon"></a>ITMS-90394 <code>Missing Icon</code></h2><ul>
+<li>We have <code>*29x29@3x.png</code> in Xcode </li>
+<li>In fact the .png is a .svg</li>
+<li>new a real <code>*29x29@3x.png</code></li>
+</ul>
+<h2 id="ITMS-90205-90206"><a href="#ITMS-90205-90206" class="headerlink" title="ITMS-90205 90206"></a>ITMS-90205 90206</h2><p>Embed Frameworks Archive del <code>carthage copy-frameworks</code></p>
+<h2 id="bcsymbolmap-39-gt-as-expected"><a href="#bcsymbolmap-39-gt-as-expected" class="headerlink" title=".bcsymbolmap&#39;&gt; as expected"></a><code>.bcsymbolmap&#39;&gt; as expected</code></h2><ul>
+<li>Enable Bitcode</li>
+</ul>
+<h2 id="ITMS-90087-90209-x84-64-i386"><a href="#ITMS-90087-90209-x84-64-i386" class="headerlink" title="ITMS-90087 90209 x84_64 i386"></a>ITMS-90087 90209 <code>x84_64 i386</code></h2><ul>
+<li>Targets(Embed Frameworks) -&gt; Run Script</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> [ <span class="string">"$&#123;CONFIGURATION&#125;"</span> != <span class="string">"Release"</span> ]; then</span><br><span class="line">    /usr/local/bin/carthage copy-frameworks</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/02/24/How-to-detect-2-4-GHz-and-5-GHz-Best-Channel-on-Mac-OS-X/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -843,141 +994,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/01/22/When-a-company-become-bigger/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/01/22/When-a-company-become-bigger/" itemprop="url">When a company become bigger</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-22T00:34:53+08:00">
-                2016-01-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/01/22/When-a-company-become-bigger/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/01/22/When-a-company-become-bigger/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>Do the right thing</strong> much more importent than <strong>doing things right</strong>. the former phrase means you have your own argument and reason. The <strong>right</strong> measures your own justice and can you responsible for your own actions. But when you joined to a big company, your manager concerned is that can you doing things right. That is why startup companies have more energy. </p>
-<p>Humans are by nature social animals, if a group has less than 140 people, it can managed by itself. Because everyone knows what others doing, they can easily have a common points of view about someone, there is no place for cribbers. But when the group become bigger, fog and shadow are appear, your ability and capability largely depend on your manager, it’s no longer based on your real contributions.</p>
-<p>Most companies have hundreds of employees, that’s why office politics so common in big companies.  How to dealing with office politics is in primary. After all, it related to your <strong>salary and promotion</strong>. If you want that, the best way is to become a politician, everyone knows what’s going on, but no one point out, just like <em>The Emperor’s New Clothes</em>. the risk is you may lose yourself. </p>
-<p>That’s why an excellent startup company so attracting, but there always will be one day, the company become big as for it’s excellent. More and more strangers are joined, not everyone are friendly. if you still be yourself, and careless about politics, that may cause inappropriate, gossip will be everywhere, and when the new year come, you have no promotion without rhyme or reason.</p>
-<p>The neutral way was working like an android, don’t share any of your emotions and feelings, that will makes your colleagues feels some kind of professional. The disadvantage is that there is no chance you will be consider as a friend. but as for the company already changed ( not a startup any more ), it’s more acceptable than the previous one.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1032,7 +1048,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1045,7 +1061,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

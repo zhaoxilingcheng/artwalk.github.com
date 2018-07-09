@@ -287,6 +287,148 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/10/19/Reflection-in-Swift-via-Mirror/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Artwalk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Artwalk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/19/Reflection-in-Swift-via-Mirror/" itemprop="url">Reflection in Swift via Mirror</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-19T20:56:20+08:00">
+                2016-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/19/Reflection-in-Swift-via-Mirror/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/19/Reflection-in-Swift-via-Mirror/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>Mirror</p>
+<ul>
+<li><code>value</code>: access to the original reflected value, but with type Any.</li>
+<li><code>valueType</code>: the Type of the original reflected value—equivalent to value.dynamicType.</li>
+</ul>
+</li>
+<li><p>I didn’t find any method can assign a value to <code>$0.value</code> with pure Swift Object, so <code>Class</code> inherit <code>NSObject</code> for <code>KVC</code></p>
+</li>
+<li>I ignore the Optional case for simplify.</li>
+<li>Generate Dictionary or Object recursively</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"></span><br><span class="line"><span class="keyword">typealias</span> <span class="type">DynamicKVType</span> = [<span class="type">String</span>: <span class="type">Any</span>]</span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">DynamicKV</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dict</span><span class="params">()</span></span> -&gt; <span class="type">DynamicKVType</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">assignment</span><span class="params">(<span class="number">_</span> with: DynamicKVType)</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">DynamicKV</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dict</span><span class="params">()</span></span> -&gt; <span class="type">DynamicKVType</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> dict = <span class="type">DynamicKVType</span>()</span><br><span class="line">        </span><br><span class="line">        <span class="type">Mirror</span>(reflecting: <span class="keyword">self</span>).children.forEach &#123;</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> k = $<span class="number">0</span>.label <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">let</span> v = $<span class="number">0</span>.value <span class="keyword">as</span>? <span class="type">DynamicKV</span> &#123;</span><br><span class="line">                dict[k] = v.dict()</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                dict[k] = $<span class="number">0</span>.value</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dict</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">assignment</span><span class="params">(<span class="number">_</span> with: DynamicKVType)</span></span> &#123;</span><br><span class="line">        <span class="type">Mirror</span>(reflecting: <span class="keyword">self</span>).children.forEach &#123;</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> obj = <span class="keyword">self</span> <span class="keyword">as</span>? <span class="type">NSObject</span>, <span class="keyword">let</span> dictV = with[$<span class="number">0</span>.label!], <span class="keyword">let</span> k = $<span class="number">0</span>.label <span class="keyword">else</span> &#123; <span class="built_in">fatalError</span>(<span class="string">"child leak"</span>) &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">let</span> dkvt = dictV <span class="keyword">as</span>? <span class="type">DynamicKVType</span>, <span class="keyword">let</span> v = $<span class="number">0</span>.value <span class="keyword">as</span>? <span class="type">DynamicKV</span> &#123;</span><br><span class="line">                v.assignment(dkvt)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                obj.setValue(dictV, forKey: k)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>: <span class="title">NSObject</span>, <span class="title">DynamicKV</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s: <span class="type">String</span> = <span class="string">"a"</span></span><br><span class="line">    <span class="keyword">var</span> i: <span class="type">Int</span> = -<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>: <span class="title">NSObject</span>, <span class="title">DynamicKV</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s = <span class="string">"b"</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="type">A</span>()</span><br><span class="line">    <span class="keyword">var</span> array = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="type">B</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"b.dict\t"</span>, b.dict())</span><br><span class="line"></span><br><span class="line">b.assignment([<span class="string">"s"</span>: <span class="string">"bbbbbbb"</span>, <span class="string">"a"</span>: [<span class="string">"s"</span>: <span class="string">"aaaaaaa"</span>, <span class="string">"i"</span>: <span class="number">233</span>], <span class="string">"array"</span>: [-<span class="number">3</span>, -<span class="number">2</span>, -<span class="number">1</span>]])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"b.assignment\t"</span>, b.s, b.a.s, b.a.i, b.array)</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/10/19/UITextField-and-UILabel-Tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -860,145 +1002,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://artwalk.github.io/2016/07/26/Use-AppleScript-as-AutoHotkey-On-Mac/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Artwalk">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Artwalk's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/26/Use-AppleScript-as-AutoHotkey-On-Mac/" itemprop="url">Use AppleScript as AutoHotkey On Mac</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-26T22:01:34+08:00">
-                2016-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/26/Use-AppleScript-as-AutoHotkey-On-Mac/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/26/Use-AppleScript-as-AutoHotkey-On-Mac/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>For the good test of Soylent 1.6, I bought 20+ boxes recently.<br>But there was a problem that Safari does not support AutoFill Form in that website. So I have to input full informations of my credit card manually for the transport fee and the tariff.</p>
-<p>All the payment steps are merely number, date, cvv, password.</p>
-<p>I was broke down after repeated it again and agin.</p>
-<p>It should be automated.</p>
-<p>For God’s sake, it occurred to me that the AutoHotkey when I was still using Windows four years ago.</p>
-<p>Mac has the AppleScript which can simulate keyboard input and mouse click.</p>
-<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"Safari"</span></span><br><span class="line">	<span class="built_in">activate</span></span><br><span class="line"><span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"System Events"</span></span><br><span class="line">	<span class="keyword">tell</span> process <span class="string">"Safari"</span></span><br><span class="line">		<span class="keyword">set</span> <span class="built_in">frontmost</span> <span class="keyword">to</span> <span class="literal">true</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">-- you can get the screen coordinate by `cmd+shift+4` easily</span></span><br><span class="line">		click <span class="keyword">at</span> &#123;<span class="number">1420</span>, <span class="number">500</span>&#125;</span><br><span class="line">		<span class="comment">-- delay 1s which is for wait the website to load</span></span><br><span class="line">		<span class="built_in">delay</span> <span class="number">1</span></span><br><span class="line">		click <span class="keyword">at</span> &#123;<span class="number">1305</span>, <span class="number">615</span>&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">delay</span> <span class="number">10</span></span><br><span class="line">		click <span class="keyword">at</span> &#123;<span class="number">1090</span>, <span class="number">369</span>&#125;</span><br><span class="line">		<span class="comment">-- simulate press **6** on keyboard</span></span><br><span class="line">		keystroke <span class="string">"6"</span></span><br><span class="line">		keystroke <span class="string">"6"</span></span><br><span class="line">		keystroke <span class="string">"0"</span></span><br><span class="line">		<span class="comment">-- ...</span></span><br><span class="line">		keystroke <span class="string">"6"</span></span><br><span class="line">		keystroke <span class="string">"4"</span></span><br><span class="line">		<span class="built_in">delay</span> <span class="number">1</span></span><br><span class="line">		click <span class="keyword">at</span> &#123;<span class="number">1083</span>, <span class="number">426</span>&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line">	</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">tell</span></span><br></pre></td></tr></table></figure>
-<p>And I found an interesting thing in this process which is the <strong>cvv</strong> can’t be clicked by the script.</p>
-<p>It seems the bank’s website really do something on security.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1053,7 +1056,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1066,7 +1069,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
